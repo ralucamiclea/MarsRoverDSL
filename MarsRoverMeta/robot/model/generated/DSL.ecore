@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="dSL" nsURI="http://www.DSL.robot" nsPrefix="dSL">
+  <eClassifiers xsi:type="ecore:EClass" name="MarsRoverExpedition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="missionlist" upperBound="-1"
+        eType="#//Mission" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mission">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="behaviorlist" upperBound="-1"
+        eType="#//Behavior" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Behavior">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sensorExpression" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actionlist" upperBound="-1"
+        eType="#//Actions" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Actions"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LeftMovementAction" eSuperTypes="#//Actions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftmove" eType="#//MovementAction"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RightMovementAction" eSuperTypes="#//Actions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightmove" eType="#//MovementAction"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RotateMovementAction" eSuperTypes="#//Actions"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RotatePoints" eSuperTypes="#//RotateMovementAction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="degrees" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LeftRotatePoint" eSuperTypes="#//RotatePoints">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftdir" eType="#//FBEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RightRotatePoint" eSuperTypes="#//RotatePoints">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightdir" eType="#//FBEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MiddleRotatePoint" eSuperTypes="#//RotatePoints">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="middledir" eType="#//LREnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="LREnum">
+    <eLiterals name="LEFT" literal="left"/>
+    <eLiterals name="RIGHT" value="1" literal="right"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FBEnum">
+    <eLiterals name="FORWARD" literal="forward"/>
+    <eLiterals name="BACKWARD" value="1" literal="backward"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MovementAction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="actionenum" eType="#//ActionEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ActionEnum">
+    <eLiterals name="FORWARD" literal="forward"/>
+    <eLiterals name="BACKWARD" value="1" literal="backward"/>
+    <eLiterals name="STOP" value="2" literal="stop"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionBracket" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exp" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TouchLiteral" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="touch" eType="#//TouchEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ColorLiteral" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" eType="#//ColorEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DistanceLiteral" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distance" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EdgeLiteral" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="edge" eType="#//EdgeEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EdgeEnum">
+    <eLiterals name="FRONTLEFT" literal="frontLeft"/>
+    <eLiterals name="FRONTRIGHT" value="1" literal="frontRight"/>
+    <eLiterals name="BACK" value="2" literal="back"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TouchEnum">
+    <eLiterals name="LEFT" literal="touchFrontLeft"/>
+    <eLiterals name="RIGHT" value="1" literal="touchFrontRight"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ColorEnum">
+    <eLiterals name="NONE" literal="NONE"/>
+    <eLiterals name="BLACK" value="1" literal="BLACK"/>
+    <eLiterals name="BLUE" value="2" literal="BLUE"/>
+    <eLiterals name="GREEN" value="3" literal="GREEN"/>
+    <eLiterals name="YELLOW" value="4" literal="YELLOW"/>
+    <eLiterals name="RED" value="5" literal="RED"/>
+    <eLiterals name="WHITE" value="6" literal="WHITE"/>
+    <eLiterals name="BROWN" value="7" literal="BROWN"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ANDexpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ORexpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>
