@@ -3,10 +3,15 @@
  */
 package robot.generator
 
+import java.util.ArrayList
+import java.util.List
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
+import robot.dSL.Behavior
+import robot.dSL.MarsRoverExpedition
+import robot.dSL.Mission
 
 /**
  * Generates code from your model files on save.
@@ -16,10 +21,20 @@ import org.eclipse.xtext.generator.IGeneratorContext
 class DSLGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
-//			resource.allContents
-//				.filter(typeof(Greeting))
-//				.map[name]
-//				.join(', '))
+		
+		val root = resource.allContents.head as MarsRoverExpedition;
+ 		if (root != null) {
+ 			fsa.generateFile("Main.java", MainGenerator.toText(root));
+ 			fsa.generateFile("Model.java", ModelGenerator.toText(root));
+ 			
+ 			var List<Mission> m = new ArrayList<Mission>();
+ 			m = Auxiliary.getMissions(root);
+ 			for(Mission i : m){
+ 				var List<Behavior> b = new ArrayList<Behavior>(); 
+ 				b = Auxiliary.getBehaviors(i);
+ 				for(Behavior j : b)
+ 				fsa.generateFile(Auxiliary.toClass(j.name) + ".java", BehaviorGenerator.toText(j));
+ 			}
+ 		}
 	}
 }

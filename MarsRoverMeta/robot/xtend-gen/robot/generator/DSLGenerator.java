@@ -3,10 +3,23 @@
  */
 package robot.generator;
 
+import com.google.common.base.Objects;
+import java.util.ArrayList;
+import java.util.List;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import robot.dSL.Behavior;
+import robot.dSL.MarsRoverExpedition;
+import robot.dSL.Mission;
+import robot.generator.Auxiliary;
+import robot.generator.BehaviorGenerator;
+import robot.generator.MainGenerator;
+import robot.generator.ModelGenerator;
 
 /**
  * Generates code from your model files on save.
@@ -17,5 +30,32 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 public class DSLGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+    TreeIterator<EObject> _allContents = resource.getAllContents();
+    EObject _head = IteratorExtensions.<EObject>head(_allContents);
+    final MarsRoverExpedition root = ((MarsRoverExpedition) _head);
+    boolean _notEquals = (!Objects.equal(root, null));
+    if (_notEquals) {
+      CharSequence _text = MainGenerator.toText(root);
+      fsa.generateFile("Main.java", _text);
+      CharSequence _text_1 = ModelGenerator.toText(root);
+      fsa.generateFile("Model.java", _text_1);
+      List<Mission> m = new ArrayList<Mission>();
+      List<Mission> _missions = Auxiliary.getMissions(root);
+      m = _missions;
+      for (final Mission i : m) {
+        {
+          List<Behavior> b = new ArrayList<Behavior>();
+          List<Behavior> _behaviors = Auxiliary.getBehaviors(i);
+          b = _behaviors;
+          for (final Behavior j : b) {
+            String _name = j.getName();
+            String _class = Auxiliary.toClass(_name);
+            String _plus = (_class + ".java");
+            CharSequence _text_2 = BehaviorGenerator.toText(j);
+            fsa.generateFile(_plus, _text_2);
+          }
+        }
+      }
+    }
   }
 }

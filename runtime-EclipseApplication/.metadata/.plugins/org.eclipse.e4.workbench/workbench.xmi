@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_3HwIEbPZEeasNv-ud-HqCA" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_3HwIErPZEeasNv-ud-HqCA" bindingContexts="_3HwIFLPZEeasNv-ud-HqCA">
-  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;robot.DSL&quot; name=&quot;spec1.rdsl&quot; tooltip=&quot;robot.models/specs/spec1.rdsl&quot;>&#xD;&#xA;&lt;persistable path=&quot;/robot.models/specs/spec1.rdsl&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
+  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;Main.java&quot; tooltip=&quot;robot.models/src-gen/Main.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/robot.models/src-gen/Main.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;robot.DSL&quot; name=&quot;spec1.rdsl&quot; tooltip=&quot;robot.models/specs/spec1.rdsl&quot;>&#xD;&#xA;&lt;persistable path=&quot;/robot.models/specs/spec1.rdsl&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
   <tags>ModelMigrationProcessor.001</tags>
   <children xsi:type="basic:TrimmedWindow" xmi:id="_3HwIErPZEeasNv-ud-HqCA" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_3Zn7MrPZEeasNv-ud-HqCA" label="%trimmedwindow.label.eclipseSDK" x="77" y="164" width="1534" height="768">
@@ -114,7 +114,7 @@
         <tags>EditorStack</tags>
         <tags>active</tags>
         <children xsi:type="basic:Part" xmi:id="_GxbysLPaEeasNv-ud-HqCA" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="spec1.rdsl" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;robot.DSL&quot; name=&quot;spec1.rdsl&quot; partName=&quot;spec1.rdsl&quot; title=&quot;spec1.rdsl&quot; tooltip=&quot;robot.models/specs/spec1.rdsl&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/robot.models/specs/spec1.rdsl&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;532&quot; selectionTopPixel=&quot;30&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;robot.DSL&quot; name=&quot;spec1.rdsl&quot; partName=&quot;spec1.rdsl&quot; title=&quot;spec1.rdsl&quot; tooltip=&quot;robot.models/specs/spec1.rdsl&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/robot.models/specs/spec1.rdsl&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;143&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>robot.DSL</tags>
           <tags>removeOnHide</tags>
@@ -196,11 +196,14 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_3aOYILPZEeasNv-ud-HqCA" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_-n-i0LPaEearheTGoj89pA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_3IKYAbPZEeasNv-ud-HqCA"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_OSfFILPhEeaxcNergC45AA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_3IKYAbPZEeasNv-ud-HqCA"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_3aO_MLPZEeasNv-ud-HqCA" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_3aO_MbPZEeasNv-ud-HqCA" elementId="additions" toBeRendered="false"/>
+      </children>
+      <children xsi:type="menu:ToolBar" xmi:id="_rMH_YLPgEeaGntDDIoK2gQ" elementId="org.eclipse.ui.edit.text.actionSet.presentation" visible="false">
+        <tags>Draggable</tags>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_3i8PQLPZEeasNv-ud-HqCA" elementId="org.eclipse.debug.ui.launchActionSet">
         <tags>Draggable</tags>
@@ -217,7 +220,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_3aO_NLPZEeasNv-ud-HqCA" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_-oBmILPaEearheTGoj89pA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_3IJxAbPZEeasNv-ud-HqCA"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_OSivgLPhEeaxcNergC45AA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_3IJxAbPZEeasNv-ud-HqCA"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_3aO_NbPZEeasNv-ud-HqCA" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -2380,7 +2383,7 @@
   <addons xmi:id="_3HwvIbPZEeasNv-ud-HqCA" elementId="MinMax Addon" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.MinMaxAddon"/>
   <addons xmi:id="_3HwvIrPZEeasNv-ud-HqCA" elementId="org.eclipse.ui.workbench.addon.0" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_3H0ZgLPZEeasNv-ud-HqCA" elementId="SplitterAddon" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.splitteraddon.SplitterAddon"/>
-  <addons xmi:id="_-WRu0bPaEearheTGoj89pA" elementId="org.eclipse.ui.ide.addon.0" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
+  <addons xmi:id="_OBhQ8LPhEeaxcNergC45AA" elementId="org.eclipse.ui.ide.addon.0" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
   <addons xmi:id="_dz0JgGOlEeSMMaPQU2nlzw" elementId="org.eclipse.ui.ide.application.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.ui.ide.application/org.eclipse.ui.internal.ide.application.addons.ModelCleanupAddon"/>
   <categories xmi:id="_3IERILPZEeasNv-ud-HqCA" elementId="org.eclipse.team.ui.category.team" name="Team" description="Actions that apply when working with a Team"/>
   <categories xmi:id="_3IERIbPZEeasNv-ud-HqCA" elementId="org.eclipse.ui.category.views" name="Views" description="Commands for opening views"/>

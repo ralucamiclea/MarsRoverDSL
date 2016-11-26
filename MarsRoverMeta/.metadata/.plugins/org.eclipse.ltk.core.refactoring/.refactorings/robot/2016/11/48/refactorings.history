@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;robot/src/robot/generator/Model.xtend&apos; to &apos;ModelGenerator.xtend&apos;" description="Rename resource &apos;Model.xtend&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/robot/generator/Model.xtend" name="ModelGenerator.xtend" stamp="1480167549742" updateReferences="true"/>
+</session>

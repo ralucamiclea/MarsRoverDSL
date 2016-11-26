@@ -1,0 +1,5 @@
+package robot.generator;
+
+@SuppressWarnings("all")
+public class Model {
+}
