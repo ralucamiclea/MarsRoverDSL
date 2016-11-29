@@ -40,10 +40,25 @@
     </genEnums>
     <genClasses ecoreClass="DSL.ecore#//MarsRoverExpedition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//MarsRoverExpedition/missionlist"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//MarsRoverExpedition/tasklist"/>
     </genClasses>
     <genClasses ecoreClass="DSL.ecore#//Mission">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//Mission/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//Mission/behaviorlist"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//Mission/endcondition"/>
+    </genClasses>
+    <genClasses ecoreClass="DSL.ecore#//EndCondition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//EndCondition/endwhenlist"/>
+    </genClasses>
+    <genClasses ecoreClass="DSL.ecore#//EndAfter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//EndAfter/time"/>
+    </genClasses>
+    <genClasses ecoreClass="DSL.ecore#//EndWhen">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//EndWhen/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//EndWhen/times"/>
+    </genClasses>
+    <genClasses ecoreClass="DSL.ecore#//BehaviorName">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//BehaviorName/name"/>
     </genClasses>
     <genClasses ecoreClass="DSL.ecore#//Behavior">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//Behavior/name"/>

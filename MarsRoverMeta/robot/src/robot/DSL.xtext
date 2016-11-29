@@ -6,12 +6,28 @@ MarsRoverExpedition:
 	"ExpeditionSTART"
 	missionlist += Mission+
 	"ExpeditionSTOP"
+	tasklist += Behavior+
 ;
 
 Mission: 
 	"Mission" name=ID
-	behaviorlist += Behavior+
-	"ENDMission"
+	behaviorlist += BehaviorName+
+	"ENDMission" endcondition = EndCondition
+;
+
+EndCondition:
+	EndAfter | endwhenlist += EndWhen+
+;
+
+EndAfter:
+	"after" time = INT "min"
+;
+
+EndWhen:
+	"If" "Task" name=ID "executed" times=INT "times"
+;
+
+BehaviorName: "Task" name=ID
 ;
 
 Behavior:

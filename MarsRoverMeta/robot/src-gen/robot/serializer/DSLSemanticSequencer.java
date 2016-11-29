@@ -16,10 +16,14 @@ import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequence
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import robot.dSL.ANDexpression;
 import robot.dSL.Behavior;
+import robot.dSL.BehaviorName;
 import robot.dSL.ColorLiteral;
 import robot.dSL.DSLPackage;
 import robot.dSL.DistanceLiteral;
 import robot.dSL.EdgeLiteral;
+import robot.dSL.EndAfter;
+import robot.dSL.EndCondition;
+import robot.dSL.EndWhen;
 import robot.dSL.ExpressionBracket;
 import robot.dSL.LeftMovementAction;
 import robot.dSL.LeftRotatePoint;
@@ -53,6 +57,9 @@ public class DSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case DSLPackage.BEHAVIOR:
 				sequence_Behavior(context, (Behavior) semanticObject); 
 				return; 
+			case DSLPackage.BEHAVIOR_NAME:
+				sequence_BehaviorName(context, (BehaviorName) semanticObject); 
+				return; 
 			case DSLPackage.COLOR_LITERAL:
 				sequence_ColorLiteral(context, (ColorLiteral) semanticObject); 
 				return; 
@@ -61,6 +68,15 @@ public class DSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case DSLPackage.EDGE_LITERAL:
 				sequence_EdgeLiteral(context, (EdgeLiteral) semanticObject); 
+				return; 
+			case DSLPackage.END_AFTER:
+				sequence_EndAfter(context, (EndAfter) semanticObject); 
+				return; 
+			case DSLPackage.END_CONDITION:
+				sequence_EndCondition(context, (EndCondition) semanticObject); 
+				return; 
+			case DSLPackage.END_WHEN:
+				sequence_EndWhen(context, (EndWhen) semanticObject); 
 				return; 
 			case DSLPackage.EXPRESSION_BRACKET:
 				sequence_ExpressionBracket(context, (ExpressionBracket) semanticObject); 
@@ -126,6 +142,24 @@ public class DSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
+	
+	/**
+	 * Contexts:
+	 *     BehaviorName returns BehaviorName
+	 *
+	 * Constraint:
+	 *     name=ID
+	 */
+	protected void sequence_BehaviorName(ISerializationContext context, BehaviorName semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DSLPackage.Literals.BEHAVIOR_NAME__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DSLPackage.Literals.BEHAVIOR_NAME__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getBehaviorNameAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
 	
 	/**
 	 * Contexts:
@@ -207,6 +241,58 @@ public class DSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getEdgeLiteralAccess().getEdgeEdgeEnumEnumRuleCall_2_0(), semanticObject.getEdge());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EndCondition returns EndAfter
+	 *     EndAfter returns EndAfter
+	 *
+	 * Constraint:
+	 *     time=INT
+	 */
+	protected void sequence_EndAfter(ISerializationContext context, EndAfter semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DSLPackage.Literals.END_AFTER__TIME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DSLPackage.Literals.END_AFTER__TIME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEndAfterAccess().getTimeINTTerminalRuleCall_1_0(), semanticObject.getTime());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EndCondition returns EndCondition
+	 *
+	 * Constraint:
+	 *     endwhenlist+=EndWhen+
+	 */
+	protected void sequence_EndCondition(ISerializationContext context, EndCondition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EndWhen returns EndWhen
+	 *
+	 * Constraint:
+	 *     (name=ID times=INT)
+	 */
+	protected void sequence_EndWhen(ISerializationContext context, EndWhen semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DSLPackage.Literals.END_WHEN__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DSLPackage.Literals.END_WHEN__NAME));
+			if (transientValues.isValueTransient(semanticObject, DSLPackage.Literals.END_WHEN__TIMES) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DSLPackage.Literals.END_WHEN__TIMES));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEndWhenAccess().getNameIDTerminalRuleCall_2_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getEndWhenAccess().getTimesINTTerminalRuleCall_4_0(), semanticObject.getTimes());
 		feeder.finish();
 	}
 	
@@ -348,7 +434,7 @@ public class DSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     MarsRoverExpedition returns MarsRoverExpedition
 	 *
 	 * Constraint:
-	 *     missionlist+=Mission+
+	 *     (missionlist+=Mission+ tasklist+=Behavior+)
 	 */
 	protected void sequence_MarsRoverExpedition(ISerializationContext context, MarsRoverExpedition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -401,7 +487,7 @@ public class DSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Mission returns Mission
 	 *
 	 * Constraint:
-	 *     (name=ID behaviorlist+=Behavior+)
+	 *     (name=ID behaviorlist+=BehaviorName+ endcondition=EndCondition)
 	 */
 	protected void sequence_Mission(ISerializationContext context, Mission semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

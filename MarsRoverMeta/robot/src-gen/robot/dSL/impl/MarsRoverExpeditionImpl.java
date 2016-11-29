@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import robot.dSL.Behavior;
 import robot.dSL.DSLPackage;
 import robot.dSL.MarsRoverExpedition;
 import robot.dSL.Mission;
@@ -30,6 +31,7 @@ import robot.dSL.Mission;
  * </p>
  * <ul>
  *   <li>{@link robot.dSL.impl.MarsRoverExpeditionImpl#getMissionlist <em>Missionlist</em>}</li>
+ *   <li>{@link robot.dSL.impl.MarsRoverExpeditionImpl#getTasklist <em>Tasklist</em>}</li>
  * </ul>
  *
  * @generated
@@ -45,6 +47,16 @@ public class MarsRoverExpeditionImpl extends MinimalEObjectImpl.Container implem
    * @ordered
    */
   protected EList<Mission> missionlist;
+
+  /**
+   * The cached value of the '{@link #getTasklist() <em>Tasklist</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTasklist()
+   * @generated
+   * @ordered
+   */
+  protected EList<Behavior> tasklist;
 
   /**
    * <!-- begin-user-doc -->
@@ -86,6 +98,20 @@ public class MarsRoverExpeditionImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<Behavior> getTasklist()
+  {
+    if (tasklist == null)
+    {
+      tasklist = new EObjectContainmentEList<Behavior>(Behavior.class, this, DSLPackage.MARS_ROVER_EXPEDITION__TASKLIST);
+    }
+    return tasklist;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -93,6 +119,8 @@ public class MarsRoverExpeditionImpl extends MinimalEObjectImpl.Container implem
     {
       case DSLPackage.MARS_ROVER_EXPEDITION__MISSIONLIST:
         return ((InternalEList<?>)getMissionlist()).basicRemove(otherEnd, msgs);
+      case DSLPackage.MARS_ROVER_EXPEDITION__TASKLIST:
+        return ((InternalEList<?>)getTasklist()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -109,6 +137,8 @@ public class MarsRoverExpeditionImpl extends MinimalEObjectImpl.Container implem
     {
       case DSLPackage.MARS_ROVER_EXPEDITION__MISSIONLIST:
         return getMissionlist();
+      case DSLPackage.MARS_ROVER_EXPEDITION__TASKLIST:
+        return getTasklist();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -128,6 +158,10 @@ public class MarsRoverExpeditionImpl extends MinimalEObjectImpl.Container implem
         getMissionlist().clear();
         getMissionlist().addAll((Collection<? extends Mission>)newValue);
         return;
+      case DSLPackage.MARS_ROVER_EXPEDITION__TASKLIST:
+        getTasklist().clear();
+        getTasklist().addAll((Collection<? extends Behavior>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -145,6 +179,9 @@ public class MarsRoverExpeditionImpl extends MinimalEObjectImpl.Container implem
       case DSLPackage.MARS_ROVER_EXPEDITION__MISSIONLIST:
         getMissionlist().clear();
         return;
+      case DSLPackage.MARS_ROVER_EXPEDITION__TASKLIST:
+        getTasklist().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -161,6 +198,8 @@ public class MarsRoverExpeditionImpl extends MinimalEObjectImpl.Container implem
     {
       case DSLPackage.MARS_ROVER_EXPEDITION__MISSIONLIST:
         return missionlist != null && !missionlist.isEmpty();
+      case DSLPackage.MARS_ROVER_EXPEDITION__TASKLIST:
+        return tasklist != null && !tasklist.isEmpty();
     }
     return super.eIsSet(featureID);
   }

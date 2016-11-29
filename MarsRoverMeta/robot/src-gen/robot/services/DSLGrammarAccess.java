@@ -33,14 +33,17 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cMissionlistAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cMissionlistMissionParserRuleCall_1_0 = (RuleCall)cMissionlistAssignment_1.eContents().get(0);
 		private final Keyword cExpeditionSTOPKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cTasklistAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cTasklistBehaviorParserRuleCall_3_0 = (RuleCall)cTasklistAssignment_3.eContents().get(0);
 		
 		//MarsRoverExpedition:
 		//	"ExpeditionSTART"
 		//	missionlist+=Mission+
-		//	"ExpeditionSTOP";
+		//	"ExpeditionSTOP"
+		//	tasklist+=Behavior+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"ExpeditionSTART" missionlist+=Mission+ "ExpeditionSTOP"
+		//"ExpeditionSTART" missionlist+=Mission+ "ExpeditionSTOP" tasklist+=Behavior+
 		public Group getGroup() { return cGroup; }
 		
 		//"ExpeditionSTART"
@@ -54,6 +57,12 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//"ExpeditionSTOP"
 		public Keyword getExpeditionSTOPKeyword_2() { return cExpeditionSTOPKeyword_2; }
+		
+		//tasklist+=Behavior+
+		public Assignment getTasklistAssignment_3() { return cTasklistAssignment_3; }
+		
+		//Behavior
+		public RuleCall getTasklistBehaviorParserRuleCall_3_0() { return cTasklistBehaviorParserRuleCall_3_0; }
 	}
 	public class MissionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.Mission");
@@ -62,16 +71,18 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Assignment cBehaviorlistAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cBehaviorlistBehaviorParserRuleCall_2_0 = (RuleCall)cBehaviorlistAssignment_2.eContents().get(0);
+		private final RuleCall cBehaviorlistBehaviorNameParserRuleCall_2_0 = (RuleCall)cBehaviorlistAssignment_2.eContents().get(0);
 		private final Keyword cENDMissionKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cEndconditionAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cEndconditionEndConditionParserRuleCall_4_0 = (RuleCall)cEndconditionAssignment_4.eContents().get(0);
 		
 		//Mission:
 		//	"Mission" name=ID
-		//	behaviorlist+=Behavior+
-		//	"ENDMission";
+		//	behaviorlist+=BehaviorName+
+		//	"ENDMission" endcondition=EndCondition;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"Mission" name=ID behaviorlist+=Behavior+ "ENDMission"
+		//"Mission" name=ID behaviorlist+=BehaviorName+ "ENDMission" endcondition=EndCondition
 		public Group getGroup() { return cGroup; }
 		
 		//"Mission"
@@ -83,14 +94,136 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//behaviorlist+=Behavior+
+		//behaviorlist+=BehaviorName+
 		public Assignment getBehaviorlistAssignment_2() { return cBehaviorlistAssignment_2; }
 		
-		//Behavior
-		public RuleCall getBehaviorlistBehaviorParserRuleCall_2_0() { return cBehaviorlistBehaviorParserRuleCall_2_0; }
+		//BehaviorName
+		public RuleCall getBehaviorlistBehaviorNameParserRuleCall_2_0() { return cBehaviorlistBehaviorNameParserRuleCall_2_0; }
 		
 		//"ENDMission"
 		public Keyword getENDMissionKeyword_3() { return cENDMissionKeyword_3; }
+		
+		//endcondition=EndCondition
+		public Assignment getEndconditionAssignment_4() { return cEndconditionAssignment_4; }
+		
+		//EndCondition
+		public RuleCall getEndconditionEndConditionParserRuleCall_4_0() { return cEndconditionEndConditionParserRuleCall_4_0; }
+	}
+	public class EndConditionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.EndCondition");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cEndAfterParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final Assignment cEndwhenlistAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall cEndwhenlistEndWhenParserRuleCall_1_0 = (RuleCall)cEndwhenlistAssignment_1.eContents().get(0);
+		
+		//EndCondition:
+		//	EndAfter | endwhenlist+=EndWhen+;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//EndAfter | endwhenlist+=EndWhen+
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//EndAfter
+		public RuleCall getEndAfterParserRuleCall_0() { return cEndAfterParserRuleCall_0; }
+		
+		//endwhenlist+=EndWhen+
+		public Assignment getEndwhenlistAssignment_1() { return cEndwhenlistAssignment_1; }
+		
+		//EndWhen
+		public RuleCall getEndwhenlistEndWhenParserRuleCall_1_0() { return cEndwhenlistEndWhenParserRuleCall_1_0; }
+	}
+	public class EndAfterElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.EndAfter");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cAfterKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTimeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTimeINTTerminalRuleCall_1_0 = (RuleCall)cTimeAssignment_1.eContents().get(0);
+		private final Keyword cMinKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//EndAfter:
+		//	"after" time=INT "min";
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"after" time=INT "min"
+		public Group getGroup() { return cGroup; }
+		
+		//"after"
+		public Keyword getAfterKeyword_0() { return cAfterKeyword_0; }
+		
+		//time=INT
+		public Assignment getTimeAssignment_1() { return cTimeAssignment_1; }
+		
+		//INT
+		public RuleCall getTimeINTTerminalRuleCall_1_0() { return cTimeINTTerminalRuleCall_1_0; }
+		
+		//"min"
+		public Keyword getMinKeyword_2() { return cMinKeyword_2; }
+	}
+	public class EndWhenElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.EndWhen");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cIfKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cTaskKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cExecutedKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cTimesAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cTimesINTTerminalRuleCall_4_0 = (RuleCall)cTimesAssignment_4.eContents().get(0);
+		private final Keyword cTimesKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		
+		//EndWhen:
+		//	"If" "Task" name=ID "executed" times=INT "times";
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"If" "Task" name=ID "executed" times=INT "times"
+		public Group getGroup() { return cGroup; }
+		
+		//"If"
+		public Keyword getIfKeyword_0() { return cIfKeyword_0; }
+		
+		//"Task"
+		public Keyword getTaskKeyword_1() { return cTaskKeyword_1; }
+		
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
+		
+		//"executed"
+		public Keyword getExecutedKeyword_3() { return cExecutedKeyword_3; }
+		
+		//times=INT
+		public Assignment getTimesAssignment_4() { return cTimesAssignment_4; }
+		
+		//INT
+		public RuleCall getTimesINTTerminalRuleCall_4_0() { return cTimesINTTerminalRuleCall_4_0; }
+		
+		//"times"
+		public Keyword getTimesKeyword_5() { return cTimesKeyword_5; }
+	}
+	public class BehaviorNameElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.BehaviorName");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cTaskKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		
+		//BehaviorName:
+		//	"Task" name=ID;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"Task" name=ID
+		public Group getGroup() { return cGroup; }
+		
+		//"Task"
+		public Keyword getTaskKeyword_0() { return cTaskKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
 	public class BehaviorElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.Behavior");
@@ -871,6 +1004,10 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private final MarsRoverExpeditionElements pMarsRoverExpedition;
 	private final MissionElements pMission;
+	private final EndConditionElements pEndCondition;
+	private final EndAfterElements pEndAfter;
+	private final EndWhenElements pEndWhen;
+	private final BehaviorNameElements pBehaviorName;
 	private final BehaviorElements pBehavior;
 	private final ExpressionElements pExpression;
 	private final ActionsElements pActions;
@@ -908,6 +1045,10 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		this.gaTerminals = gaTerminals;
 		this.pMarsRoverExpedition = new MarsRoverExpeditionElements();
 		this.pMission = new MissionElements();
+		this.pEndCondition = new EndConditionElements();
+		this.pEndAfter = new EndAfterElements();
+		this.pEndWhen = new EndWhenElements();
+		this.pBehaviorName = new BehaviorNameElements();
 		this.pBehavior = new BehaviorElements();
 		this.pExpression = new ExpressionElements();
 		this.pActions = new ActionsElements();
@@ -965,7 +1106,8 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 	//MarsRoverExpedition:
 	//	"ExpeditionSTART"
 	//	missionlist+=Mission+
-	//	"ExpeditionSTOP";
+	//	"ExpeditionSTOP"
+	//	tasklist+=Behavior+;
 	public MarsRoverExpeditionElements getMarsRoverExpeditionAccess() {
 		return pMarsRoverExpedition;
 	}
@@ -976,14 +1118,54 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//Mission:
 	//	"Mission" name=ID
-	//	behaviorlist+=Behavior+
-	//	"ENDMission";
+	//	behaviorlist+=BehaviorName+
+	//	"ENDMission" endcondition=EndCondition;
 	public MissionElements getMissionAccess() {
 		return pMission;
 	}
 	
 	public ParserRule getMissionRule() {
 		return getMissionAccess().getRule();
+	}
+	
+	//EndCondition:
+	//	EndAfter | endwhenlist+=EndWhen+;
+	public EndConditionElements getEndConditionAccess() {
+		return pEndCondition;
+	}
+	
+	public ParserRule getEndConditionRule() {
+		return getEndConditionAccess().getRule();
+	}
+	
+	//EndAfter:
+	//	"after" time=INT "min";
+	public EndAfterElements getEndAfterAccess() {
+		return pEndAfter;
+	}
+	
+	public ParserRule getEndAfterRule() {
+		return getEndAfterAccess().getRule();
+	}
+	
+	//EndWhen:
+	//	"If" "Task" name=ID "executed" times=INT "times";
+	public EndWhenElements getEndWhenAccess() {
+		return pEndWhen;
+	}
+	
+	public ParserRule getEndWhenRule() {
+		return getEndWhenAccess().getRule();
+	}
+	
+	//BehaviorName:
+	//	"Task" name=ID;
+	public BehaviorNameElements getBehaviorNameAccess() {
+		return pBehaviorName;
+	}
+	
+	public ParserRule getBehaviorNameRule() {
+		return getBehaviorNameAccess().getRule();
 	}
 	
 	//Behavior:

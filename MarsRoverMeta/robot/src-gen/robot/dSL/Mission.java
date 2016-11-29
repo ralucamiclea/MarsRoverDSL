@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link robot.dSL.Mission#getName <em>Name</em>}</li>
  *   <li>{@link robot.dSL.Mission#getBehaviorlist <em>Behaviorlist</em>}</li>
+ *   <li>{@link robot.dSL.Mission#getEndcondition <em>Endcondition</em>}</li>
  * </ul>
  *
  * @see robot.dSL.DSLPackage#getMission()
@@ -54,7 +55,7 @@ public interface Mission extends EObject
 
   /**
    * Returns the value of the '<em><b>Behaviorlist</b></em>' containment reference list.
-   * The list contents are of type {@link robot.dSL.Behavior}.
+   * The list contents are of type {@link robot.dSL.BehaviorName}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Behaviorlist</em>' containment reference list isn't clear,
@@ -66,6 +67,32 @@ public interface Mission extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<Behavior> getBehaviorlist();
+  EList<BehaviorName> getBehaviorlist();
+
+  /**
+   * Returns the value of the '<em><b>Endcondition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Endcondition</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Endcondition</em>' containment reference.
+   * @see #setEndcondition(EndCondition)
+   * @see robot.dSL.DSLPackage#getMission_Endcondition()
+   * @model containment="true"
+   * @generated
+   */
+  EndCondition getEndcondition();
+
+  /**
+   * Sets the value of the '{@link robot.dSL.Mission#getEndcondition <em>Endcondition</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Endcondition</em>' containment reference.
+   * @see #getEndcondition()
+   * @generated
+   */
+  void setEndcondition(EndCondition value);
 
 } // Mission

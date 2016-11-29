@@ -42,6 +42,42 @@ public interface DSLFactory extends EFactory
   Mission createMission();
 
   /**
+   * Returns a new object of class '<em>End Condition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>End Condition</em>'.
+   * @generated
+   */
+  EndCondition createEndCondition();
+
+  /**
+   * Returns a new object of class '<em>End After</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>End After</em>'.
+   * @generated
+   */
+  EndAfter createEndAfter();
+
+  /**
+   * Returns a new object of class '<em>End When</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>End When</em>'.
+   * @generated
+   */
+  EndWhen createEndWhen();
+
+  /**
+   * Returns a new object of class '<em>Behavior Name</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Behavior Name</em>'.
+   * @generated
+   */
+  BehaviorName createBehaviorName();
+
+  /**
    * Returns a new object of class '<em>Behavior</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

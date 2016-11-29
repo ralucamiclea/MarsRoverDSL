@@ -35,6 +35,7 @@ public class DSLParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
+					put(grammarAccess.getEndConditionAccess().getAlternatives(), "rule__EndCondition__Alternatives");
 					put(grammarAccess.getActionsAccess().getAlternatives(), "rule__Actions__Alternatives");
 					put(grammarAccess.getRotatePointsAccess().getAlternatives(), "rule__RotatePoints__Alternatives");
 					put(grammarAccess.getExpression3Access().getAlternatives(), "rule__Expression3__Alternatives");
@@ -46,6 +47,9 @@ public class DSLParser extends AbstractContentAssistParser {
 					put(grammarAccess.getColorEnumAccess().getAlternatives(), "rule__ColorEnum__Alternatives");
 					put(grammarAccess.getMarsRoverExpeditionAccess().getGroup(), "rule__MarsRoverExpedition__Group__0");
 					put(grammarAccess.getMissionAccess().getGroup(), "rule__Mission__Group__0");
+					put(grammarAccess.getEndAfterAccess().getGroup(), "rule__EndAfter__Group__0");
+					put(grammarAccess.getEndWhenAccess().getGroup(), "rule__EndWhen__Group__0");
+					put(grammarAccess.getBehaviorNameAccess().getGroup(), "rule__BehaviorName__Group__0");
 					put(grammarAccess.getBehaviorAccess().getGroup(), "rule__Behavior__Group__0");
 					put(grammarAccess.getLeftMovementActionAccess().getGroup(), "rule__LeftMovementAction__Group__0");
 					put(grammarAccess.getRightMovementActionAccess().getGroup(), "rule__RightMovementAction__Group__0");
@@ -63,8 +67,15 @@ public class DSLParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDistanceLiteralAccess().getGroup(), "rule__DistanceLiteral__Group__0");
 					put(grammarAccess.getEdgeLiteralAccess().getGroup(), "rule__EdgeLiteral__Group__0");
 					put(grammarAccess.getMarsRoverExpeditionAccess().getMissionlistAssignment_1(), "rule__MarsRoverExpedition__MissionlistAssignment_1");
+					put(grammarAccess.getMarsRoverExpeditionAccess().getTasklistAssignment_3(), "rule__MarsRoverExpedition__TasklistAssignment_3");
 					put(grammarAccess.getMissionAccess().getNameAssignment_1(), "rule__Mission__NameAssignment_1");
 					put(grammarAccess.getMissionAccess().getBehaviorlistAssignment_2(), "rule__Mission__BehaviorlistAssignment_2");
+					put(grammarAccess.getMissionAccess().getEndconditionAssignment_4(), "rule__Mission__EndconditionAssignment_4");
+					put(grammarAccess.getEndConditionAccess().getEndwhenlistAssignment_1(), "rule__EndCondition__EndwhenlistAssignment_1");
+					put(grammarAccess.getEndAfterAccess().getTimeAssignment_1(), "rule__EndAfter__TimeAssignment_1");
+					put(grammarAccess.getEndWhenAccess().getNameAssignment_2(), "rule__EndWhen__NameAssignment_2");
+					put(grammarAccess.getEndWhenAccess().getTimesAssignment_4(), "rule__EndWhen__TimesAssignment_4");
+					put(grammarAccess.getBehaviorNameAccess().getNameAssignment_1(), "rule__BehaviorName__NameAssignment_1");
 					put(grammarAccess.getBehaviorAccess().getNameAssignment_1(), "rule__Behavior__NameAssignment_1");
 					put(grammarAccess.getBehaviorAccess().getSensorExpressionAssignment_3(), "rule__Behavior__SensorExpressionAssignment_3");
 					put(grammarAccess.getBehaviorAccess().getActionlistAssignment_5(), "rule__Behavior__ActionlistAssignment_5");

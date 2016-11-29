@@ -1,0 +1,22 @@
+ExpeditionSTART 
+
+	Mission FindLakes 
+		Task AvoidEdge 
+		Task AvoidCollision
+	ENDMission
+	
+	Mission FollowLine 
+		Task AvoidEdge 		
+	ENDMission 
+	
+ExpeditionSTOP
+
+Task AvoidEdge 
+			IF edge at frontLeft OR edge at frontLeft 
+			THEN leftMotor backward 
+ENDtask
+	
+Task AvoidCollision
+		IF touchFrontLeft hits OR touchFrontRight hits 
+		THEN rightMotor backward
+ENDtask 

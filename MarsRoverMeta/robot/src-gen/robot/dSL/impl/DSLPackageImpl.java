@@ -15,6 +15,7 @@ import robot.dSL.ANDexpression;
 import robot.dSL.ActionEnum;
 import robot.dSL.Actions;
 import robot.dSL.Behavior;
+import robot.dSL.BehaviorName;
 import robot.dSL.ColorEnum;
 import robot.dSL.ColorLiteral;
 import robot.dSL.DSLFactory;
@@ -22,6 +23,9 @@ import robot.dSL.DSLPackage;
 import robot.dSL.DistanceLiteral;
 import robot.dSL.EdgeEnum;
 import robot.dSL.EdgeLiteral;
+import robot.dSL.EndAfter;
+import robot.dSL.EndCondition;
+import robot.dSL.EndWhen;
 import robot.dSL.Expression;
 import robot.dSL.ExpressionBracket;
 import robot.dSL.FBEnum;
@@ -61,6 +65,34 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
    * @generated
    */
   private EClass missionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass endConditionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass endAfterEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass endWhenEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass behaviorNameEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -318,6 +350,16 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getMarsRoverExpedition_Tasklist()
+  {
+    return (EReference)marsRoverExpeditionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getMission()
   {
     return missionEClass;
@@ -341,6 +383,106 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
   public EReference getMission_Behaviorlist()
   {
     return (EReference)missionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getMission_Endcondition()
+  {
+    return (EReference)missionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEndCondition()
+  {
+    return endConditionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEndCondition_Endwhenlist()
+  {
+    return (EReference)endConditionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEndAfter()
+  {
+    return endAfterEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEndAfter_Time()
+  {
+    return (EAttribute)endAfterEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEndWhen()
+  {
+    return endWhenEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEndWhen_Name()
+  {
+    return (EAttribute)endWhenEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEndWhen_Times()
+  {
+    return (EAttribute)endWhenEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getBehaviorName()
+  {
+    return behaviorNameEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBehaviorName_Name()
+  {
+    return (EAttribute)behaviorNameEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -805,10 +947,25 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
     // Create classes and their features
     marsRoverExpeditionEClass = createEClass(MARS_ROVER_EXPEDITION);
     createEReference(marsRoverExpeditionEClass, MARS_ROVER_EXPEDITION__MISSIONLIST);
+    createEReference(marsRoverExpeditionEClass, MARS_ROVER_EXPEDITION__TASKLIST);
 
     missionEClass = createEClass(MISSION);
     createEAttribute(missionEClass, MISSION__NAME);
     createEReference(missionEClass, MISSION__BEHAVIORLIST);
+    createEReference(missionEClass, MISSION__ENDCONDITION);
+
+    endConditionEClass = createEClass(END_CONDITION);
+    createEReference(endConditionEClass, END_CONDITION__ENDWHENLIST);
+
+    endAfterEClass = createEClass(END_AFTER);
+    createEAttribute(endAfterEClass, END_AFTER__TIME);
+
+    endWhenEClass = createEClass(END_WHEN);
+    createEAttribute(endWhenEClass, END_WHEN__NAME);
+    createEAttribute(endWhenEClass, END_WHEN__TIMES);
+
+    behaviorNameEClass = createEClass(BEHAVIOR_NAME);
+    createEAttribute(behaviorNameEClass, BEHAVIOR_NAME__NAME);
 
     behaviorEClass = createEClass(BEHAVIOR);
     createEAttribute(behaviorEClass, BEHAVIOR__NAME);
@@ -903,6 +1060,7 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    endAfterEClass.getESuperTypes().add(this.getEndCondition());
     leftMovementActionEClass.getESuperTypes().add(this.getActions());
     rightMovementActionEClass.getESuperTypes().add(this.getActions());
     rotateMovementActionEClass.getESuperTypes().add(this.getActions());
@@ -921,10 +1079,25 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
     // Initialize classes and features; add operations and parameters
     initEClass(marsRoverExpeditionEClass, MarsRoverExpedition.class, "MarsRoverExpedition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMarsRoverExpedition_Missionlist(), this.getMission(), null, "missionlist", null, 0, -1, MarsRoverExpedition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMarsRoverExpedition_Tasklist(), this.getBehavior(), null, "tasklist", null, 0, -1, MarsRoverExpedition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(missionEClass, Mission.class, "Mission", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMission_Name(), ecorePackage.getEString(), "name", null, 0, 1, Mission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getMission_Behaviorlist(), this.getBehavior(), null, "behaviorlist", null, 0, -1, Mission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMission_Behaviorlist(), this.getBehaviorName(), null, "behaviorlist", null, 0, -1, Mission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMission_Endcondition(), this.getEndCondition(), null, "endcondition", null, 0, 1, Mission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(endConditionEClass, EndCondition.class, "EndCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEndCondition_Endwhenlist(), this.getEndWhen(), null, "endwhenlist", null, 0, -1, EndCondition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(endAfterEClass, EndAfter.class, "EndAfter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEndAfter_Time(), ecorePackage.getEInt(), "time", null, 0, 1, EndAfter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(endWhenEClass, EndWhen.class, "EndWhen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEndWhen_Name(), ecorePackage.getEString(), "name", null, 0, 1, EndWhen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEndWhen_Times(), ecorePackage.getEInt(), "times", null, 0, 1, EndWhen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(behaviorNameEClass, BehaviorName.class, "BehaviorName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getBehaviorName_Name(), ecorePackage.getEString(), "name", null, 0, 1, BehaviorName.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(behaviorEClass, Behavior.class, "Behavior", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getBehavior_Name(), ecorePackage.getEString(), "name", null, 0, 1, Behavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

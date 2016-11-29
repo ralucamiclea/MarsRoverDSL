@@ -19,8 +19,9 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import robot.dSL.Behavior;
+import robot.dSL.BehaviorName;
 import robot.dSL.DSLPackage;
+import robot.dSL.EndCondition;
 import robot.dSL.Mission;
 
 /**
@@ -33,6 +34,7 @@ import robot.dSL.Mission;
  * <ul>
  *   <li>{@link robot.dSL.impl.MissionImpl#getName <em>Name</em>}</li>
  *   <li>{@link robot.dSL.impl.MissionImpl#getBehaviorlist <em>Behaviorlist</em>}</li>
+ *   <li>{@link robot.dSL.impl.MissionImpl#getEndcondition <em>Endcondition</em>}</li>
  * </ul>
  *
  * @generated
@@ -67,7 +69,17 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
    * @generated
    * @ordered
    */
-  protected EList<Behavior> behaviorlist;
+  protected EList<BehaviorName> behaviorlist;
+
+  /**
+   * The cached value of the '{@link #getEndcondition() <em>Endcondition</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getEndcondition()
+   * @generated
+   * @ordered
+   */
+  protected EndCondition endcondition;
 
   /**
    * <!-- begin-user-doc -->
@@ -118,13 +130,61 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Behavior> getBehaviorlist()
+  public EList<BehaviorName> getBehaviorlist()
   {
     if (behaviorlist == null)
     {
-      behaviorlist = new EObjectContainmentEList<Behavior>(Behavior.class, this, DSLPackage.MISSION__BEHAVIORLIST);
+      behaviorlist = new EObjectContainmentEList<BehaviorName>(BehaviorName.class, this, DSLPackage.MISSION__BEHAVIORLIST);
     }
     return behaviorlist;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EndCondition getEndcondition()
+  {
+    return endcondition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetEndcondition(EndCondition newEndcondition, NotificationChain msgs)
+  {
+    EndCondition oldEndcondition = endcondition;
+    endcondition = newEndcondition;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DSLPackage.MISSION__ENDCONDITION, oldEndcondition, newEndcondition);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setEndcondition(EndCondition newEndcondition)
+  {
+    if (newEndcondition != endcondition)
+    {
+      NotificationChain msgs = null;
+      if (endcondition != null)
+        msgs = ((InternalEObject)endcondition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DSLPackage.MISSION__ENDCONDITION, null, msgs);
+      if (newEndcondition != null)
+        msgs = ((InternalEObject)newEndcondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DSLPackage.MISSION__ENDCONDITION, null, msgs);
+      msgs = basicSetEndcondition(newEndcondition, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, DSLPackage.MISSION__ENDCONDITION, newEndcondition, newEndcondition));
   }
 
   /**
@@ -139,6 +199,8 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
     {
       case DSLPackage.MISSION__BEHAVIORLIST:
         return ((InternalEList<?>)getBehaviorlist()).basicRemove(otherEnd, msgs);
+      case DSLPackage.MISSION__ENDCONDITION:
+        return basicSetEndcondition(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -157,6 +219,8 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
         return getName();
       case DSLPackage.MISSION__BEHAVIORLIST:
         return getBehaviorlist();
+      case DSLPackage.MISSION__ENDCONDITION:
+        return getEndcondition();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -177,7 +241,10 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
         return;
       case DSLPackage.MISSION__BEHAVIORLIST:
         getBehaviorlist().clear();
-        getBehaviorlist().addAll((Collection<? extends Behavior>)newValue);
+        getBehaviorlist().addAll((Collection<? extends BehaviorName>)newValue);
+        return;
+      case DSLPackage.MISSION__ENDCONDITION:
+        setEndcondition((EndCondition)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -199,6 +266,9 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
       case DSLPackage.MISSION__BEHAVIORLIST:
         getBehaviorlist().clear();
         return;
+      case DSLPackage.MISSION__ENDCONDITION:
+        setEndcondition((EndCondition)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -217,6 +287,8 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case DSLPackage.MISSION__BEHAVIORLIST:
         return behaviorlist != null && !behaviorlist.isEmpty();
+      case DSLPackage.MISSION__ENDCONDITION:
+        return endcondition != null;
     }
     return super.eIsSet(featureID);
   }

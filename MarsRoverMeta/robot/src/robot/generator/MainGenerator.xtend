@@ -14,16 +14,20 @@ class MainGenerator {
 	public class Main {
 	
 	public static void main(String[] args) {
+		
 	Model m = new Model();
 	
-	«FOR m : Auxiliary.getMissions(root)»
-	Behavior [] bArray«m.name»;
-	«FOR b : Auxiliary.getBehaviors(m)»
-	
+	//behaviors in this expedition
+	«FOR b : Auxiliary.getBehaviors(root)»
 	Behavior «b.name» = new «Auxiliary.toClass(b.name)»(m);
-	bArray«m.name».add(«b.name»);
 	«ENDFOR»
 	
+	«FOR m : Auxiliary.getMissions(root)»
+	//mission "«m.name»"
+	Behavior [] bArray«m.name»;
+	«FOR b : Auxiliary.getBehaviorNames(m)»
+	bArray«m.name».add(«b.name»);
+	«ENDFOR»
 	Arbitrator arby«m.name» = new Arbitrator(bArray«m.name»);
 	arby«m.name».go();
 	
@@ -32,5 +36,4 @@ class MainGenerator {
 }
 	
 	'''
-	
 }

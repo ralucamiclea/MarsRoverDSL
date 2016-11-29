@@ -11,7 +11,6 @@ import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import robot.dSL.Behavior
 import robot.dSL.MarsRoverExpedition
-import robot.dSL.Mission
 
 /**
  * Generates code from your model files on save.
@@ -27,13 +26,10 @@ class DSLGenerator extends AbstractGenerator {
  			fsa.generateFile("Main.java", MainGenerator.toText(root));
  			fsa.generateFile("Model.java", ModelGenerator.toText(root));
  			
- 			var List<Mission> m = new ArrayList<Mission>();
- 			m = Auxiliary.getMissions(root);
- 			for(Mission i : m){
- 				var List<Behavior> b = new ArrayList<Behavior>(); 
- 				b = Auxiliary.getBehaviors(i);
- 				for(Behavior j : b)
- 				fsa.generateFile(Auxiliary.toClass(j.name) + ".java", BehaviorGenerator.toText(j));
+ 			var List<Behavior> b = new ArrayList<Behavior>();
+ 			b = Auxiliary.getBehaviors(root);
+ 			for(Behavior i : b){
+ 				fsa.generateFile(Auxiliary.toClass(i.name) + ".java", BehaviorGenerator.toText(i));
  			}
  		}
 	}

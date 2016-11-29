@@ -1,0 +1,24 @@
+	package assignment;
+	
+	import lejos.robotics.subsumption.Arbitrator;
+	import lejos.robotics.subsumption.Behavior;
+	
+	public class Main {
+	
+	public static void main(String[] args) {
+	Model m = new Model();
+	
+	Behavior AvoidEdge = new AvoidEdge(m);
+	Behavior AvoidCollision = new AvoidCollision(m);
+	Behavior [] bArrayFindLakes;
+	bArrayFindLakes.add(AvoidEdge);
+	bArrayFindLakes.add(AvoidCollision);
+	Arbitrator arbyFindLakes = new Arbitrator(bArrayFindLakes);
+	arbyFindLakes.go();
+	Behavior [] bArrayFollowLine;
+	bArrayFollowLine.add(AvoidEdge);
+	Arbitrator arbyFollowLine = new Arbitrator(bArrayFollowLine);
+	arbyFollowLine.go();
+	}
+}
+	

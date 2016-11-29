@@ -68,6 +68,10 @@ public class DSLFactoryImpl extends EFactoryImpl implements DSLFactory
     {
       case DSLPackage.MARS_ROVER_EXPEDITION: return createMarsRoverExpedition();
       case DSLPackage.MISSION: return createMission();
+      case DSLPackage.END_CONDITION: return createEndCondition();
+      case DSLPackage.END_AFTER: return createEndAfter();
+      case DSLPackage.END_WHEN: return createEndWhen();
+      case DSLPackage.BEHAVIOR_NAME: return createBehaviorName();
       case DSLPackage.BEHAVIOR: return createBehavior();
       case DSLPackage.EXPRESSION: return createExpression();
       case DSLPackage.ACTIONS: return createActions();
@@ -165,6 +169,50 @@ public class DSLFactoryImpl extends EFactoryImpl implements DSLFactory
   {
     MissionImpl mission = new MissionImpl();
     return mission;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EndCondition createEndCondition()
+  {
+    EndConditionImpl endCondition = new EndConditionImpl();
+    return endCondition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EndAfter createEndAfter()
+  {
+    EndAfterImpl endAfter = new EndAfterImpl();
+    return endAfter;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EndWhen createEndWhen()
+  {
+    EndWhenImpl endWhen = new EndWhenImpl();
+    return endWhen;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public BehaviorName createBehaviorName()
+  {
+    BehaviorNameImpl behaviorName = new BehaviorNameImpl();
+    return behaviorName;
   }
 
   /**

@@ -6,27 +6,24 @@
 	public class Main {
 	
 	public static void main(String[] args) {
+		
 	Model m = new Model();
 	
-	Behavior [] bArrayFindLakes;
-	
+	//behaviors in this expedition
 	Behavior AvoidEdge = new AvoidEdge(m);
-	bArrayFindLakes.add(AvoidEdge);
-	
 	Behavior AvoidCollision = new AvoidCollision(m);
-	bArrayFindLakes.add(AvoidCollision);
 	
+	//mission "FindLakes"
+	Behavior [] bArrayFindLakes;
+	bArrayFindLakes.add(AvoidEdge);
+	bArrayFindLakes.add(AvoidCollision);
 	Arbitrator arbyFindLakes = new Arbitrator(bArrayFindLakes);
 	arbyFindLakes.go();
 	
+	//mission "FollowLine"
 	Behavior [] bArrayFollowLine;
-	
-	Behavior AvoidEdge = new AvoidEdge(m);
 	bArrayFollowLine.add(AvoidEdge);
-	
-	Behavior AvoidCollision = new AvoidCollision(m);
-	bArrayFollowLine.add(AvoidCollision);
-	
+	bArrayFollowLine.add(FindBlue);
 	Arbitrator arbyFollowLine = new Arbitrator(bArrayFollowLine);
 	arbyFollowLine.go();
 	

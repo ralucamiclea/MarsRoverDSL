@@ -10,6 +10,7 @@ import robot.dSL.ANDexpression;
 import robot.dSL.ActionEnum;
 import robot.dSL.Actions;
 import robot.dSL.Behavior;
+import robot.dSL.BehaviorName;
 import robot.dSL.ColorEnum;
 import robot.dSL.ColorLiteral;
 import robot.dSL.DistanceLiteral;
@@ -36,10 +37,19 @@ public class Auxiliary {
     return missionslist;
   }
   
-  public static List<Behavior> getBehaviors(final Mission root) {
+  public static List<Behavior> getBehaviors(final MarsRoverExpedition root) {
     List<Behavior> behaviorslist = new ArrayList<Behavior>();
-    EList<Behavior> _behaviorlist = root.getBehaviorlist();
-    for (final Behavior t : _behaviorlist) {
+    EList<Behavior> _tasklist = root.getTasklist();
+    for (final Behavior t : _tasklist) {
+      behaviorslist.add(t);
+    }
+    return behaviorslist;
+  }
+  
+  public static List<BehaviorName> getBehaviorNames(final Mission root) {
+    List<BehaviorName> behaviorslist = new ArrayList<BehaviorName>();
+    EList<BehaviorName> _behaviorlist = root.getBehaviorlist();
+    for (final BehaviorName t : _behaviorlist) {
       behaviorslist.add(t);
     }
     return behaviorslist;
@@ -186,7 +196,7 @@ public class Auxiliary {
   }
   
   protected static String _action2Text(final RotateMovementAction a) {
-    return null;
+    return "";
   }
   
   public static HashSet<String> getSensors(final Expression b) {

@@ -87,6 +87,35 @@ public class DSLSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case DSLPackage.END_CONDITION:
+      {
+        EndCondition endCondition = (EndCondition)theEObject;
+        T result = caseEndCondition(endCondition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case DSLPackage.END_AFTER:
+      {
+        EndAfter endAfter = (EndAfter)theEObject;
+        T result = caseEndAfter(endAfter);
+        if (result == null) result = caseEndCondition(endAfter);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case DSLPackage.END_WHEN:
+      {
+        EndWhen endWhen = (EndWhen)theEObject;
+        T result = caseEndWhen(endWhen);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case DSLPackage.BEHAVIOR_NAME:
+      {
+        BehaviorName behaviorName = (BehaviorName)theEObject;
+        T result = caseBehaviorName(behaviorName);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case DSLPackage.BEHAVIOR:
       {
         Behavior behavior = (Behavior)theEObject;
@@ -266,6 +295,70 @@ public class DSLSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseMission(Mission object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>End Condition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>End Condition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEndCondition(EndCondition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>End After</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>End After</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEndAfter(EndAfter object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>End When</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>End When</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEndWhen(EndWhen object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Behavior Name</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Behavior Name</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBehaviorName(BehaviorName object)
   {
     return null;
   }

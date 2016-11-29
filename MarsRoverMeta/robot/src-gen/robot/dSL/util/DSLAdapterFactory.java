@@ -86,6 +86,26 @@ public class DSLAdapterFactory extends AdapterFactoryImpl
         return createMissionAdapter();
       }
       @Override
+      public Adapter caseEndCondition(EndCondition object)
+      {
+        return createEndConditionAdapter();
+      }
+      @Override
+      public Adapter caseEndAfter(EndAfter object)
+      {
+        return createEndAfterAdapter();
+      }
+      @Override
+      public Adapter caseEndWhen(EndWhen object)
+      {
+        return createEndWhenAdapter();
+      }
+      @Override
+      public Adapter caseBehaviorName(BehaviorName object)
+      {
+        return createBehaviorNameAdapter();
+      }
+      @Override
       public Adapter caseBehavior(Behavior object)
       {
         return createBehaviorAdapter();
@@ -223,6 +243,66 @@ public class DSLAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMissionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link robot.dSL.EndCondition <em>End Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see robot.dSL.EndCondition
+   * @generated
+   */
+  public Adapter createEndConditionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link robot.dSL.EndAfter <em>End After</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see robot.dSL.EndAfter
+   * @generated
+   */
+  public Adapter createEndAfterAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link robot.dSL.EndWhen <em>End When</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see robot.dSL.EndWhen
+   * @generated
+   */
+  public Adapter createEndWhenAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link robot.dSL.BehaviorName <em>Behavior Name</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see robot.dSL.BehaviorName
+   * @generated
+   */
+  public Adapter createBehaviorNameAdapter()
   {
     return null;
   }

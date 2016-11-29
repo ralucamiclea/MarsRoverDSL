@@ -15,7 +15,6 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import robot.dSL.Behavior;
 import robot.dSL.MarsRoverExpedition;
-import robot.dSL.Mission;
 import robot.generator.Auxiliary;
 import robot.generator.BehaviorGenerator;
 import robot.generator.MainGenerator;
@@ -39,22 +38,15 @@ public class DSLGenerator extends AbstractGenerator {
       fsa.generateFile("Main.java", _text);
       CharSequence _text_1 = ModelGenerator.toText(root);
       fsa.generateFile("Model.java", _text_1);
-      List<Mission> m = new ArrayList<Mission>();
-      List<Mission> _missions = Auxiliary.getMissions(root);
-      m = _missions;
-      for (final Mission i : m) {
-        {
-          List<Behavior> b = new ArrayList<Behavior>();
-          List<Behavior> _behaviors = Auxiliary.getBehaviors(i);
-          b = _behaviors;
-          for (final Behavior j : b) {
-            String _name = j.getName();
-            String _class = Auxiliary.toClass(_name);
-            String _plus = (_class + ".java");
-            CharSequence _text_2 = BehaviorGenerator.toText(j);
-            fsa.generateFile(_plus, _text_2);
-          }
-        }
+      List<Behavior> b = new ArrayList<Behavior>();
+      List<Behavior> _behaviors = Auxiliary.getBehaviors(root);
+      b = _behaviors;
+      for (final Behavior i : b) {
+        String _name = i.getName();
+        String _class = Auxiliary.toClass(_name);
+        String _plus = (_class + ".java");
+        CharSequence _text_2 = BehaviorGenerator.toText(i);
+        fsa.generateFile(_plus, _text_2);
       }
     }
   }

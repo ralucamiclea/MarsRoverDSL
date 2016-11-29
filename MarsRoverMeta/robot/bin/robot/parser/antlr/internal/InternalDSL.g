@@ -104,6 +104,25 @@ ruleMarsRoverExpedition returns [EObject current=null]
 		{
 			newLeafNode(otherlv_2, grammarAccess.getMarsRoverExpeditionAccess().getExpeditionSTOPKeyword_2());
 		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getMarsRoverExpeditionAccess().getTasklistBehaviorParserRuleCall_3_0());
+				}
+				lv_tasklist_3_0=ruleBehavior
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getMarsRoverExpeditionRule());
+					}
+					add(
+						$current,
+						"tasklist",
+						lv_tasklist_3_0,
+						"robot.DSL.Behavior");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)+
 	)
 ;
 
@@ -148,9 +167,9 @@ ruleMission returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getMissionAccess().getBehaviorlistBehaviorParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getMissionAccess().getBehaviorlistBehaviorNameParserRuleCall_2_0());
 				}
-				lv_behaviorlist_2_0=ruleBehavior
+				lv_behaviorlist_2_0=ruleBehaviorName
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getMissionRule());
@@ -159,7 +178,7 @@ ruleMission returns [EObject current=null]
 						$current,
 						"behaviorlist",
 						lv_behaviorlist_2_0,
-						"robot.DSL.Behavior");
+						"robot.DSL.BehaviorName");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -168,6 +187,229 @@ ruleMission returns [EObject current=null]
 		{
 			newLeafNode(otherlv_3, grammarAccess.getMissionAccess().getENDMissionKeyword_3());
 		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getMissionAccess().getEndconditionEndConditionParserRuleCall_4_0());
+				}
+				lv_endcondition_4_0=ruleEndCondition
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getMissionRule());
+					}
+					set(
+						$current,
+						"endcondition",
+						lv_endcondition_4_0,
+						"robot.DSL.EndCondition");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleEndCondition
+entryRuleEndCondition returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEndConditionRule()); }
+	iv_ruleEndCondition=ruleEndCondition
+	{ $current=$iv_ruleEndCondition.current; }
+	EOF;
+
+// Rule EndCondition
+ruleEndCondition returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getEndConditionAccess().getEndAfterParserRuleCall_0());
+		}
+		this_EndAfter_0=ruleEndAfter
+		{
+			$current = $this_EndAfter_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getEndConditionAccess().getEndwhenlistEndWhenParserRuleCall_1_0());
+				}
+				lv_endwhenlist_1_0=ruleEndWhen
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getEndConditionRule());
+					}
+					add(
+						$current,
+						"endwhenlist",
+						lv_endwhenlist_1_0,
+						"robot.DSL.EndWhen");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)+
+	)
+;
+
+// Entry rule entryRuleEndAfter
+entryRuleEndAfter returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEndAfterRule()); }
+	iv_ruleEndAfter=ruleEndAfter
+	{ $current=$iv_ruleEndAfter.current; }
+	EOF;
+
+// Rule EndAfter
+ruleEndAfter returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='after'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getEndAfterAccess().getAfterKeyword_0());
+		}
+		(
+			(
+				lv_time_1_0=RULE_INT
+				{
+					newLeafNode(lv_time_1_0, grammarAccess.getEndAfterAccess().getTimeINTTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getEndAfterRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"time",
+						lv_time_1_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
+			)
+		)
+		otherlv_2='min'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getEndAfterAccess().getMinKeyword_2());
+		}
+	)
+;
+
+// Entry rule entryRuleEndWhen
+entryRuleEndWhen returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getEndWhenRule()); }
+	iv_ruleEndWhen=ruleEndWhen
+	{ $current=$iv_ruleEndWhen.current; }
+	EOF;
+
+// Rule EndWhen
+ruleEndWhen returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='If'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getEndWhenAccess().getIfKeyword_0());
+		}
+		otherlv_1='Task'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getEndWhenAccess().getTaskKeyword_1());
+		}
+		(
+			(
+				lv_name_2_0=RULE_ID
+				{
+					newLeafNode(lv_name_2_0, grammarAccess.getEndWhenAccess().getNameIDTerminalRuleCall_2_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getEndWhenRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_2_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		otherlv_3='executed'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getEndWhenAccess().getExecutedKeyword_3());
+		}
+		(
+			(
+				lv_times_4_0=RULE_INT
+				{
+					newLeafNode(lv_times_4_0, grammarAccess.getEndWhenAccess().getTimesINTTerminalRuleCall_4_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getEndWhenRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"times",
+						lv_times_4_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
+			)
+		)
+		otherlv_5='times'
+		{
+			newLeafNode(otherlv_5, grammarAccess.getEndWhenAccess().getTimesKeyword_5());
+		}
+	)
+;
+
+// Entry rule entryRuleBehaviorName
+entryRuleBehaviorName returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getBehaviorNameRule()); }
+	iv_ruleBehaviorName=ruleBehaviorName
+	{ $current=$iv_ruleBehaviorName.current; }
+	EOF;
+
+// Rule BehaviorName
+ruleBehaviorName returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='Task'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getBehaviorNameAccess().getTaskKeyword_0());
+		}
+		(
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getBehaviorNameAccess().getNameIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getBehaviorNameRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
 	)
 ;
 

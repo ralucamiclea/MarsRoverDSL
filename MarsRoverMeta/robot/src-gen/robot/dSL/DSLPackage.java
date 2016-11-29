@@ -78,13 +78,22 @@ public interface DSLPackage extends EPackage
   int MARS_ROVER_EXPEDITION__MISSIONLIST = 0;
 
   /**
+   * The feature id for the '<em><b>Tasklist</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MARS_ROVER_EXPEDITION__TASKLIST = 1;
+
+  /**
    * The number of structural features of the '<em>Mars Rover Expedition</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MARS_ROVER_EXPEDITION_FEATURE_COUNT = 1;
+  int MARS_ROVER_EXPEDITION_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link robot.dSL.impl.MissionImpl <em>Mission</em>}' class.
@@ -115,13 +124,152 @@ public interface DSLPackage extends EPackage
   int MISSION__BEHAVIORLIST = 1;
 
   /**
+   * The feature id for the '<em><b>Endcondition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MISSION__ENDCONDITION = 2;
+
+  /**
    * The number of structural features of the '<em>Mission</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MISSION_FEATURE_COUNT = 2;
+  int MISSION_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link robot.dSL.impl.EndConditionImpl <em>End Condition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see robot.dSL.impl.EndConditionImpl
+   * @see robot.dSL.impl.DSLPackageImpl#getEndCondition()
+   * @generated
+   */
+  int END_CONDITION = 2;
+
+  /**
+   * The feature id for the '<em><b>Endwhenlist</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int END_CONDITION__ENDWHENLIST = 0;
+
+  /**
+   * The number of structural features of the '<em>End Condition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int END_CONDITION_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link robot.dSL.impl.EndAfterImpl <em>End After</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see robot.dSL.impl.EndAfterImpl
+   * @see robot.dSL.impl.DSLPackageImpl#getEndAfter()
+   * @generated
+   */
+  int END_AFTER = 3;
+
+  /**
+   * The feature id for the '<em><b>Endwhenlist</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int END_AFTER__ENDWHENLIST = END_CONDITION__ENDWHENLIST;
+
+  /**
+   * The feature id for the '<em><b>Time</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int END_AFTER__TIME = END_CONDITION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>End After</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int END_AFTER_FEATURE_COUNT = END_CONDITION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link robot.dSL.impl.EndWhenImpl <em>End When</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see robot.dSL.impl.EndWhenImpl
+   * @see robot.dSL.impl.DSLPackageImpl#getEndWhen()
+   * @generated
+   */
+  int END_WHEN = 4;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int END_WHEN__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Times</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int END_WHEN__TIMES = 1;
+
+  /**
+   * The number of structural features of the '<em>End When</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int END_WHEN_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link robot.dSL.impl.BehaviorNameImpl <em>Behavior Name</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see robot.dSL.impl.BehaviorNameImpl
+   * @see robot.dSL.impl.DSLPackageImpl#getBehaviorName()
+   * @generated
+   */
+  int BEHAVIOR_NAME = 5;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BEHAVIOR_NAME__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Behavior Name</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BEHAVIOR_NAME_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link robot.dSL.impl.BehaviorImpl <em>Behavior</em>}' class.
@@ -131,7 +279,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getBehavior()
    * @generated
    */
-  int BEHAVIOR = 2;
+  int BEHAVIOR = 6;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -177,7 +325,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getExpression()
    * @generated
    */
-  int EXPRESSION = 3;
+  int EXPRESSION = 7;
 
   /**
    * The number of structural features of the '<em>Expression</em>' class.
@@ -196,7 +344,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getActions()
    * @generated
    */
-  int ACTIONS = 4;
+  int ACTIONS = 8;
 
   /**
    * The number of structural features of the '<em>Actions</em>' class.
@@ -215,7 +363,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getLeftMovementAction()
    * @generated
    */
-  int LEFT_MOVEMENT_ACTION = 5;
+  int LEFT_MOVEMENT_ACTION = 9;
 
   /**
    * The feature id for the '<em><b>Leftmove</b></em>' containment reference.
@@ -243,7 +391,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getRightMovementAction()
    * @generated
    */
-  int RIGHT_MOVEMENT_ACTION = 6;
+  int RIGHT_MOVEMENT_ACTION = 10;
 
   /**
    * The feature id for the '<em><b>Rightmove</b></em>' containment reference.
@@ -271,7 +419,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getRotateMovementAction()
    * @generated
    */
-  int ROTATE_MOVEMENT_ACTION = 7;
+  int ROTATE_MOVEMENT_ACTION = 11;
 
   /**
    * The number of structural features of the '<em>Rotate Movement Action</em>' class.
@@ -290,7 +438,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getRotatePoints()
    * @generated
    */
-  int ROTATE_POINTS = 8;
+  int ROTATE_POINTS = 12;
 
   /**
    * The feature id for the '<em><b>Degrees</b></em>' attribute.
@@ -318,7 +466,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getLeftRotatePoint()
    * @generated
    */
-  int LEFT_ROTATE_POINT = 9;
+  int LEFT_ROTATE_POINT = 13;
 
   /**
    * The feature id for the '<em><b>Degrees</b></em>' attribute.
@@ -355,7 +503,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getRightRotatePoint()
    * @generated
    */
-  int RIGHT_ROTATE_POINT = 10;
+  int RIGHT_ROTATE_POINT = 14;
 
   /**
    * The feature id for the '<em><b>Degrees</b></em>' attribute.
@@ -392,7 +540,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getMiddleRotatePoint()
    * @generated
    */
-  int MIDDLE_ROTATE_POINT = 11;
+  int MIDDLE_ROTATE_POINT = 15;
 
   /**
    * The feature id for the '<em><b>Degrees</b></em>' attribute.
@@ -429,7 +577,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getMovementAction()
    * @generated
    */
-  int MOVEMENT_ACTION = 12;
+  int MOVEMENT_ACTION = 16;
 
   /**
    * The feature id for the '<em><b>Actionenum</b></em>' attribute.
@@ -457,7 +605,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getExpressionBracket()
    * @generated
    */
-  int EXPRESSION_BRACKET = 13;
+  int EXPRESSION_BRACKET = 17;
 
   /**
    * The feature id for the '<em><b>Exp</b></em>' containment reference.
@@ -485,7 +633,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getTouchLiteral()
    * @generated
    */
-  int TOUCH_LITERAL = 14;
+  int TOUCH_LITERAL = 18;
 
   /**
    * The feature id for the '<em><b>Touch</b></em>' attribute.
@@ -513,7 +661,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getColorLiteral()
    * @generated
    */
-  int COLOR_LITERAL = 15;
+  int COLOR_LITERAL = 19;
 
   /**
    * The feature id for the '<em><b>Color</b></em>' attribute.
@@ -541,7 +689,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getDistanceLiteral()
    * @generated
    */
-  int DISTANCE_LITERAL = 16;
+  int DISTANCE_LITERAL = 20;
 
   /**
    * The feature id for the '<em><b>Distance</b></em>' attribute.
@@ -569,7 +717,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getEdgeLiteral()
    * @generated
    */
-  int EDGE_LITERAL = 17;
+  int EDGE_LITERAL = 21;
 
   /**
    * The feature id for the '<em><b>Edge</b></em>' attribute.
@@ -597,7 +745,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getANDexpression()
    * @generated
    */
-  int AN_DEXPRESSION = 18;
+  int AN_DEXPRESSION = 22;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -634,7 +782,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getORexpression()
    * @generated
    */
-  int OREXPRESSION = 19;
+  int OREXPRESSION = 23;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -671,7 +819,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getLREnum()
    * @generated
    */
-  int LR_ENUM = 20;
+  int LR_ENUM = 24;
 
   /**
    * The meta object id for the '{@link robot.dSL.FBEnum <em>FB Enum</em>}' enum.
@@ -681,7 +829,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getFBEnum()
    * @generated
    */
-  int FB_ENUM = 21;
+  int FB_ENUM = 25;
 
   /**
    * The meta object id for the '{@link robot.dSL.ActionEnum <em>Action Enum</em>}' enum.
@@ -691,7 +839,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getActionEnum()
    * @generated
    */
-  int ACTION_ENUM = 22;
+  int ACTION_ENUM = 26;
 
   /**
    * The meta object id for the '{@link robot.dSL.EdgeEnum <em>Edge Enum</em>}' enum.
@@ -701,7 +849,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getEdgeEnum()
    * @generated
    */
-  int EDGE_ENUM = 23;
+  int EDGE_ENUM = 27;
 
   /**
    * The meta object id for the '{@link robot.dSL.TouchEnum <em>Touch Enum</em>}' enum.
@@ -711,7 +859,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getTouchEnum()
    * @generated
    */
-  int TOUCH_ENUM = 24;
+  int TOUCH_ENUM = 28;
 
   /**
    * The meta object id for the '{@link robot.dSL.ColorEnum <em>Color Enum</em>}' enum.
@@ -721,7 +869,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getColorEnum()
    * @generated
    */
-  int COLOR_ENUM = 25;
+  int COLOR_ENUM = 29;
 
 
   /**
@@ -744,6 +892,17 @@ public interface DSLPackage extends EPackage
    * @generated
    */
   EReference getMarsRoverExpedition_Missionlist();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link robot.dSL.MarsRoverExpedition#getTasklist <em>Tasklist</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Tasklist</em>'.
+   * @see robot.dSL.MarsRoverExpedition#getTasklist()
+   * @see #getMarsRoverExpedition()
+   * @generated
+   */
+  EReference getMarsRoverExpedition_Tasklist();
 
   /**
    * Returns the meta object for class '{@link robot.dSL.Mission <em>Mission</em>}'.
@@ -776,6 +935,112 @@ public interface DSLPackage extends EPackage
    * @generated
    */
   EReference getMission_Behaviorlist();
+
+  /**
+   * Returns the meta object for the containment reference '{@link robot.dSL.Mission#getEndcondition <em>Endcondition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Endcondition</em>'.
+   * @see robot.dSL.Mission#getEndcondition()
+   * @see #getMission()
+   * @generated
+   */
+  EReference getMission_Endcondition();
+
+  /**
+   * Returns the meta object for class '{@link robot.dSL.EndCondition <em>End Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>End Condition</em>'.
+   * @see robot.dSL.EndCondition
+   * @generated
+   */
+  EClass getEndCondition();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link robot.dSL.EndCondition#getEndwhenlist <em>Endwhenlist</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Endwhenlist</em>'.
+   * @see robot.dSL.EndCondition#getEndwhenlist()
+   * @see #getEndCondition()
+   * @generated
+   */
+  EReference getEndCondition_Endwhenlist();
+
+  /**
+   * Returns the meta object for class '{@link robot.dSL.EndAfter <em>End After</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>End After</em>'.
+   * @see robot.dSL.EndAfter
+   * @generated
+   */
+  EClass getEndAfter();
+
+  /**
+   * Returns the meta object for the attribute '{@link robot.dSL.EndAfter#getTime <em>Time</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Time</em>'.
+   * @see robot.dSL.EndAfter#getTime()
+   * @see #getEndAfter()
+   * @generated
+   */
+  EAttribute getEndAfter_Time();
+
+  /**
+   * Returns the meta object for class '{@link robot.dSL.EndWhen <em>End When</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>End When</em>'.
+   * @see robot.dSL.EndWhen
+   * @generated
+   */
+  EClass getEndWhen();
+
+  /**
+   * Returns the meta object for the attribute '{@link robot.dSL.EndWhen#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see robot.dSL.EndWhen#getName()
+   * @see #getEndWhen()
+   * @generated
+   */
+  EAttribute getEndWhen_Name();
+
+  /**
+   * Returns the meta object for the attribute '{@link robot.dSL.EndWhen#getTimes <em>Times</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Times</em>'.
+   * @see robot.dSL.EndWhen#getTimes()
+   * @see #getEndWhen()
+   * @generated
+   */
+  EAttribute getEndWhen_Times();
+
+  /**
+   * Returns the meta object for class '{@link robot.dSL.BehaviorName <em>Behavior Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Behavior Name</em>'.
+   * @see robot.dSL.BehaviorName
+   * @generated
+   */
+  EClass getBehaviorName();
+
+  /**
+   * Returns the meta object for the attribute '{@link robot.dSL.BehaviorName#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see robot.dSL.BehaviorName#getName()
+   * @see #getBehaviorName()
+   * @generated
+   */
+  EAttribute getBehaviorName_Name();
 
   /**
    * Returns the meta object for class '{@link robot.dSL.Behavior <em>Behavior</em>}'.
@@ -1268,6 +1533,14 @@ public interface DSLPackage extends EPackage
     EReference MARS_ROVER_EXPEDITION__MISSIONLIST = eINSTANCE.getMarsRoverExpedition_Missionlist();
 
     /**
+     * The meta object literal for the '<em><b>Tasklist</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MARS_ROVER_EXPEDITION__TASKLIST = eINSTANCE.getMarsRoverExpedition_Tasklist();
+
+    /**
      * The meta object literal for the '{@link robot.dSL.impl.MissionImpl <em>Mission</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1292,6 +1565,94 @@ public interface DSLPackage extends EPackage
      * @generated
      */
     EReference MISSION__BEHAVIORLIST = eINSTANCE.getMission_Behaviorlist();
+
+    /**
+     * The meta object literal for the '<em><b>Endcondition</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MISSION__ENDCONDITION = eINSTANCE.getMission_Endcondition();
+
+    /**
+     * The meta object literal for the '{@link robot.dSL.impl.EndConditionImpl <em>End Condition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see robot.dSL.impl.EndConditionImpl
+     * @see robot.dSL.impl.DSLPackageImpl#getEndCondition()
+     * @generated
+     */
+    EClass END_CONDITION = eINSTANCE.getEndCondition();
+
+    /**
+     * The meta object literal for the '<em><b>Endwhenlist</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference END_CONDITION__ENDWHENLIST = eINSTANCE.getEndCondition_Endwhenlist();
+
+    /**
+     * The meta object literal for the '{@link robot.dSL.impl.EndAfterImpl <em>End After</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see robot.dSL.impl.EndAfterImpl
+     * @see robot.dSL.impl.DSLPackageImpl#getEndAfter()
+     * @generated
+     */
+    EClass END_AFTER = eINSTANCE.getEndAfter();
+
+    /**
+     * The meta object literal for the '<em><b>Time</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute END_AFTER__TIME = eINSTANCE.getEndAfter_Time();
+
+    /**
+     * The meta object literal for the '{@link robot.dSL.impl.EndWhenImpl <em>End When</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see robot.dSL.impl.EndWhenImpl
+     * @see robot.dSL.impl.DSLPackageImpl#getEndWhen()
+     * @generated
+     */
+    EClass END_WHEN = eINSTANCE.getEndWhen();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute END_WHEN__NAME = eINSTANCE.getEndWhen_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Times</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute END_WHEN__TIMES = eINSTANCE.getEndWhen_Times();
+
+    /**
+     * The meta object literal for the '{@link robot.dSL.impl.BehaviorNameImpl <em>Behavior Name</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see robot.dSL.impl.BehaviorNameImpl
+     * @see robot.dSL.impl.DSLPackageImpl#getBehaviorName()
+     * @generated
+     */
+    EClass BEHAVIOR_NAME = eINSTANCE.getBehaviorName();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BEHAVIOR_NAME__NAME = eINSTANCE.getBehaviorName_Name();
 
     /**
      * The meta object literal for the '{@link robot.dSL.impl.BehaviorImpl <em>Behavior</em>}' class.

@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link robot.dSL.MarsRoverExpedition#getMissionlist <em>Missionlist</em>}</li>
+ *   <li>{@link robot.dSL.MarsRoverExpedition#getTasklist <em>Tasklist</em>}</li>
  * </ul>
  *
  * @see robot.dSL.DSLPackage#getMarsRoverExpedition()
@@ -40,5 +41,21 @@ public interface MarsRoverExpedition extends EObject
    * @generated
    */
   EList<Mission> getMissionlist();
+
+  /**
+   * Returns the value of the '<em><b>Tasklist</b></em>' containment reference list.
+   * The list contents are of type {@link robot.dSL.Behavior}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Tasklist</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Tasklist</em>' containment reference list.
+   * @see robot.dSL.DSLPackage#getMarsRoverExpedition_Tasklist()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Behavior> getTasklist();
 
 } // MarsRoverExpedition

@@ -16,6 +16,7 @@ import robot.dSL.ORexpression
 import robot.dSL.RightMovementAction
 import robot.dSL.RotateMovementAction
 import robot.dSL.TouchLiteral
+import robot.dSL.BehaviorName
 
 class Auxiliary {
 	
@@ -29,10 +30,20 @@ class Auxiliary {
 		return missionslist; 
 	}
 	
-	def static List<Behavior> getBehaviors(Mission root) {
+	def static List<Behavior> getBehaviors(MarsRoverExpedition root) {
 		var List<Behavior> behaviorslist = new ArrayList<Behavior>() 
 	
-		for (Behavior t : root.behaviorlist){
+		for (Behavior t : root.tasklist){
+			behaviorslist.add(t);
+		}
+		
+		return behaviorslist; 
+	}
+	
+	def static List<BehaviorName> getBehaviorNames(Mission root) {
+		var List<BehaviorName> behaviorslist = new ArrayList<BehaviorName>() 
+	
+		for (BehaviorName t : root.behaviorlist){
 			behaviorslist.add(t);
 		}
 		
@@ -117,7 +128,7 @@ class Auxiliary {
 	}
 	
 	def static dispatch String action2Text(RotateMovementAction a){
-//		return '''
+	return ""//'''
 //		m.lm.rotate(«if(a.leftdir==RotateEnum.FORWARD){a.rotateleft}else{-a.rotateleft}», true);
 //		m.rm.rotate(«if(a.rightdir==RotateEnum.FORWARD){a.rotateright}else{-a.rotateright}»,true);
 //		while(m.rm.isMoving() && !suppressed){
