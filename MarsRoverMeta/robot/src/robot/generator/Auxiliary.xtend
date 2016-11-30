@@ -5,18 +5,23 @@ import java.util.HashSet
 import java.util.List
 import robot.dSL.ANDexpression
 import robot.dSL.Behavior
+import robot.dSL.BehaviorName
 import robot.dSL.ColorLiteral
 import robot.dSL.DistanceLiteral
 import robot.dSL.ExpressionBracket
+import robot.dSL.FBEnum
 import robot.dSL.LeftMovementAction
+import robot.dSL.LeftRotatePoint
 import robot.dSL.MarsRoverExpedition
+import robot.dSL.MiddleRotatePoint
 import robot.dSL.Mission
 import robot.dSL.MovementAction
 import robot.dSL.ORexpression
 import robot.dSL.RightMovementAction
+import robot.dSL.RightRotatePoint
 import robot.dSL.RotateMovementAction
 import robot.dSL.TouchLiteral
-import robot.dSL.BehaviorName
+import robot.dSL.LREnum
 
 class Auxiliary {
 	
@@ -126,14 +131,46 @@ class Auxiliary {
 	def static dispatch String action2Text(RightMovementAction a){
 		return "m.rm."+movementAction2Text(a.rightmove);
 	}
+
 	
-	def static dispatch String action2Text(RotateMovementAction a){
-	return ""//'''
-//		m.lm.rotate(«if(a.leftdir==RotateEnum.FORWARD){a.rotateleft}else{-a.rotateleft}», true);
-//		m.rm.rotate(«if(a.rightdir==RotateEnum.FORWARD){a.rotateright}else{-a.rotateright}»,true);
-//		while(m.rm.isMoving() && !suppressed){
-//			Thread.yield();
-//		'''
+	def static dispatch String action2Text(LeftRotatePoint a){
+		return '''
+		m.writer.print('g');
+		m.writer.flush();
+		m.writer.print(«if(a.leftdir == FBEnum.FORWARD){a.degrees}else{-a.degrees}»);
+		m.writer.flush();
+		m.lm.«if(a.leftdir == FBEnum.FORWARD){"forward"}else{"backwards"}»();
+		while(m.g && !suppressed){
+			Thread.yield();
+		}
+		'''
+	}
+	
+	def static dispatch String action2Text(RightRotatePoint a){
+		return '''
+		m.writer.print('g');
+		m.writer.flush();
+		m.writer.print(«if(a.rightdir == FBEnum.FORWARD){a.degrees}else{-a.degrees}»);
+		m.writer.flush();
+		m.rm.«if(a.rightdir == FBEnum.FORWARD){"forward"}else{"backwards"}»();
+		while(m.g && !suppressed){
+			Thread.yield();
+		}
+		'''
+	}
+	
+	def static dispatch String action2Text(MiddleRotatePoint a){
+		return '''
+		m.writer.print('g');
+		m.writer.flush();
+		m.writer.print(«a.degrees»);
+		m.writer.flush();
+		m.rm.forward();
+		m.lm.backward();
+		while(m.g && !suppressed){
+			Thread.yield();
+		}
+		'''
 	}
 	
 }

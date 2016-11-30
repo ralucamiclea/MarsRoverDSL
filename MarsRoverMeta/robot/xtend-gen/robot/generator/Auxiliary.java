@@ -1,5 +1,6 @@
 package robot.generator;
 
+import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -16,13 +17,16 @@ import robot.dSL.ColorLiteral;
 import robot.dSL.DistanceLiteral;
 import robot.dSL.Expression;
 import robot.dSL.ExpressionBracket;
+import robot.dSL.FBEnum;
 import robot.dSL.LeftMovementAction;
+import robot.dSL.LeftRotatePoint;
 import robot.dSL.MarsRoverExpedition;
+import robot.dSL.MiddleRotatePoint;
 import robot.dSL.Mission;
 import robot.dSL.MovementAction;
 import robot.dSL.ORexpression;
 import robot.dSL.RightMovementAction;
-import robot.dSL.RotateMovementAction;
+import robot.dSL.RightRotatePoint;
 import robot.dSL.TouchEnum;
 import robot.dSL.TouchLiteral;
 
@@ -195,8 +199,117 @@ public class Auxiliary {
     return ("m.rm." + _movementAction2Text);
   }
   
-  protected static String _action2Text(final RotateMovementAction a) {
-    return "";
+  protected static String _action2Text(final LeftRotatePoint a) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("m.writer.print(\'g\');");
+    _builder.newLine();
+    _builder.append("m.writer.flush();");
+    _builder.newLine();
+    _builder.append("m.writer.print(");
+    int _xifexpression = (int) 0;
+    FBEnum _leftdir = a.getLeftdir();
+    boolean _equals = Objects.equal(_leftdir, FBEnum.FORWARD);
+    if (_equals) {
+      _xifexpression = a.getDegrees();
+    } else {
+      int _degrees = a.getDegrees();
+      _xifexpression = (-_degrees);
+    }
+    _builder.append(_xifexpression, "");
+    _builder.append(");");
+    _builder.newLineIfNotEmpty();
+    _builder.append("m.writer.flush();");
+    _builder.newLine();
+    _builder.append("m.lm.");
+    String _xifexpression_1 = null;
+    FBEnum _leftdir_1 = a.getLeftdir();
+    boolean _equals_1 = Objects.equal(_leftdir_1, FBEnum.FORWARD);
+    if (_equals_1) {
+      _xifexpression_1 = "forward";
+    } else {
+      _xifexpression_1 = "backwards";
+    }
+    _builder.append(_xifexpression_1, "");
+    _builder.append("();");
+    _builder.newLineIfNotEmpty();
+    _builder.append("while(m.g && !suppressed){");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Thread.yield();");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder.toString();
+  }
+  
+  protected static String _action2Text(final RightRotatePoint a) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("m.writer.print(\'g\');");
+    _builder.newLine();
+    _builder.append("m.writer.flush();");
+    _builder.newLine();
+    _builder.append("m.writer.print(");
+    int _xifexpression = (int) 0;
+    FBEnum _rightdir = a.getRightdir();
+    boolean _equals = Objects.equal(_rightdir, FBEnum.FORWARD);
+    if (_equals) {
+      _xifexpression = a.getDegrees();
+    } else {
+      int _degrees = a.getDegrees();
+      _xifexpression = (-_degrees);
+    }
+    _builder.append(_xifexpression, "");
+    _builder.append(");");
+    _builder.newLineIfNotEmpty();
+    _builder.append("m.writer.flush();");
+    _builder.newLine();
+    _builder.append("m.rm.");
+    String _xifexpression_1 = null;
+    FBEnum _rightdir_1 = a.getRightdir();
+    boolean _equals_1 = Objects.equal(_rightdir_1, FBEnum.FORWARD);
+    if (_equals_1) {
+      _xifexpression_1 = "forward";
+    } else {
+      _xifexpression_1 = "backwards";
+    }
+    _builder.append(_xifexpression_1, "");
+    _builder.append("();");
+    _builder.newLineIfNotEmpty();
+    _builder.append("while(m.g && !suppressed){");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Thread.yield();");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder.toString();
+  }
+  
+  protected static String _action2Text(final MiddleRotatePoint a) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("m.writer.print(\'g\');");
+    _builder.newLine();
+    _builder.append("m.writer.flush();");
+    _builder.newLine();
+    _builder.append("m.writer.print(");
+    int _degrees = a.getDegrees();
+    _builder.append(_degrees, "");
+    _builder.append(");");
+    _builder.newLineIfNotEmpty();
+    _builder.append("m.writer.flush();");
+    _builder.newLine();
+    _builder.append("m.rm.forward();");
+    _builder.newLine();
+    _builder.append("m.lm.backward();");
+    _builder.newLine();
+    _builder.append("while(m.g && !suppressed){");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Thread.yield();");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder.toString();
   }
   
   public static HashSet<String> getSensors(final Expression b) {
@@ -238,12 +351,16 @@ public class Auxiliary {
   }
   
   public static String action2Text(final Actions a) {
-    if (a instanceof LeftMovementAction) {
+    if (a instanceof LeftRotatePoint) {
+      return _action2Text((LeftRotatePoint)a);
+    } else if (a instanceof MiddleRotatePoint) {
+      return _action2Text((MiddleRotatePoint)a);
+    } else if (a instanceof RightRotatePoint) {
+      return _action2Text((RightRotatePoint)a);
+    } else if (a instanceof LeftMovementAction) {
       return _action2Text((LeftMovementAction)a);
     } else if (a instanceof RightMovementAction) {
       return _action2Text((RightMovementAction)a);
-    } else if (a instanceof RotateMovementAction) {
-      return _action2Text((RotateMovementAction)a);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(a).toString());

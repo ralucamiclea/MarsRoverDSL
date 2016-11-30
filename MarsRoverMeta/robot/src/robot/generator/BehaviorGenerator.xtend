@@ -31,7 +31,7 @@ class BehaviorGenerator {
 			public void action() {
 				suppressed = false;
 				«FOR action : behavior.actionlist»
-					«Auxiliary.action2Text(action)»
+				«Auxiliary.action2Text(action)»
 				«ENDFOR»
 					}
 				}
