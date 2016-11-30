@@ -23,3 +23,8 @@ Task AvoidCollision
 	IF touchFrontLeft hits OR touchFrontRight hits 
 	THEN rightMotor backward
 ENDtask 
+
+Task FindBlue 
+	IF colorFront sees color YELLOW OR object at 5 cm 
+	THEN rotate around right wheel backward for 56 degrees 
+ENDtask 

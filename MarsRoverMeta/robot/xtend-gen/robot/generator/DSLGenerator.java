@@ -19,6 +19,7 @@ import robot.generator.Auxiliary;
 import robot.generator.BehaviorGenerator;
 import robot.generator.MainGenerator;
 import robot.generator.ModelGenerator;
+import robot.generator.SlaveGenerator;
 
 /**
  * Generates code from your model files on save.
@@ -35,18 +36,27 @@ public class DSLGenerator extends AbstractGenerator {
     boolean _notEquals = (!Objects.equal(root, null));
     if (_notEquals) {
       CharSequence _text = MainGenerator.toText(root);
-      fsa.generateFile("Main.java", _text);
+      fsa.generateFile("/Master/Main.java", _text);
       CharSequence _text_1 = ModelGenerator.toText(root);
-      fsa.generateFile("Model.java", _text_1);
+      fsa.generateFile("/Master/Model.java", _text_1);
+      String _MainToText = SlaveGenerator.MainToText(root);
+      fsa.generateFile("/Slave/Main.java", _MainToText);
+      String _ModelToText = SlaveGenerator.ModelToText(root);
+      fsa.generateFile("/Slave/Model.java", _ModelToText);
+      String _GetMesageToText = SlaveGenerator.GetMesageToText(root);
+      fsa.generateFile("/Slave/GetMessage.java", _GetMesageToText);
+      String _ReadSensorsToText = SlaveGenerator.ReadSensorsToText(root);
+      fsa.generateFile("/Slave/ReadSensors.java", _ReadSensorsToText);
       List<Behavior> b = new ArrayList<Behavior>();
       List<Behavior> _behaviors = Auxiliary.getBehaviors(root);
       b = _behaviors;
       for (final Behavior i : b) {
         String _name = i.getName();
         String _class = Auxiliary.toClass(_name);
-        String _plus = (_class + ".java");
+        String _plus = ("/Master/" + _class);
+        String _plus_1 = (_plus + ".java");
         CharSequence _text_2 = BehaviorGenerator.toText(i);
-        fsa.generateFile(_plus, _text_2);
+        fsa.generateFile(_plus_1, _text_2);
       }
     }
   }
