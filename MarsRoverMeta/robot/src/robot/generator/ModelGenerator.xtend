@@ -41,6 +41,11 @@ class ModelGenerator {
 		public EV3LargeRegulatedMotor ma;
 		public NXTLightSensor lightL;
 		public NXTLightSensor lightR;
+		public boolean touchFrontLeft=false;
+		public boolean touchFrontRight=false;
+		public boolean g=false;
+		public boolean end=false;
+		public int d=100;
 	    
 		public Model(){
 			connector = new BTConnector();

@@ -15,11 +15,19 @@ ExpeditionSTART
 ExpeditionSTOP
 
 Task AvoidEdge 
-	IF edge at frontLeft OR edge at frontLeft 
-	THEN leftMotor backward 
+	IF edge at frontLeft OR edge at frontRight  
+	THEN leftMotor backward rightMotor backward 
 ENDtask
 	
 Task AvoidCollision
 	IF touchFrontLeft hits OR touchFrontRight hits 
-	THEN rightMotor backward
+	THEN 
+		rotate around left wheel backward for 180 degrees 
+		rotate around right wheel backward for 360 degrees
 ENDtask 
+
+Task FindBlue
+	 IF colorFront sees color BLUE 
+	 THEN leftMotor stop rightMotor stop
+ENDtask
+

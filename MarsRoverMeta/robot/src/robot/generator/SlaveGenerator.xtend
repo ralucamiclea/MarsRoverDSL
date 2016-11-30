@@ -35,7 +35,7 @@ class SlaveGenerator {
 	}
 	
 	def static GetMesageToText(MarsRoverExpedition expedition) {
-		return '''
+		return '''		
 		import java.io.DataInputStream;
 		import java.io.IOException;
 		
@@ -81,10 +81,18 @@ class SlaveGenerator {
 						}
 						gyro.fetchSample(gyroSamples,0);
 						float start = gyroSamples[0];
-						float end = start+deg-5;
-						while(start<end){
-							gyro.fetchSample(gyroSamples,0);
-							start = gyroSamples[0];
+						if(deg<0){
+							float end = start+deg+5;
+							while(start>end){
+								gyro.fetchSample(gyroSamples,0);
+								start = gyroSamples[0];
+							}
+						}else{
+							float end = start+deg-5;
+							while(start<end){
+								gyro.fetchSample(gyroSamples,0);
+								start = gyroSamples[0];
+							}
 						}
 						m.doneturning=true;
 					}

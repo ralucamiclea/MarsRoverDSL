@@ -8,6 +8,8 @@ import robot.dSL.Behavior
 import robot.dSL.BehaviorName
 import robot.dSL.ColorLiteral
 import robot.dSL.DistanceLiteral
+import robot.dSL.EdgeEnum
+import robot.dSL.EdgeLiteral
 import robot.dSL.ExpressionBracket
 import robot.dSL.FBEnum
 import robot.dSL.LeftMovementAction
@@ -19,9 +21,7 @@ import robot.dSL.MovementAction
 import robot.dSL.ORexpression
 import robot.dSL.RightMovementAction
 import robot.dSL.RightRotatePoint
-import robot.dSL.RotateMovementAction
 import robot.dSL.TouchLiteral
-import robot.dSL.LREnum
 
 class Auxiliary {
 	
@@ -80,7 +80,6 @@ class Auxiliary {
 	
 	def static dispatch HashSet<String> getSensors(TouchLiteral b){
 		var HashSet<String> sensors = new HashSet<String>();
-		sensors.add('''«b.touch»''');
 		return sensors; 
 	}
 	
@@ -92,7 +91,14 @@ class Auxiliary {
 	
 	def static dispatch HashSet<String> getSensors(DistanceLiteral b){
 		var HashSet<String> sensors = new HashSet<String>();
-		sensors.add('''distance''');
+		return sensors; 
+	}
+	
+	def static dispatch HashSet<String> getSensors(EdgeLiteral b){
+		var HashSet<String> sensors = new HashSet<String>();
+		if(b.edge==EdgeEnum.BACK){
+			sensors.add('''distance''');
+		}
 		return sensors; 
 	}
 	
@@ -109,7 +115,7 @@ class Auxiliary {
 	}
 	
 	def static dispatch CharSequence getControlReturnString(TouchLiteral a){
-		return '''m.«a.touch»Samples[0] > 0''';
+		return '''m.«a.touch»''';
 	}
 	
 	def static dispatch CharSequence getControlReturnString(ColorLiteral a){
@@ -117,7 +123,18 @@ class Auxiliary {
 	}
 	
 	def static dispatch CharSequence getControlReturnString(DistanceLiteral a){
-		return '''m.distanceSamples[0] < «a.distance / 100 as float»''';
+		return '''m.d < «a.distance / 100 as float»''';
+	}
+	
+	def static dispatch CharSequence getControlReturnString(EdgeLiteral a){
+		if(a.edge==EdgeEnum.FRONTLEFT){
+			return '''lightL.readNormalizedValue() > 600'''
+		}else if(a.edge==EdgeEnum.FRONTRIGHT){
+			return '''lightR.readNormalizedValue() > 600'''
+		}
+		else{ //back
+			return '''m.distanceSamples[0] > 10'''
+		}
 	}
 	
 	def static String movementAction2Text(MovementAction m){

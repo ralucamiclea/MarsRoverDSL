@@ -15,6 +15,8 @@ import robot.dSL.BehaviorName;
 import robot.dSL.ColorEnum;
 import robot.dSL.ColorLiteral;
 import robot.dSL.DistanceLiteral;
+import robot.dSL.EdgeEnum;
+import robot.dSL.EdgeLiteral;
 import robot.dSL.Expression;
 import robot.dSL.ExpressionBracket;
 import robot.dSL.FBEnum;
@@ -96,10 +98,6 @@ public class Auxiliary {
   
   protected static HashSet<String> _getSensors(final TouchLiteral b) {
     HashSet<String> sensors = new HashSet<String>();
-    StringConcatenation _builder = new StringConcatenation();
-    TouchEnum _touch = b.getTouch();
-    _builder.append(_touch, "");
-    sensors.add(_builder.toString());
     return sensors;
   }
   
@@ -113,9 +111,18 @@ public class Auxiliary {
   
   protected static HashSet<String> _getSensors(final DistanceLiteral b) {
     HashSet<String> sensors = new HashSet<String>();
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("distance");
-    sensors.add(_builder.toString());
+    return sensors;
+  }
+  
+  protected static HashSet<String> _getSensors(final EdgeLiteral b) {
+    HashSet<String> sensors = new HashSet<String>();
+    EdgeEnum _edge = b.getEdge();
+    boolean _equals = Objects.equal(_edge, EdgeEnum.BACK);
+    if (_equals) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("distance");
+      sensors.add(_builder.toString());
+    }
     return sensors;
   }
   
@@ -158,7 +165,6 @@ public class Auxiliary {
     _builder.append("m.");
     TouchEnum _touch = a.getTouch();
     _builder.append(_touch, "");
-    _builder.append("Samples[0] > 0");
     return _builder;
   }
   
@@ -172,11 +178,33 @@ public class Auxiliary {
   
   protected static CharSequence _getControlReturnString(final DistanceLiteral a) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("m.distanceSamples[0] < ");
+    _builder.append("m.d < ");
     int _distance = a.getDistance();
     float _divide = (_distance / ((float) 100));
     _builder.append(_divide, "");
     return _builder;
+  }
+  
+  protected static CharSequence _getControlReturnString(final EdgeLiteral a) {
+    EdgeEnum _edge = a.getEdge();
+    boolean _equals = Objects.equal(_edge, EdgeEnum.FRONTLEFT);
+    if (_equals) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("lightL.readNormalizedValue() > 600");
+      return _builder;
+    } else {
+      EdgeEnum _edge_1 = a.getEdge();
+      boolean _equals_1 = Objects.equal(_edge_1, EdgeEnum.FRONTRIGHT);
+      if (_equals_1) {
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("lightR.readNormalizedValue() > 600");
+        return _builder_1;
+      } else {
+        StringConcatenation _builder_2 = new StringConcatenation();
+        _builder_2.append("m.distanceSamples[0] > 10");
+        return _builder_2;
+      }
+    }
   }
   
   public static String movementAction2Text(final MovementAction m) {
@@ -319,6 +347,8 @@ public class Auxiliary {
       return _getSensors((ColorLiteral)b);
     } else if (b instanceof DistanceLiteral) {
       return _getSensors((DistanceLiteral)b);
+    } else if (b instanceof EdgeLiteral) {
+      return _getSensors((EdgeLiteral)b);
     } else if (b instanceof ExpressionBracket) {
       return _getSensors((ExpressionBracket)b);
     } else if (b instanceof ORexpression) {
@@ -338,6 +368,8 @@ public class Auxiliary {
       return _getControlReturnString((ColorLiteral)b);
     } else if (b instanceof DistanceLiteral) {
       return _getControlReturnString((DistanceLiteral)b);
+    } else if (b instanceof EdgeLiteral) {
+      return _getControlReturnString((EdgeLiteral)b);
     } else if (b instanceof ExpressionBracket) {
       return _getControlReturnString((ExpressionBracket)b);
     } else if (b instanceof ORexpression) {
