@@ -1,0 +1,10 @@
+package test.slave;
+
+public class ModelSlave {
+	public boolean end=false;
+	public boolean doneturning=false;
+	
+	
+	public ModelSlave(){
+	}
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;robot/src/robot/generator/DriveForward.xtend&apos; to &apos;DriveForwardGenerator.xtend&apos;" description="Rename resource &apos;DriveForward.xtend&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/robot/generator/DriveForward.xtend" name="DriveForwardGenerator.xtend" stamp="1481034413491" updateReferences="true"/>
+</session>

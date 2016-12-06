@@ -1,0 +1,82 @@
+package robot.generator;
+
+import org.eclipse.xtend2.lib.StringConcatenation;
+import robot.dSL.MarsRoverExpedition;
+
+@SuppressWarnings("all")
+public class DriveForwardGenerator {
+  public static CharSequence toText(final MarsRoverExpedition root) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package test.master;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import lejos.robotics.subsumption.Behavior;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class DriveForward  implements Behavior {");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("private boolean suppressed = false;");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("ModelMaster m;");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("public DriveForward(ModelMaster m){");
+    _builder.newLine();
+    _builder.append("\t   ");
+    _builder.append("this.m=m;");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("public boolean takeControl() {");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("return true;");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("public void suppress() {");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("suppressed = true;");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("public void action() {");
+    _builder.newLine();
+    _builder.append("     ");
+    _builder.append("suppressed = false;");
+    _builder.newLine();
+    _builder.append("     ");
+    _builder.append("m.lm.forward();");
+    _builder.newLine();
+    _builder.append("     ");
+    _builder.append("m.rm.forward();");
+    _builder.newLine();
+    _builder.append("     ");
+    _builder.append("while( !suppressed )");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("Thread.yield();");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+}

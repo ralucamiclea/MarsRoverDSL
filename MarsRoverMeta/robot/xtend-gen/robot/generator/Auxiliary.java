@@ -111,6 +111,9 @@ public class Auxiliary {
   
   protected static HashSet<String> _getSensors(final DistanceLiteral b) {
     HashSet<String> sensors = new HashSet<String>();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("distance");
+    sensors.add(_builder.toString());
     return sensors;
   }
   
@@ -190,14 +193,14 @@ public class Auxiliary {
     boolean _equals = Objects.equal(_edge, EdgeEnum.FRONTLEFT);
     if (_equals) {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("lightL.readNormalizedValue() > 600");
+      _builder.append("m.lightL.readNormalizedValue() > 600");
       return _builder;
     } else {
       EdgeEnum _edge_1 = a.getEdge();
       boolean _equals_1 = Objects.equal(_edge_1, EdgeEnum.FRONTRIGHT);
       if (_equals_1) {
         StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("lightR.readNormalizedValue() > 600");
+        _builder_1.append("m.lightR.readNormalizedValue() > 600");
         return _builder_1;
       } else {
         StringConcatenation _builder_2 = new StringConcatenation();
@@ -255,7 +258,7 @@ public class Auxiliary {
     if (_equals_1) {
       _xifexpression_1 = "forward";
     } else {
-      _xifexpression_1 = "backwards";
+      _xifexpression_1 = "backward";
     }
     _builder.append(_xifexpression_1, "");
     _builder.append("();");
@@ -298,7 +301,7 @@ public class Auxiliary {
     if (_equals_1) {
       _xifexpression_1 = "forward";
     } else {
-      _xifexpression_1 = "backwards";
+      _xifexpression_1 = "backward";
     }
     _builder.append(_xifexpression_1, "");
     _builder.append("();");

@@ -7,10 +7,13 @@ import robot.dSL.MarsRoverExpedition;
 public class ModelGenerator {
   public static CharSequence toText(final MarsRoverExpedition expedition) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package test.master;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
     _builder.append("import java.io.DataInputStream;");
     _builder.newLine();
     _builder.append("import java.io.PrintWriter;");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("import lejos.hardware.Brick;");
     _builder.newLine();
@@ -39,7 +42,7 @@ public class ModelGenerator {
     _builder.append("import lejos.robotics.SampleProvider;");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("public class Model {");
+    _builder.append("public class ModelMaster {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public RegulatedMotor lm;");
@@ -107,10 +110,13 @@ public class ModelGenerator {
     _builder.append("\t");
     _builder.append("public int d=100;");
     _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public boolean doneturning = true;");
+    _builder.newLine();
     _builder.append("    ");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public Model(){");
+    _builder.append("public ModelMaster(){");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("connector = new BTConnector();");

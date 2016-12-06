@@ -12,10 +12,11 @@ import robot.generator.Auxiliary;
 public class BehaviorGenerator {
   public static CharSequence toText(final Behavior behavior) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package assignment;");
+    _builder.append("package test.master;");
     _builder.newLine();
+    _builder.append("import lejos.robotics.subsumption.Behavior;");
     _builder.newLine();
-    _builder.append("import assignment.Model;");
+    _builder.append("import lejos.robotics.Color;");
     _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
@@ -27,10 +28,10 @@ public class BehaviorGenerator {
     _builder.append("\t\t\t");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("Model m;");
+    _builder.append("ModelMaster m;");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("private boolean suppressed;");
+    _builder.append("private boolean suppressed = false;");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.newLine();
@@ -39,7 +40,7 @@ public class BehaviorGenerator {
     String _name_1 = behavior.getName();
     String _class_1 = Auxiliary.toClass(_name_1);
     _builder.append(_class_1, "\t\t\t");
-    _builder.append("(Model m){");
+    _builder.append("(ModelMaster m){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t");
     _builder.append("this.m = m;");
@@ -90,13 +91,13 @@ public class BehaviorGenerator {
     _builder.append("suppressed = false;");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("touchFrontLeft=false;");
+    _builder.append("m.touchFrontLeft=false;");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("touchFrontRight=false;");
+    _builder.append("m.touchFrontRight=false;");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("g=false;");
+    _builder.append("m.g=false;");
     _builder.newLine();
     {
       EList<Actions> _actionlist = behavior.getActionlist();

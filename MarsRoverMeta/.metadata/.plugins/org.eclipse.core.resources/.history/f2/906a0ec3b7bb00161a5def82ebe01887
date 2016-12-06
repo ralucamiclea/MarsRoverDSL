@@ -1,0 +1,41 @@
+package robot.generator
+
+import robot.dSL.MarsRoverExpedition
+
+class MainGenerator {
+	def static toText(MarsRoverExpedition root) 
+	
+	'''
+	package test.master;
+	
+	import java.util.List;
+	import java.util.ArrayList;
+	import lejos.robotics.subsumption.Arbitrator;
+	import lejos.robotics.subsumption.Behavior;
+	
+	public class MainMaster {
+	
+	public static void main(String[] args) {
+		
+	ModelMaster m = new ModelMaster();
+	
+	//behaviors in this expedition
+	«FOR b : Auxiliary.getBehaviors(root)»
+	Behavior «b.name» = new «Auxiliary.toClass(b.name)»(m);
+	«ENDFOR»
+	
+	«FOR m : Auxiliary.getMissions(root)»
+	//mission "«m.name»"
+	List<Behavior> bArray«m.name» = new ArrayList<>();
+	«FOR b : Auxiliary.getBehaviorNames(m)»
+	bArray«m.name».add(«b.name»);
+	«ENDFOR»
+	Arbitrator arby«m.name» = new Arbitrator((Behavior[])bArray«m.name».toArray());
+	arby«m.name».go();
+	
+	«ENDFOR»
+	}
+}
+	
+	'''
+}

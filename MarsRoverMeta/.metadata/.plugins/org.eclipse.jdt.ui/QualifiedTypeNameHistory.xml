@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="test.master.ModelMaster"/>
+<fullyQualifiedTypeName name="lejos.robotics.Color"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="test.slave.GetMessage"/>
+<fullyQualifiedTypeName name="lejos.utility.Delay"/>
+<fullyQualifiedTypeName name="lejos.robotics.subsumption.Behavior"/>
+</qualifiedTypeNameHistroy>

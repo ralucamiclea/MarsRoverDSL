@@ -1,9 +1,0 @@
-grammar robot.DSL with org.eclipse.xtext.common.Terminals
-
-generate dSL "http://www.DSL.robot"
-
-Model:
-	greetings+=Greeting*;
-	
-Greeting:
-	'Hello' name=ID '!';

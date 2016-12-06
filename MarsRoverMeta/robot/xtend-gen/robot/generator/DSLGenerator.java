@@ -17,6 +17,9 @@ import robot.dSL.Behavior;
 import robot.dSL.MarsRoverExpedition;
 import robot.generator.Auxiliary;
 import robot.generator.BehaviorGenerator;
+import robot.generator.DriveForwardGenerator;
+import robot.generator.GetMessageGenerator;
+import robot.generator.GoalsGenerator;
 import robot.generator.MainGenerator;
 import robot.generator.ModelGenerator;
 import robot.generator.SlaveGenerator;
@@ -36,15 +39,21 @@ public class DSLGenerator extends AbstractGenerator {
     boolean _notEquals = (!Objects.equal(root, null));
     if (_notEquals) {
       CharSequence _text = MainGenerator.toText(root);
-      fsa.generateFile("/Master/Main.java", _text);
-      CharSequence _text_1 = ModelGenerator.toText(root);
-      fsa.generateFile("/Master/Model.java", _text_1);
+      fsa.generateFile("/Master/MainMaster.java", _text);
+      CharSequence _text_1 = DriveForwardGenerator.toText(root);
+      fsa.generateFile("/Master/DriveForward.java", _text_1);
+      CharSequence _text_2 = GetMessageGenerator.toText(root);
+      fsa.generateFile("/Master/GetMessageMaster.java", _text_2);
+      CharSequence _text_3 = GoalsGenerator.toText(root);
+      fsa.generateFile("/Master/Goals.java", _text_3);
+      CharSequence _text_4 = ModelGenerator.toText(root);
+      fsa.generateFile("/Master/ModelMaster.java", _text_4);
       String _MainToText = SlaveGenerator.MainToText(root);
-      fsa.generateFile("/Slave/Main.java", _MainToText);
+      fsa.generateFile("/Slave/MainSlave.java", _MainToText);
       String _ModelToText = SlaveGenerator.ModelToText(root);
-      fsa.generateFile("/Slave/Model.java", _ModelToText);
+      fsa.generateFile("/Slave/ModelSlave.java", _ModelToText);
       String _GetMesageToText = SlaveGenerator.GetMesageToText(root);
-      fsa.generateFile("/Slave/GetMessage.java", _GetMesageToText);
+      fsa.generateFile("/Slave/GetMessageSlave.java", _GetMesageToText);
       String _ReadSensorsToText = SlaveGenerator.ReadSensorsToText(root);
       fsa.generateFile("/Slave/ReadSensors.java", _ReadSensorsToText);
       List<Behavior> b = new ArrayList<Behavior>();
@@ -55,8 +64,8 @@ public class DSLGenerator extends AbstractGenerator {
         String _class = Auxiliary.toClass(_name);
         String _plus = ("/Master/" + _class);
         String _plus_1 = (_plus + ".java");
-        CharSequence _text_2 = BehaviorGenerator.toText(i);
-        fsa.generateFile(_plus_1, _text_2);
+        CharSequence _text_5 = BehaviorGenerator.toText(i);
+        fsa.generateFile(_plus_1, _text_5);
       }
     }
   }

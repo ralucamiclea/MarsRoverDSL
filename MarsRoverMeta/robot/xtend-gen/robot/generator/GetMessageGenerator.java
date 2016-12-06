@@ -7,16 +7,21 @@ import robot.dSL.MarsRoverExpedition;
 public class GetMessageGenerator {
   public static CharSequence toText(final MarsRoverExpedition expedition) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package test.master;");
+    _builder.newLine();
+    _builder.append("import test.master.ModelMaster;");
+    _builder.newLine();
+    _builder.newLine();
     _builder.append("import java.io.IOException;");
     _builder.newLine();
     _builder.append("import lejos.hardware.lcd.LCD;");
     _builder.newLine();
     _builder.newLine();
     _builder.newLine();
-    _builder.append("public class GetMessage extends Thread {");
+    _builder.append("public class GetMessageMaster extends Thread {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("Model m;");
+    _builder.append("ModelMaster m;");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("private byte b;");
@@ -24,7 +29,7 @@ public class GetMessageGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public GetMessage(Model m, Goals g){");
+    _builder.append("public GetMessageMaster(ModelMaster m, Goals g){");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("this.m=m;");
@@ -73,7 +78,7 @@ public class GetMessageGenerator {
     _builder.append("if(b==\'r\')");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("m.touchFronRight=true;");
+    _builder.append("m.touchFrontRight=true;");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("if(b==\'g\')");
