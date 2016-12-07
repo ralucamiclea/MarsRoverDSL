@@ -9,8 +9,6 @@ public class SlaveGenerator {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package test.slave;");
     _builder.newLine();
-    _builder.append("import test.master.ModelMaster;");
-    _builder.newLine();
     _builder.append("import lejos.remote.nxt.BTConnector;");
     _builder.newLine();
     _builder.append("import lejos.remote.nxt.NXTConnection;");
@@ -29,10 +27,10 @@ public class SlaveGenerator {
     _builder.append("NXTConnection connection = connector.waitForConnection(60000,NXTConnection.RAW);");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("ModelMaster m = new ModelMaster();");
+    _builder.append("ModelSlave m = new ModelSlave();");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("GetMessageSlave gm = new GetMessageSlave(connection, m);");
+    _builder.append("GetMessageSlave gm = new GetMessageSlave(connection,m);");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("gm.start();");
@@ -51,7 +49,6 @@ public class SlaveGenerator {
   public static String ModelToText(final MarsRoverExpedition expedition) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package test.slave;");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("public class ModelSlave {");
     _builder.newLine();
@@ -80,13 +77,10 @@ public class SlaveGenerator {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package test.slave;");
     _builder.newLine();
-    _builder.append("import test.master.ModelMaster;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
     _builder.append("import java.io.DataInputStream;");
     _builder.newLine();
     _builder.append("import java.io.IOException;");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("import lejos.hardware.lcd.LCD;");
     _builder.newLine();
@@ -113,7 +107,7 @@ public class SlaveGenerator {
     _builder.append("private Byte b;");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public ModelMaster m;");
+    _builder.append("public ModelSlave m;");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public EV3GyroSensor gyrosensor;");
@@ -126,10 +120,10 @@ public class SlaveGenerator {
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public GetMessageSlave(NXTConnection connection, ModelMaster m){");
+    _builder.append("public GetMessageSlave(NXTConnection connection, ModelSlave m){");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("reader = m.connection.openDataInputStream();");
+    _builder.append("reader = connection.openDataInputStream();");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("this.m=m;");
@@ -263,10 +257,8 @@ public class SlaveGenerator {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package test.slave;");
     _builder.newLine();
-    _builder.append("import test.master.ModelMaster;");
-    _builder.newLine();
-    _builder.newLine();
     _builder.append("import java.io.PrintWriter;");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("import lejos.hardware.port.SensorPort;");
     _builder.newLine();
@@ -284,7 +276,7 @@ public class SlaveGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public ModelMaster m;");
+    _builder.append("public ModelSlave m;");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("protected static EV3TouchSensor touchL, touchR;");
@@ -310,7 +302,7 @@ public class SlaveGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public ReadSensors(NXTConnection connection, ModelMaster m){");
+    _builder.append("public ReadSensors(NXTConnection connection, ModelSlave m){");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("touchL = new EV3TouchSensor(SensorPort.S1);");

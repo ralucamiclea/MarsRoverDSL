@@ -21,9 +21,9 @@
 	Behavior DriveForward = new DriveForward(m);
 	//mission "AvoidStuff"
 	Behavior [] bArrayAvoidStuff = {
-		DriveForward,
-		AvoidCollision, 
-		AvoidEdge
+		//AvoidEdge, 
+		//AvoidCollision, 
+		DriveForward
 	};
 	Arbitrator arbyAvoidStuff = new Arbitrator(bArrayAvoidStuff);
 	arbyAvoidStuff.go();

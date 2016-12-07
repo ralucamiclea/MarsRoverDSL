@@ -1,7 +1,6 @@
 package test.slave;
-import test.master.ModelMaster;
-
 import java.io.PrintWriter;
+
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
@@ -10,7 +9,7 @@ import lejos.robotics.SampleProvider;
 
 public class ReadSensors {
 	
-	public ModelMaster m;
+	public ModelSlave m;
 	protected static EV3TouchSensor touchL, touchR;
 	protected static EV3UltrasonicSensor sonar;
 	public SampleProvider touchLeft, touchRight;
@@ -19,7 +18,7 @@ public class ReadSensors {
 	public float[] distanceSamples;
 	public PrintWriter writer;
 	
-	public ReadSensors(NXTConnection connection, ModelMaster m){
+	public ReadSensors(NXTConnection connection, ModelSlave m){
 		touchL = new EV3TouchSensor(SensorPort.S1);
 		touchR = new EV3TouchSensor(SensorPort.S4);
 		touchLeft = touchL.getTouchMode();

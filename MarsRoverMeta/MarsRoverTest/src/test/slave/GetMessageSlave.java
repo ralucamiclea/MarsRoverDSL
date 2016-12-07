@@ -1,8 +1,7 @@
 package test.slave;
-import test.master.ModelMaster;
-	
 import java.io.DataInputStream;
 import java.io.IOException;
+
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3GyroSensor;
@@ -14,13 +13,13 @@ public class GetMessageSlave extends Thread {
 	private boolean bll;
 	public DataInputStream reader;
 	private Byte b;
-	public ModelMaster m;
+	public ModelSlave m;
 	public EV3GyroSensor gyrosensor;
 	private SampleProvider gyro;
 	private float[] gyroSamples;
 
-	public GetMessageSlave(NXTConnection connection, ModelMaster m){
-	reader = m.connection.openDataInputStream();
+	public GetMessageSlave(NXTConnection connection, ModelSlave m){
+	reader = connection.openDataInputStream();
 	this.m=m;
 	gyrosensor = new EV3GyroSensor(SensorPort.S4);
 	gyro = gyrosensor.getAngleMode();
