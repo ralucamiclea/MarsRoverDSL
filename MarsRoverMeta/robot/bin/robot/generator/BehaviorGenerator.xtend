@@ -14,11 +14,13 @@ class BehaviorGenerator {
 		
 		public class «Auxiliary.toClass(behavior.name)» implements Behavior{
 					
+					Goals goals;
 					ModelMaster m;
 					private boolean suppressed = false;
 					
-					public «Auxiliary.toClass(behavior.name)»(ModelMaster m){
+					public «Auxiliary.toClass(behavior.name)»(ModelMaster m, Goals goals){
 						this.m = m;
+						this.goals = goals;
 					}
 					
 					@Override
@@ -31,11 +33,16 @@ class BehaviorGenerator {
 					
 					@Override
 					public void action() {
+						goals.«behavior.name»++;
 						suppressed = false;
 						float g = m.g;
 						«FOR action : behavior.actionlist»
 							«Auxiliary.action2Text(action)»
 						«ENDFOR»
+						
+						Delay.msDelay(120);
+						m.rm.forward();
+						Delay.msDelay(120);
 					}
 					@Override
 					public void suppress() {

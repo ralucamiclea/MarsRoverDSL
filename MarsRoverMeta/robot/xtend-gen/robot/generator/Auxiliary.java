@@ -17,6 +17,9 @@ import robot.dSL.ColorLiteral;
 import robot.dSL.DistanceLiteral;
 import robot.dSL.EdgeEnum;
 import robot.dSL.EdgeLiteral;
+import robot.dSL.EndAfter;
+import robot.dSL.EndCondition;
+import robot.dSL.EndWhen;
 import robot.dSL.Expression;
 import robot.dSL.ExpressionBracket;
 import robot.dSL.FBEnum;
@@ -36,6 +39,71 @@ import robot.dSL.TouchLiteral;
 
 @SuppressWarnings("all")
 public class Auxiliary {
+  public static int getMissionTimeCondition(final EndAfter a) {
+    return a.getTime();
+  }
+  
+  public static List<EndWhen> getMissionExecutionList(final EndCondition a) {
+    List<EndWhen> missionsexecutionlist = new ArrayList<EndWhen>();
+    EList<EndWhen> _endwhenlist = a.getEndwhenlist();
+    for (final EndWhen e : _endwhenlist) {
+      missionsexecutionlist.add(e);
+    }
+    return missionsexecutionlist;
+  }
+  
+  public static String getMissionCondition(final Mission mission) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EndCondition _endcondition = mission.getEndcondition();
+      List<EndWhen> _missionExecutionList = Auxiliary.getMissionExecutionList(_endcondition);
+      for(final EndWhen e : _missionExecutionList) {
+        _builder.append("//wait ");
+        int _times = e.getTimes();
+        _builder.append(_times, "");
+        _builder.append(" times for ");
+        String _name = e.getName();
+        _builder.append(_name, "");
+        _builder.newLineIfNotEmpty();
+        _builder.append("if(goals.");
+        String _name_1 = e.getName();
+        _builder.append(_name_1, "");
+        _builder.append(" == ");
+        int _times_1 = e.getTimes();
+        _builder.append(_times_1, "");
+        _builder.append(")");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        String _name_2 = mission.getName();
+        _builder.append(_name_2, "\t");
+        _builder.append("Count++;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("if(");
+    EndCondition _endcondition_1 = mission.getEndcondition();
+    List<EndWhen> _missionExecutionList_1 = Auxiliary.getMissionExecutionList(_endcondition_1);
+    int _size = _missionExecutionList_1.size();
+    _builder.append(_size, "");
+    _builder.append(" == ");
+    String _name_3 = mission.getName();
+    _builder.append(_name_3, "");
+    _builder.append("Count)");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("arby");
+    String _name_4 = mission.getName();
+    _builder.append(_name_4, "\t");
+    _builder.append(".stop();");
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  public static int getExecutionTimes(final Behavior behavior) {
+    int count = 0;
+    return count;
+  }
+  
   public static List<Mission> getMissions(final MarsRoverExpedition root) {
     List<Mission> missionslist = new ArrayList<Mission>();
     EList<Mission> _missionlist = root.getMissionlist();
@@ -239,14 +307,14 @@ public class Auxiliary {
     boolean _equals = Objects.equal(_edge, EdgeEnum.FRONTLEFT);
     if (_equals) {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("m.llSamples[0] > 0.24");
+      _builder.append("m.llSamples[0] > 0.55");
       return _builder;
     } else {
       EdgeEnum _edge_1 = a.getEdge();
       boolean _equals_1 = Objects.equal(_edge_1, EdgeEnum.FRONTRIGHT);
       if (_equals_1) {
         StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("m.lrSamples[0] > 0.24");
+        _builder_1.append("m.lrSamples[0] > 0.55");
         return _builder_1;
       } else {
         StringConcatenation _builder_2 = new StringConcatenation();
@@ -289,7 +357,6 @@ public class Auxiliary {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("g = m.g;");
     _builder.newLine();
-    _builder.append("\t\t");
     _builder.append("m.lm.");
     String _xifexpression = null;
     FBEnum _leftdir = a.getLeftdir();
@@ -299,10 +366,9 @@ public class Auxiliary {
     } else {
       _xifexpression = "backward";
     }
-    _builder.append(_xifexpression, "\t\t");
+    _builder.append(_xifexpression, "");
     _builder.append("();");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
     _builder.append("while(m.g%360 ");
     String _xifexpression_1 = null;
     int _degrees = a.getDegrees();
@@ -316,13 +382,12 @@ public class Auxiliary {
       int _plus = (_degrees_2 + 5);
       _xifexpression_1 = ("< (g+" + Integer.valueOf(_plus));
     }
-    _builder.append(_xifexpression_1, "\t\t");
+    _builder.append(_xifexpression_1, "");
     _builder.append("%360) && !suppressed){");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t");
+    _builder.append("\t");
     _builder.append("Thread.yield();");
     _builder.newLine();
-    _builder.append("\t\t");
     _builder.append("}");
     _builder.newLine();
     return _builder.toString();

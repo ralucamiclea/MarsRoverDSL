@@ -19,6 +19,7 @@ import robot.generator.Auxiliary;
 import robot.generator.BehaviorGenerator;
 import robot.generator.DriveForwardGenerator;
 import robot.generator.GetMessageGenerator;
+import robot.generator.GoalsGenerator;
 import robot.generator.MainGenerator;
 import robot.generator.ModelGenerator;
 import robot.generator.SlaveGenerator;
@@ -43,8 +44,10 @@ public class DSLGenerator extends AbstractGenerator {
       fsa.generateFile("/Master/DriveForward.java", _text_1);
       CharSequence _text_2 = GetMessageGenerator.toText(root);
       fsa.generateFile("/Master/GetMessageMaster.java", _text_2);
-      CharSequence _text_3 = ModelGenerator.toText(root);
-      fsa.generateFile("/Master/ModelMaster.java", _text_3);
+      CharSequence _text_3 = GoalsGenerator.toText(root);
+      fsa.generateFile("/Master/Goals.java", _text_3);
+      CharSequence _text_4 = ModelGenerator.toText(root);
+      fsa.generateFile("/Master/ModelMaster.java", _text_4);
       String _MainToText = SlaveGenerator.MainToText(root);
       fsa.generateFile("/Slave/MainSlave.java", _MainToText);
       String _ReadSensorsToText = SlaveGenerator.ReadSensorsToText(root);
@@ -57,8 +60,8 @@ public class DSLGenerator extends AbstractGenerator {
         String _class = Auxiliary.toClass(_name);
         String _plus = ("/Master/" + _class);
         String _plus_1 = (_plus + ".java");
-        CharSequence _text_4 = BehaviorGenerator.toText(i);
-        fsa.generateFile(_plus_1, _text_4);
+        CharSequence _text_5 = BehaviorGenerator.toText(i);
+        fsa.generateFile(_plus_1, _text_5);
       }
     }
   }

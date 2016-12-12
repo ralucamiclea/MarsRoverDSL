@@ -39,7 +39,7 @@ public class MainGenerator {
     _builder.append("ModelMaster m = new ModelMaster();");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("//Goals g = new Goals();");
+    _builder.append("Goals goals = new Goals();");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("GetMessageMaster t = new GetMessageMaster(m);");
@@ -63,7 +63,7 @@ public class MainGenerator {
         String _name_1 = b.getName();
         String _class = Auxiliary.toClass(_name_1);
         _builder.append(_class, "\t");
-        _builder.append("(m);");
+        _builder.append("(m,goals);");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -80,9 +80,15 @@ public class MainGenerator {
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("Behavior [] bArray");
+        _builder.append("int ");
         String _name_3 = m.getName();
         _builder.append(_name_3, "\t");
+        _builder.append("Count = 0;");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("Behavior [] bArray");
+        String _name_4 = m.getName();
+        _builder.append(_name_4, "\t");
         _builder.append(" = {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -95,8 +101,8 @@ public class MainGenerator {
             _builder.append("\t");
             _builder.append("\t");
             _builder.append(", ");
-            String _name_4 = b_1.getName();
-            _builder.append(_name_4, "\t\t");
+            String _name_5 = b_1.getName();
+            _builder.append(_name_5, "\t\t");
             _builder.newLineIfNotEmpty();
           }
         }
@@ -105,21 +111,25 @@ public class MainGenerator {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("Arbitrator arby");
-        String _name_5 = m.getName();
-        _builder.append(_name_5, "\t");
-        _builder.append(" = new Arbitrator(bArray");
         String _name_6 = m.getName();
         _builder.append(_name_6, "\t");
+        _builder.append(" = new Arbitrator(bArray");
+        String _name_7 = m.getName();
+        _builder.append(_name_7, "\t");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("arby");
-        String _name_7 = m.getName();
-        _builder.append(_name_7, "\t");
+        String _name_8 = m.getName();
+        _builder.append(_name_8, "\t");
         _builder.append(".go();");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.newLine();
+        _builder.append("\t");
+        String _missionCondition = Auxiliary.getMissionCondition(m);
+        _builder.append(_missionCondition, "\t");
+        _builder.newLineIfNotEmpty();
       }
     }
     _builder.append("\t");

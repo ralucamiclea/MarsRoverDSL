@@ -26,7 +26,7 @@ class DSLGenerator extends AbstractGenerator {
  			fsa.generateFile("/Master/MainMaster.java", MainGenerator.toText(root));
  			fsa.generateFile("/Master/DriveForward.java", DriveForwardGenerator.toText(root));
  			fsa.generateFile("/Master/GetMessageMaster.java", GetMessageGenerator.toText(root));
- 			//fsa.generateFile("/Master/Goals.java", GoalsGenerator.toText(root));
+ 			fsa.generateFile("/Master/Goals.java", GoalsGenerator.toText(root));
  			fsa.generateFile("/Master/ModelMaster.java", ModelGenerator.toText(root));
  			fsa.generateFile("/Slave/MainSlave.java", SlaveGenerator.MainToText(root));
   			fsa.generateFile("/Slave/ReadSensors.java", SlaveGenerator.ReadSensorsToText(root));

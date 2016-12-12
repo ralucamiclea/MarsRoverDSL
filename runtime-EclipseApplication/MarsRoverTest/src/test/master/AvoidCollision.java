@@ -6,11 +6,13 @@ import lejos.robotics.Color;
 
 public class AvoidCollision implements Behavior{
 			
+			Goals goals;
 			ModelMaster m;
 			private boolean suppressed = false;
 			
-			public AvoidCollision(ModelMaster m){
+			public AvoidCollision(ModelMaster m, Goals goals){
 				this.m = m;
+				this.goals = goals;
 			}
 			
 			@Override
@@ -20,18 +22,23 @@ public class AvoidCollision implements Behavior{
 			
 			@Override
 			public void action() {
+				goals.AvoidCollision++;
 				suppressed = false;
 				float g = m.g;
 				g = m.g;
-						m.lm.backward();
-						while(m.g%360 > (g+175%360) && !suppressed){
-							Thread.yield();
-						}
+				m.lm.backward();
+				while(m.g%360 > (g+175%360) && !suppressed){
+					Thread.yield();
+				}
 				g = m.g;
 				m.rm.backward();
 				while(m.g%360 > (g+355%360) && !suppressed){
 					Thread.yield();
 				}
+				
+				Delay.msDelay(120);
+				m.rm.forward();
+				Delay.msDelay(120);
 			}
 			@Override
 			public void suppress() {

@@ -182,10 +182,10 @@ public class ModelGenerator {
     _builder.append("lightR = new NXTLightSensor(SensorPort.S2);");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("ll = lightL.getAmbientMode();");
+    _builder.append("ll = lightL.getRedMode();");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("lr = lightR.getAmbientMode();");
+    _builder.append("lr = lightR.getRedMode();");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("llSamples = new float[ll.sampleSize()];");

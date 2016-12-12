@@ -32,6 +32,9 @@ public class BehaviorGenerator {
     _builder.append("\t\t\t");
     _builder.newLine();
     _builder.append("\t\t\t");
+    _builder.append("Goals goals;");
+    _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.append("ModelMaster m;");
     _builder.newLine();
     _builder.append("\t\t\t");
@@ -44,10 +47,13 @@ public class BehaviorGenerator {
     String _name_1 = behavior.getName();
     String _class_1 = Auxiliary.toClass(_name_1);
     _builder.append(_class_1, "\t\t\t");
-    _builder.append("(ModelMaster m){");
+    _builder.append("(ModelMaster m, Goals goals){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t");
     _builder.append("this.m = m;");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("this.goals = goals;");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("}");
@@ -92,6 +98,12 @@ public class BehaviorGenerator {
     _builder.append("public void action() {");
     _builder.newLine();
     _builder.append("\t\t\t\t");
+    _builder.append("goals.");
+    String _name_2 = behavior.getName();
+    _builder.append(_name_2, "\t\t\t\t");
+    _builder.append("++;");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t\t");
     _builder.append("suppressed = false;");
     _builder.newLine();
     _builder.append("\t\t\t\t");
@@ -106,6 +118,17 @@ public class BehaviorGenerator {
         _builder.newLineIfNotEmpty();
       }
     }
+    _builder.append("\t\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("Delay.msDelay(120);");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("m.rm.forward();");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("Delay.msDelay(120);");
+    _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("}");
     _builder.newLine();

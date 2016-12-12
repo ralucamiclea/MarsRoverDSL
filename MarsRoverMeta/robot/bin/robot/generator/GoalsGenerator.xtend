@@ -6,11 +6,12 @@ class GoalsGenerator {
 	def static toText(MarsRoverExpedition expedition) 
 	'''
 	package test.master;
-	import test.slave.ModelSlave;
 		
 	public class Goals {
 		
-		public boolean red = false, blue = false, yellow = false; 
+		«FOR b : Auxiliary.getBehaviors(expedition)»
+		public int «b.name»	= 0;
+		«ENDFOR»
 		 
 		public Goals(){
 			//

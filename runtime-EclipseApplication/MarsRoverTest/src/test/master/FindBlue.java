@@ -6,11 +6,13 @@ import lejos.robotics.Color;
 
 public class FindBlue implements Behavior{
 			
+			Goals goals;
 			ModelMaster m;
 			private boolean suppressed = false;
 			
-			public FindBlue(ModelMaster m){
+			public FindBlue(ModelMaster m, Goals goals){
 				this.m = m;
+				this.goals = goals;
 			}
 			
 			@Override
@@ -21,10 +23,15 @@ public class FindBlue implements Behavior{
 			
 			@Override
 			public void action() {
+				goals.FindBlue++;
 				suppressed = false;
 				float g = m.g;
 				m.lm.stop();
 				m.rm.stop();
+				
+				Delay.msDelay(120);
+				m.rm.forward();
+				Delay.msDelay(120);
 			}
 			@Override
 			public void suppress() {

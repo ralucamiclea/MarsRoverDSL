@@ -16,6 +16,7 @@ import robot.dSL.LREnum
 import robot.dSL.LeftMovementAction
 import robot.dSL.LeftRotatePoint
 import robot.dSL.MarsRoverExpedition
+import robot.dSL.MeasurementAction
 import robot.dSL.MiddleRotatePoint
 import robot.dSL.Mission
 import robot.dSL.MovementAction
@@ -23,9 +24,52 @@ import robot.dSL.ORexpression
 import robot.dSL.RightMovementAction
 import robot.dSL.RightRotatePoint
 import robot.dSL.TouchLiteral
-import robot.dSL.MeasurementAction
+import robot.dSL.EndAfter
+import robot.dSL.EndWhen
+import robot.dSL.EndCondition
 
 class Auxiliary {
+	
+	def static int getMissionTimeCondition(EndAfter a){
+		return a.time;
+	}
+	
+	def static List<EndWhen> getMissionExecutionList(EndCondition a){
+		var List<EndWhen> missionsexecutionlist = new ArrayList<EndWhen>();
+		
+		for (EndWhen e : a.endwhenlist)
+			missionsexecutionlist.add(e);
+			
+		return missionsexecutionlist;
+	}
+	
+	def static String getMissionCondition(Mission mission){
+//		if(getMissionTimeCondition(mission.endcondition.EndAfter) != 0){
+//			return 
+//			'''
+//			//wait «getMissionTimeCondition(mission.endcondition.EndAfter)» minutes
+//			//arby.stop();
+//			''';	
+//		}
+//		else {
+				return 
+				'''
+				«FOR e : getMissionExecutionList(mission.endcondition)»
+				//wait «e.times» times for «e.name»
+				if(goals.«e.name» == «e.times»)
+					«mission.name»Count++;
+				«ENDFOR»
+				if(«getMissionExecutionList(mission.endcondition).size()» == «mission.name»Count)
+					arby«mission.name».stop();
+				'''
+//			}
+	}
+	
+	def static int getExecutionTimes(Behavior behavior){
+		var count = 0;
+		
+		return count;
+	}
 	
 	def static List<Mission> getMissions(MarsRoverExpedition root){
 		var List<Mission> missionslist = new ArrayList<Mission>() 
@@ -153,9 +197,9 @@ class Auxiliary {
 	
 	def static dispatch CharSequence getControlReturnString(EdgeLiteral a){
 		if(a.edge==EdgeEnum.FRONTLEFT){
-			return '''m.llSamples[0] > 0.24'''
+			return '''m.llSamples[0] > 0.55'''
 		}else if(a.edge==EdgeEnum.FRONTRIGHT){
-			return '''m.lrSamples[0] > 0.24'''
+			return '''m.lrSamples[0] > 0.55'''
 		}
 		else{ //back
 			return '''m.distanceSamples[0] > 0.10'''
@@ -163,7 +207,8 @@ class Auxiliary {
 	}
 	
 	def static String movementAction2Text(MovementAction m){
-		return '''«m.actionenum»();'''
+		return '''
+		«m.actionenum»();'''
 	}
 	
 	def static dispatch String action2Text(LeftMovementAction a){
@@ -185,10 +230,10 @@ class Auxiliary {
 	def static dispatch String action2Text(LeftRotatePoint a){
 		return '''
 		g = m.g;
-				m.lm.«if(a.leftdir == FBEnum.FORWARD){"forward"}else{"backward"}»();
-				while(m.g%360 «if(a.degrees>0){"> (g+"+(a.degrees-5)}else{"< (g+"+(a.degrees+5)}»%360) && !suppressed){
-					Thread.yield();
-				}
+		m.lm.«if(a.leftdir == FBEnum.FORWARD){"forward"}else{"backward"}»();
+		while(m.g%360 «if(a.degrees>0){"> (g+"+(a.degrees-5)}else{"< (g+"+(a.degrees+5)}»%360) && !suppressed){
+			Thread.yield();
+		}
 		'''
 	}
 	

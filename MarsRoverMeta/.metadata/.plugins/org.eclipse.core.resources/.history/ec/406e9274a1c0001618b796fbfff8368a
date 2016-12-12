@@ -1,0 +1,151 @@
+grammar robot.DSL with org.eclipse.xtext.common.Terminals
+
+generate dSL "http://www.DSL.robot"
+
+MarsRoverExpedition:
+	"ExpeditionSTART"
+	missionlist += Mission+
+	"ExpeditionSTOP"
+	tasklist += Behavior+
+;
+
+Mission: 
+	"Mission" name=ID
+	behaviorlist += BehaviorName+
+	"ENDMission" endcondition = EndCondition
+;
+
+EndCondition:
+	EndAfter | endwhenlist += EndWhen+
+;
+
+EndAfter:
+	"after" time = INT "min"
+;
+
+EndWhen:
+	"If" "Task" name=ID "executed" times=INT "times"
+;
+
+BehaviorName: "Task" name=ID
+;
+
+Behavior:
+	"Task" name=ID
+	"IF" sensorExpression = Expression 
+	"THEN"  actionlist += Actions+ 
+	"ENDtask"
+;
+
+Expression: Expression1;
+
+Actions:
+    LeftMovementAction | RightMovementAction | RotateMovementAction | MeasurementAction;
+
+MeasurementAction:
+    measure = MAEnum
+;
+    
+enum MAEnum:
+    MEASURE = "measure";
+	
+LeftMovementAction:
+	"leftMotor" leftmove = MovementAction;
+	
+RightMovementAction:
+	"rightMotor" rightmove = MovementAction;
+
+RotateMovementAction:
+	"rotate" "around" RotatePoints 'for' degrees=INT 'degrees'
+;
+
+RotatePoints:
+	LeftRotatePoint | RightRotatePoint | MiddleRotatePoint
+;
+
+LeftRotatePoint:
+	"left" "wheel" leftdir=FBEnum 
+;
+
+RightRotatePoint:
+	"right" "wheel" rightdir=FBEnum
+;
+
+MiddleRotatePoint:
+	'middle' 'to' 'the' middledir=LREnum
+;
+
+
+enum LREnum:
+	LEFT = 'left' |
+	RIGHT = 'right'
+;
+
+enum FBEnum:
+	FORWARD = 'forward' |
+	BACKWARD = 'backward'
+;
+
+MovementAction:
+	actionenum = ActionEnum
+;
+
+enum ActionEnum:
+	FORWARD = 'forward' |
+	BACKWARD = 'backward' |
+	STOP = 'stop'
+;
+
+Expression1 returns Expression:
+	Expression2 
+	({ANDexpression.left = current} "AND" right = Expression2)*
+;
+
+Expression2 returns Expression:
+	Expression3 ({ORexpression.left = current} "OR" right = Expression3)*
+;
+
+Expression3 returns Expression:
+	ExpressionBracket | TouchLiteral | ColorLiteral | DistanceLiteral | EdgeLiteral
+;
+
+ExpressionBracket:
+	'('exp = Expression')'
+;
+
+TouchLiteral:
+	touch = TouchEnum 'hits'
+;
+
+ColorLiteral:
+	"colorFront" "sees" "color"  color = ColorEnum
+;
+
+DistanceLiteral:
+	"object" "at" distance=INT "cm"
+;
+
+EdgeLiteral:
+	"edge" "at" edge=EdgeEnum
+;
+
+enum EdgeEnum:
+	FRONTLEFT = "frontLeft" |
+	FRONTRIGHT = "frontRight" |
+	BACK = "back"
+;
+
+enum TouchEnum:
+	LEFT = 'touchFrontLeft' | RIGHT = 'touchFrontRight'
+;
+
+enum ColorEnum:
+	NONE = 'NONE' |
+	BLACK = 'BLACK' |
+	BLUE = 'BLUE' |
+	GREEN = 'GREEN' |
+	YELLOW = 'YELLOW' |
+	RED = 'RED' |
+	WHITE = 'WHITE' |
+	BROWN = 'BROWN'
+;

@@ -72,8 +72,8 @@ class ModelGenerator {
 	        sonar = new EV3UltrasonicSensor(SensorPort.S3);
 			lightL = new NXTLightSensor(SensorPort.S1);
 			lightR = new NXTLightSensor(SensorPort.S2);
-			ll = lightL.getAmbientMode();
-			lr = lightR.getAmbientMode();
+			ll = lightL.getRedMode();
+			lr = lightR.getRedMode();
 			llSamples = new float[ll.sampleSize()];
 			lrSamples = new float[lr.sampleSize()];
 		 	writer = new PrintWriter(connection.openOutputStream());
