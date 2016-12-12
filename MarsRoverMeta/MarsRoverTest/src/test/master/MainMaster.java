@@ -1,7 +1,5 @@
 	package test.master;
 	
-	import java.util.List;
-	import java.util.ArrayList;
 	import lejos.robotics.subsumption.Arbitrator;
 	import lejos.robotics.subsumption.Behavior;
 	
@@ -10,8 +8,8 @@
 	public static void main(String[] args) {
 		
 	ModelMaster m = new ModelMaster();
-	Goals g = new Goals();
-	GetMessageMaster t = new GetMessageMaster(m,g);
+	//Goals g = new Goals();
+	GetMessageMaster t = new GetMessageMaster(m);
 	t.start();
 		
 	//behaviors in this expedition
@@ -21,13 +19,12 @@
 	Behavior DriveForward = new DriveForward(m);
 	//mission "AvoidStuff"
 	Behavior [] bArrayAvoidStuff = {
-		//AvoidEdge, 
-		//AvoidCollision, 
 		DriveForward
+		, AvoidEdge
+		, AvoidCollision
 	};
 	Arbitrator arbyAvoidStuff = new Arbitrator(bArrayAvoidStuff);
 	arbyAvoidStuff.go();
 	
 	}
 }
-	

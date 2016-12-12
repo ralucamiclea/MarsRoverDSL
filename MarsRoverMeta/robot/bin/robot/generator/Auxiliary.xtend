@@ -12,6 +12,7 @@ import robot.dSL.EdgeEnum
 import robot.dSL.EdgeLiteral
 import robot.dSL.ExpressionBracket
 import robot.dSL.FBEnum
+import robot.dSL.LREnum
 import robot.dSL.LeftMovementAction
 import robot.dSL.LeftRotatePoint
 import robot.dSL.MarsRoverExpedition
@@ -22,6 +23,7 @@ import robot.dSL.ORexpression
 import robot.dSL.RightMovementAction
 import robot.dSL.RightRotatePoint
 import robot.dSL.TouchLiteral
+import robot.dSL.MeasurementAction
 
 class Auxiliary {
 	
@@ -91,7 +93,6 @@ class Auxiliary {
 	
 	def static dispatch HashSet<String> getSensors(DistanceLiteral b){
 		var HashSet<String> sensors = new HashSet<String>();
-		sensors.add('''distance''');
 		return sensors; 
 	}
 	
@@ -99,6 +100,12 @@ class Auxiliary {
 		var HashSet<String> sensors = new HashSet<String>();
 		if(b.edge==EdgeEnum.BACK){
 			sensors.add('''distance''');
+		}
+		else if(b.edge==EdgeEnum.FRONTLEFT){
+			sensors.add('''ll''')
+		}
+		else{
+			sensors.add('''lr''')
 		}
 		return sensors; 
 	}
@@ -120,7 +127,24 @@ class Auxiliary {
 	}
 	
 	def static dispatch CharSequence getControlReturnString(ColorLiteral a){
-		return '''m.colorSamples[0] == Color.«a.color»''';
+		switch(a.color){
+			case BLUE: 
+				{return '''m.colorSamples[0] < 10 && m.colorSamples[1] < 10 && m.colorSamples[2] > 200''';}
+			case RED : 
+				{return '''m.colorSamples[0] > 200 && m.colorSamples[1] < 10 && m.colorSamples[2] < 10''';}
+			case GREEN: 
+				{return '''m.colorSamples[0] < 10 && m.colorSamples[1] > 200 && m.colorSamples[2] < 10''';}
+			case WHITE: 
+				{return '''m.colorSamples[0] > 200 && m.colorSamples[1] > 200 && m.colorSamples[2] >200''';}
+			case BLACK: 
+				{return '''m.colorSamples[0] < 10 && m.colorSamples[1] < 10 && m.colorSamples[2] < 10''';}
+			case BROWN: 
+				{return '''m.colorSamples[0] < 170 && m.colorSamples[0] > 140 && m.colorSamples[1] > 60 && m.colorSamples[1] < 90 && m.colorSamples[2] > 10 m.colorSamples[2] < 25''';}
+			case YELLOW: 
+				{return '''m.colorSamples[0] > 200 && m.colorSamples[1] > 200 && m.colorSamples[2] < 10''';}
+			case NONE: 
+				{return '''m.colorSamples[0] = 15 && m.colorSamples[1] = 15 && m.colorSamples[2] = 96''';}
+		}
 	}
 	
 	def static dispatch CharSequence getControlReturnString(DistanceLiteral a){
@@ -129,12 +153,12 @@ class Auxiliary {
 	
 	def static dispatch CharSequence getControlReturnString(EdgeLiteral a){
 		if(a.edge==EdgeEnum.FRONTLEFT){
-			return '''m.lightL.readNormalizedValue() > 600'''
+			return '''m.llSamples[0] > 0.24'''
 		}else if(a.edge==EdgeEnum.FRONTRIGHT){
-			return '''m.lightR.readNormalizedValue() > 600'''
+			return '''m.lrSamples[0] > 0.24'''
 		}
 		else{ //back
-			return '''m.distanceSamples[0] > 10'''
+			return '''m.distanceSamples[0] > 0.10'''
 		}
 	}
 	
@@ -149,29 +173,30 @@ class Auxiliary {
 	def static dispatch String action2Text(RightMovementAction a){
 		return "m.rm."+movementAction2Text(a.rightmove);
 	}
+	
+	def static dispatch String action2Text(MeasurementAction a){
+		return '''
+		m.ma.rotate(90,false);
+		m.ma.rotate(-90,false);
+		'''
+	}
 
 	
 	def static dispatch String action2Text(LeftRotatePoint a){
 		return '''
-		m.writer.print('g');
-		m.writer.flush();
-		m.writer.print(«if(a.leftdir == FBEnum.FORWARD){a.degrees}else{-a.degrees}»);
-		m.writer.flush();
-		m.lm.«if(a.leftdir == FBEnum.FORWARD){"forward"}else{"backward"}»();
-		while(m.g && !suppressed){
-			Thread.yield();
-		}
+		g = m.g;
+				m.lm.«if(a.leftdir == FBEnum.FORWARD){"forward"}else{"backward"}»();
+				while(m.g%360 «if(a.degrees>0){"> (g+"+(a.degrees-5)}else{"< (g+"+(a.degrees+5)}»%360) && !suppressed){
+					Thread.yield();
+				}
 		'''
 	}
 	
 	def static dispatch String action2Text(RightRotatePoint a){
 		return '''
-		m.writer.print('g');
-		m.writer.flush();
-		m.writer.print(«if(a.rightdir == FBEnum.FORWARD){a.degrees}else{-a.degrees}»);
-		m.writer.flush();
+		g = m.g;
 		m.rm.«if(a.rightdir == FBEnum.FORWARD){"forward"}else{"backward"}»();
-		while(m.g && !suppressed){
+		while(m.g%360 «if(a.degrees>0){"> (g+"+(a.degrees-5)}else{"< (g+"+(a.degrees+5)}»%360) && !suppressed){
 			Thread.yield();
 		}
 		'''
@@ -179,15 +204,12 @@ class Auxiliary {
 	
 	def static dispatch String action2Text(MiddleRotatePoint a){
 		return '''
-		m.writer.print('g');
-		m.writer.flush();
-		m.writer.print(«a.degrees»);
-		m.writer.flush();
-		m.rm.forward();
-		m.lm.backward();
-		while(m.g && !suppressed){
-			Thread.yield();
-		}
+		g = m.g;
+				m.lm.«if(a.middledir == LREnum.RIGHT){"forward"}else{"backward"}»();
+				m.rm.«if(a.middledir == LREnum.LEFT){"forward"}else{"backward"}»();
+				while(m.g%360 «if(a.degrees>0){"> (g+"+(a.degrees-5)}else{"< (g+"+(a.degrees+5)}»%360) && !suppressed){
+					Thread.yield();
+				}
 		'''
 	}
 	

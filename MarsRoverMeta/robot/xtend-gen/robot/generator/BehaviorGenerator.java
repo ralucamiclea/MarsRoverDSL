@@ -16,6 +16,10 @@ public class BehaviorGenerator {
     _builder.newLine();
     _builder.append("import lejos.robotics.subsumption.Behavior;");
     _builder.newLine();
+    _builder.append("import lejos.utility.Delay;");
+    _builder.newLine();
+    _builder.append("import lejos.hardware.lcd.LCD;");
+    _builder.newLine();
     _builder.append("import lejos.robotics.Color;");
     _builder.newLine();
     _builder.newLine();
@@ -91,13 +95,7 @@ public class BehaviorGenerator {
     _builder.append("suppressed = false;");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("m.touchFrontLeft=false;");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("m.touchFrontRight=false;");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("m.g=false;");
+    _builder.append("float g = m.g;");
     _builder.newLine();
     {
       EList<Actions> _actionlist = behavior.getActionlist();

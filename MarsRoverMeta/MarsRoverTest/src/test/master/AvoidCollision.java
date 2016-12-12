@@ -1,5 +1,7 @@
 package test.master;
 import lejos.robotics.subsumption.Behavior;
+import lejos.utility.Delay;
+import lejos.hardware.lcd.LCD;
 import lejos.robotics.Color;
 
 public class AvoidCollision implements Behavior{
@@ -19,23 +21,14 @@ public class AvoidCollision implements Behavior{
 			@Override
 			public void action() {
 				suppressed = false;
-				m.touchFrontLeft=false;
-				m.touchFrontRight=false;
-				m.g=false;
-				m.writer.print('g');
-				m.writer.flush();
-				m.writer.print(-180);
-				m.writer.flush();
-				m.lm.backward();
-				while(m.g && !suppressed){
-					Thread.yield();
-				}
-				m.writer.print('g');
-				m.writer.flush();
-				m.writer.print(-360);
-				m.writer.flush();
+				float g = m.g;
+						m.lm.backward();
+						while(m.g%360 > (g+175%360) && !suppressed){
+							Thread.yield();
+						}
+				g = m.g;
 				m.rm.backward();
-				while(m.g && !suppressed){
+				while(m.g%360 > (g+355%360) && !suppressed){
 					Thread.yield();
 				}
 			}

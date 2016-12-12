@@ -8,6 +8,8 @@ class BehaviorGenerator {
 		'''
 		package test.master;
 		import lejos.robotics.subsumption.Behavior;
+		import lejos.utility.Delay;
+		import lejos.hardware.lcd.LCD;
 		import lejos.robotics.Color;
 		
 		public class «Auxiliary.toClass(behavior.name)» implements Behavior{
@@ -30,9 +32,7 @@ class BehaviorGenerator {
 					@Override
 					public void action() {
 						suppressed = false;
-						m.touchFrontLeft=false;
-						m.touchFrontRight=false;
-						m.g=false;
+						float g = m.g;
 						«FOR action : behavior.actionlist»
 							«Auxiliary.action2Text(action)»
 						«ENDFOR»

@@ -40,7 +40,14 @@ Behavior:
 Expression: Expression1;
 
 Actions:
-	LeftMovementAction | RightMovementAction | RotateMovementAction;
+    LeftMovementAction | RightMovementAction | RotateMovementAction | MeasurementAction;
+
+MeasurementAction:
+    measure = MAEnum
+;
+    
+enum MAEnum:
+    MEASURE = "measure";
 	
 LeftMovementAction:
 	"leftMotor" leftmove = MovementAction;
@@ -67,6 +74,7 @@ RightRotatePoint:
 MiddleRotatePoint:
 	'middle' 'to' 'the' middledir=LREnum
 ;
+
 
 enum LREnum:
 	LEFT = 'left' |

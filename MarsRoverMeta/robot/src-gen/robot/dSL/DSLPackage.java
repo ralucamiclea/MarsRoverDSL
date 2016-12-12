@@ -356,6 +356,34 @@ public interface DSLPackage extends EPackage
   int ACTIONS_FEATURE_COUNT = 0;
 
   /**
+   * The meta object id for the '{@link robot.dSL.impl.MeasurementActionImpl <em>Measurement Action</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see robot.dSL.impl.MeasurementActionImpl
+   * @see robot.dSL.impl.DSLPackageImpl#getMeasurementAction()
+   * @generated
+   */
+  int MEASUREMENT_ACTION = 9;
+
+  /**
+   * The feature id for the '<em><b>Measure</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MEASUREMENT_ACTION__MEASURE = ACTIONS_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Measurement Action</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MEASUREMENT_ACTION_FEATURE_COUNT = ACTIONS_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link robot.dSL.impl.LeftMovementActionImpl <em>Left Movement Action</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -363,7 +391,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getLeftMovementAction()
    * @generated
    */
-  int LEFT_MOVEMENT_ACTION = 9;
+  int LEFT_MOVEMENT_ACTION = 10;
 
   /**
    * The feature id for the '<em><b>Leftmove</b></em>' containment reference.
@@ -391,7 +419,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getRightMovementAction()
    * @generated
    */
-  int RIGHT_MOVEMENT_ACTION = 10;
+  int RIGHT_MOVEMENT_ACTION = 11;
 
   /**
    * The feature id for the '<em><b>Rightmove</b></em>' containment reference.
@@ -419,7 +447,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getRotateMovementAction()
    * @generated
    */
-  int ROTATE_MOVEMENT_ACTION = 11;
+  int ROTATE_MOVEMENT_ACTION = 12;
 
   /**
    * The number of structural features of the '<em>Rotate Movement Action</em>' class.
@@ -438,7 +466,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getRotatePoints()
    * @generated
    */
-  int ROTATE_POINTS = 12;
+  int ROTATE_POINTS = 13;
 
   /**
    * The feature id for the '<em><b>Degrees</b></em>' attribute.
@@ -466,7 +494,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getLeftRotatePoint()
    * @generated
    */
-  int LEFT_ROTATE_POINT = 13;
+  int LEFT_ROTATE_POINT = 14;
 
   /**
    * The feature id for the '<em><b>Degrees</b></em>' attribute.
@@ -503,7 +531,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getRightRotatePoint()
    * @generated
    */
-  int RIGHT_ROTATE_POINT = 14;
+  int RIGHT_ROTATE_POINT = 15;
 
   /**
    * The feature id for the '<em><b>Degrees</b></em>' attribute.
@@ -540,7 +568,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getMiddleRotatePoint()
    * @generated
    */
-  int MIDDLE_ROTATE_POINT = 15;
+  int MIDDLE_ROTATE_POINT = 16;
 
   /**
    * The feature id for the '<em><b>Degrees</b></em>' attribute.
@@ -577,7 +605,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getMovementAction()
    * @generated
    */
-  int MOVEMENT_ACTION = 16;
+  int MOVEMENT_ACTION = 17;
 
   /**
    * The feature id for the '<em><b>Actionenum</b></em>' attribute.
@@ -605,7 +633,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getExpressionBracket()
    * @generated
    */
-  int EXPRESSION_BRACKET = 17;
+  int EXPRESSION_BRACKET = 18;
 
   /**
    * The feature id for the '<em><b>Exp</b></em>' containment reference.
@@ -633,7 +661,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getTouchLiteral()
    * @generated
    */
-  int TOUCH_LITERAL = 18;
+  int TOUCH_LITERAL = 19;
 
   /**
    * The feature id for the '<em><b>Touch</b></em>' attribute.
@@ -661,7 +689,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getColorLiteral()
    * @generated
    */
-  int COLOR_LITERAL = 19;
+  int COLOR_LITERAL = 20;
 
   /**
    * The feature id for the '<em><b>Color</b></em>' attribute.
@@ -689,7 +717,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getDistanceLiteral()
    * @generated
    */
-  int DISTANCE_LITERAL = 20;
+  int DISTANCE_LITERAL = 21;
 
   /**
    * The feature id for the '<em><b>Distance</b></em>' attribute.
@@ -717,7 +745,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getEdgeLiteral()
    * @generated
    */
-  int EDGE_LITERAL = 21;
+  int EDGE_LITERAL = 22;
 
   /**
    * The feature id for the '<em><b>Edge</b></em>' attribute.
@@ -745,7 +773,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getANDexpression()
    * @generated
    */
-  int AN_DEXPRESSION = 22;
+  int AN_DEXPRESSION = 23;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -782,7 +810,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getORexpression()
    * @generated
    */
-  int OREXPRESSION = 23;
+  int OREXPRESSION = 24;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -812,6 +840,16 @@ public interface DSLPackage extends EPackage
   int OREXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
   /**
+   * The meta object id for the '{@link robot.dSL.MAEnum <em>MA Enum</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see robot.dSL.MAEnum
+   * @see robot.dSL.impl.DSLPackageImpl#getMAEnum()
+   * @generated
+   */
+  int MA_ENUM = 25;
+
+  /**
    * The meta object id for the '{@link robot.dSL.LREnum <em>LR Enum</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -819,7 +857,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getLREnum()
    * @generated
    */
-  int LR_ENUM = 24;
+  int LR_ENUM = 26;
 
   /**
    * The meta object id for the '{@link robot.dSL.FBEnum <em>FB Enum</em>}' enum.
@@ -829,7 +867,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getFBEnum()
    * @generated
    */
-  int FB_ENUM = 25;
+  int FB_ENUM = 27;
 
   /**
    * The meta object id for the '{@link robot.dSL.ActionEnum <em>Action Enum</em>}' enum.
@@ -839,7 +877,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getActionEnum()
    * @generated
    */
-  int ACTION_ENUM = 26;
+  int ACTION_ENUM = 28;
 
   /**
    * The meta object id for the '{@link robot.dSL.EdgeEnum <em>Edge Enum</em>}' enum.
@@ -849,7 +887,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getEdgeEnum()
    * @generated
    */
-  int EDGE_ENUM = 27;
+  int EDGE_ENUM = 29;
 
   /**
    * The meta object id for the '{@link robot.dSL.TouchEnum <em>Touch Enum</em>}' enum.
@@ -859,7 +897,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getTouchEnum()
    * @generated
    */
-  int TOUCH_ENUM = 28;
+  int TOUCH_ENUM = 30;
 
   /**
    * The meta object id for the '{@link robot.dSL.ColorEnum <em>Color Enum</em>}' enum.
@@ -869,7 +907,7 @@ public interface DSLPackage extends EPackage
    * @see robot.dSL.impl.DSLPackageImpl#getColorEnum()
    * @generated
    */
-  int COLOR_ENUM = 29;
+  int COLOR_ENUM = 31;
 
 
   /**
@@ -1104,6 +1142,27 @@ public interface DSLPackage extends EPackage
    * @generated
    */
   EClass getActions();
+
+  /**
+   * Returns the meta object for class '{@link robot.dSL.MeasurementAction <em>Measurement Action</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Measurement Action</em>'.
+   * @see robot.dSL.MeasurementAction
+   * @generated
+   */
+  EClass getMeasurementAction();
+
+  /**
+   * Returns the meta object for the attribute '{@link robot.dSL.MeasurementAction#getMeasure <em>Measure</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Measure</em>'.
+   * @see robot.dSL.MeasurementAction#getMeasure()
+   * @see #getMeasurementAction()
+   * @generated
+   */
+  EAttribute getMeasurementAction_Measure();
 
   /**
    * Returns the meta object for class '{@link robot.dSL.LeftMovementAction <em>Left Movement Action</em>}'.
@@ -1432,6 +1491,16 @@ public interface DSLPackage extends EPackage
   EReference getORexpression_Right();
 
   /**
+   * Returns the meta object for enum '{@link robot.dSL.MAEnum <em>MA Enum</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>MA Enum</em>'.
+   * @see robot.dSL.MAEnum
+   * @generated
+   */
+  EEnum getMAEnum();
+
+  /**
    * Returns the meta object for enum '{@link robot.dSL.LREnum <em>LR Enum</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1707,6 +1776,24 @@ public interface DSLPackage extends EPackage
      * @generated
      */
     EClass ACTIONS = eINSTANCE.getActions();
+
+    /**
+     * The meta object literal for the '{@link robot.dSL.impl.MeasurementActionImpl <em>Measurement Action</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see robot.dSL.impl.MeasurementActionImpl
+     * @see robot.dSL.impl.DSLPackageImpl#getMeasurementAction()
+     * @generated
+     */
+    EClass MEASUREMENT_ACTION = eINSTANCE.getMeasurementAction();
+
+    /**
+     * The meta object literal for the '<em><b>Measure</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MEASUREMENT_ACTION__MEASURE = eINSTANCE.getMeasurementAction_Measure();
 
     /**
      * The meta object literal for the '{@link robot.dSL.impl.LeftMovementActionImpl <em>Left Movement Action</em>}' class.
@@ -1985,6 +2072,16 @@ public interface DSLPackage extends EPackage
      * @generated
      */
     EReference OREXPRESSION__RIGHT = eINSTANCE.getORexpression_Right();
+
+    /**
+     * The meta object literal for the '{@link robot.dSL.MAEnum <em>MA Enum</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see robot.dSL.MAEnum
+     * @see robot.dSL.impl.DSLPackageImpl#getMAEnum()
+     * @generated
+     */
+    EEnum MA_ENUM = eINSTANCE.getMAEnum();
 
     /**
      * The meta object literal for the '{@link robot.dSL.LREnum <em>LR Enum</em>}' enum.

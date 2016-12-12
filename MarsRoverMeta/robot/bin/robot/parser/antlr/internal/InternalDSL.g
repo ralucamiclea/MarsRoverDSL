@@ -571,6 +571,51 @@ ruleActions returns [EObject current=null]
 			$current = $this_RotateMovementAction_2.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getActionsAccess().getMeasurementActionParserRuleCall_3());
+		}
+		this_MeasurementAction_3=ruleMeasurementAction
+		{
+			$current = $this_MeasurementAction_3.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleMeasurementAction
+entryRuleMeasurementAction returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getMeasurementActionRule()); }
+	iv_ruleMeasurementAction=ruleMeasurementAction
+	{ $current=$iv_ruleMeasurementAction.current; }
+	EOF;
+
+// Rule MeasurementAction
+ruleMeasurementAction returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getMeasurementActionAccess().getMeasureMAEnumEnumRuleCall_0());
+			}
+			lv_measure_0_0=ruleMAEnum
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getMeasurementActionRule());
+				}
+				set(
+					$current,
+					"measure",
+					lv_measure_0_0,
+					"robot.DSL.MAEnum");
+				afterParserOrEnumRuleCall();
+			}
+		)
 	)
 ;
 
@@ -1353,6 +1398,23 @@ ruleEdgeLiteral returns [EObject current=null]
 				}
 			)
 		)
+	)
+;
+
+// Rule MAEnum
+ruleMAEnum returns [Enumerator current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		enumLiteral_0='measure'
+		{
+			$current = grammarAccess.getMAEnumAccess().getMEASUREEnumLiteralDeclaration().getEnumLiteral().getInstance();
+			newLeafNode(enumLiteral_0, grammarAccess.getMAEnumAccess().getMEASUREEnumLiteralDeclaration());
+		}
 	)
 ;
 

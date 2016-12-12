@@ -75,6 +75,7 @@ public class DSLFactoryImpl extends EFactoryImpl implements DSLFactory
       case DSLPackage.BEHAVIOR: return createBehavior();
       case DSLPackage.EXPRESSION: return createExpression();
       case DSLPackage.ACTIONS: return createActions();
+      case DSLPackage.MEASUREMENT_ACTION: return createMeasurementAction();
       case DSLPackage.LEFT_MOVEMENT_ACTION: return createLeftMovementAction();
       case DSLPackage.RIGHT_MOVEMENT_ACTION: return createRightMovementAction();
       case DSLPackage.ROTATE_MOVEMENT_ACTION: return createRotateMovementAction();
@@ -105,6 +106,8 @@ public class DSLFactoryImpl extends EFactoryImpl implements DSLFactory
   {
     switch (eDataType.getClassifierID())
     {
+      case DSLPackage.MA_ENUM:
+        return createMAEnumFromString(eDataType, initialValue);
       case DSLPackage.LR_ENUM:
         return createLREnumFromString(eDataType, initialValue);
       case DSLPackage.FB_ENUM:
@@ -132,6 +135,8 @@ public class DSLFactoryImpl extends EFactoryImpl implements DSLFactory
   {
     switch (eDataType.getClassifierID())
     {
+      case DSLPackage.MA_ENUM:
+        return convertMAEnumToString(eDataType, instanceValue);
       case DSLPackage.LR_ENUM:
         return convertLREnumToString(eDataType, instanceValue);
       case DSLPackage.FB_ENUM:
@@ -246,6 +251,17 @@ public class DSLFactoryImpl extends EFactoryImpl implements DSLFactory
   {
     ActionsImpl actions = new ActionsImpl();
     return actions;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MeasurementAction createMeasurementAction()
+  {
+    MeasurementActionImpl measurementAction = new MeasurementActionImpl();
+    return measurementAction;
   }
 
   /**
@@ -411,6 +427,28 @@ public class DSLFactoryImpl extends EFactoryImpl implements DSLFactory
   {
     ORexpressionImpl oRexpression = new ORexpressionImpl();
     return oRexpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MAEnum createMAEnumFromString(EDataType eDataType, String initialValue)
+  {
+    MAEnum result = MAEnum.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertMAEnumToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

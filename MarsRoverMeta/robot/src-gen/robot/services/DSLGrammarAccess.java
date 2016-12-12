@@ -296,12 +296,13 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cLeftMovementActionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cRightMovementActionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cRotateMovementActionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cMeasurementActionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//Actions:
-		//	LeftMovementAction | RightMovementAction | RotateMovementAction;
+		//	LeftMovementAction | RightMovementAction | RotateMovementAction | MeasurementAction;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//LeftMovementAction | RightMovementAction | RotateMovementAction
+		//LeftMovementAction | RightMovementAction | RotateMovementAction | MeasurementAction
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//LeftMovementAction
@@ -312,6 +313,24 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//RotateMovementAction
 		public RuleCall getRotateMovementActionParserRuleCall_2() { return cRotateMovementActionParserRuleCall_2; }
+		
+		//MeasurementAction
+		public RuleCall getMeasurementActionParserRuleCall_3() { return cMeasurementActionParserRuleCall_3; }
+	}
+	public class MeasurementActionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.MeasurementAction");
+		private final Assignment cMeasureAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cMeasureMAEnumEnumRuleCall_0 = (RuleCall)cMeasureAssignment.eContents().get(0);
+		
+		//MeasurementAction:
+		//	measure=MAEnum;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//measure=MAEnum
+		public Assignment getMeasureAssignment() { return cMeasureAssignment; }
+		
+		//MAEnum
+		public RuleCall getMeasureMAEnumEnumRuleCall_0() { return cMeasureMAEnumEnumRuleCall_0; }
 	}
 	public class LeftMovementActionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.LeftMovementAction");
@@ -762,6 +781,21 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getEdgeEdgeEnumEnumRuleCall_2_0() { return cEdgeEdgeEnumEnumRuleCall_2_0; }
 	}
 	
+	public class MAEnumElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.MAEnum");
+		private final EnumLiteralDeclaration cMEASUREEnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
+		private final Keyword cMEASUREMeasureKeyword_0 = (Keyword)cMEASUREEnumLiteralDeclaration.eContents().get(0);
+		
+		//enum MAEnum:
+		//	MEASURE="measure";
+		public EnumRule getRule() { return rule; }
+		
+		//MEASURE="measure"
+		public EnumLiteralDeclaration getMEASUREEnumLiteralDeclaration() { return cMEASUREEnumLiteralDeclaration; }
+		
+		//"measure"
+		public Keyword getMEASUREMeasureKeyword_0() { return cMEASUREMeasureKeyword_0; }
+	}
 	public class LREnumElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.LREnum");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -1011,6 +1045,8 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 	private final BehaviorElements pBehavior;
 	private final ExpressionElements pExpression;
 	private final ActionsElements pActions;
+	private final MeasurementActionElements pMeasurementAction;
+	private final MAEnumElements eMAEnum;
 	private final LeftMovementActionElements pLeftMovementAction;
 	private final RightMovementActionElements pRightMovementAction;
 	private final RotateMovementActionElements pRotateMovementAction;
@@ -1052,6 +1088,8 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pBehavior = new BehaviorElements();
 		this.pExpression = new ExpressionElements();
 		this.pActions = new ActionsElements();
+		this.pMeasurementAction = new MeasurementActionElements();
+		this.eMAEnum = new MAEnumElements();
 		this.pLeftMovementAction = new LeftMovementActionElements();
 		this.pRightMovementAction = new RightMovementActionElements();
 		this.pRotateMovementAction = new RotateMovementActionElements();
@@ -1192,13 +1230,33 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Actions:
-	//	LeftMovementAction | RightMovementAction | RotateMovementAction;
+	//	LeftMovementAction | RightMovementAction | RotateMovementAction | MeasurementAction;
 	public ActionsElements getActionsAccess() {
 		return pActions;
 	}
 	
 	public ParserRule getActionsRule() {
 		return getActionsAccess().getRule();
+	}
+	
+	//MeasurementAction:
+	//	measure=MAEnum;
+	public MeasurementActionElements getMeasurementActionAccess() {
+		return pMeasurementAction;
+	}
+	
+	public ParserRule getMeasurementActionRule() {
+		return getMeasurementActionAccess().getRule();
+	}
+	
+	//enum MAEnum:
+	//	MEASURE="measure";
+	public MAEnumElements getMAEnumAccess() {
+		return eMAEnum;
+	}
+	
+	public EnumRule getMAEnumRule() {
+		return getMAEnumAccess().getRule();
 	}
 	
 	//LeftMovementAction:

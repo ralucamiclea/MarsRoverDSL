@@ -32,7 +32,9 @@ import robot.dSL.FBEnum;
 import robot.dSL.LREnum;
 import robot.dSL.LeftMovementAction;
 import robot.dSL.LeftRotatePoint;
+import robot.dSL.MAEnum;
 import robot.dSL.MarsRoverExpedition;
+import robot.dSL.MeasurementAction;
 import robot.dSL.MiddleRotatePoint;
 import robot.dSL.Mission;
 import robot.dSL.MovementAction;
@@ -114,6 +116,13 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
    * @generated
    */
   private EClass actionsEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass measurementActionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -219,6 +228,13 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
    * @generated
    */
   private EClass oRexpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum maEnumEEnum = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -550,6 +566,26 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getMeasurementAction()
+  {
+    return measurementActionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMeasurementAction_Measure()
+  {
+    return (EAttribute)measurementActionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getLeftMovementAction()
   {
     return leftMovementActionEClass;
@@ -860,6 +896,16 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EEnum getMAEnum()
+  {
+    return maEnumEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getLREnum()
   {
     return lrEnumEEnum;
@@ -976,6 +1022,9 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
 
     actionsEClass = createEClass(ACTIONS);
 
+    measurementActionEClass = createEClass(MEASUREMENT_ACTION);
+    createEAttribute(measurementActionEClass, MEASUREMENT_ACTION__MEASURE);
+
     leftMovementActionEClass = createEClass(LEFT_MOVEMENT_ACTION);
     createEReference(leftMovementActionEClass, LEFT_MOVEMENT_ACTION__LEFTMOVE);
 
@@ -1023,6 +1072,7 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
     createEReference(oRexpressionEClass, OREXPRESSION__RIGHT);
 
     // Create enums
+    maEnumEEnum = createEEnum(MA_ENUM);
     lrEnumEEnum = createEEnum(LR_ENUM);
     fbEnumEEnum = createEEnum(FB_ENUM);
     actionEnumEEnum = createEEnum(ACTION_ENUM);
@@ -1061,6 +1111,7 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
 
     // Add supertypes to classes
     endAfterEClass.getESuperTypes().add(this.getEndCondition());
+    measurementActionEClass.getESuperTypes().add(this.getActions());
     leftMovementActionEClass.getESuperTypes().add(this.getActions());
     rightMovementActionEClass.getESuperTypes().add(this.getActions());
     rotateMovementActionEClass.getESuperTypes().add(this.getActions());
@@ -1107,6 +1158,9 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(actionsEClass, Actions.class, "Actions", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(measurementActionEClass, MeasurementAction.class, "MeasurementAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getMeasurementAction_Measure(), this.getMAEnum(), "measure", null, 0, 1, MeasurementAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(leftMovementActionEClass, LeftMovementAction.class, "LeftMovementAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getLeftMovementAction_Leftmove(), this.getMovementAction(), null, "leftmove", null, 0, 1, LeftMovementAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1155,6 +1209,9 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
     initEReference(getORexpression_Right(), this.getExpression(), null, "right", null, 0, 1, ORexpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
+    initEEnum(maEnumEEnum, MAEnum.class, "MAEnum");
+    addEEnumLiteral(maEnumEEnum, MAEnum.MEASURE);
+
     initEEnum(lrEnumEEnum, LREnum.class, "LREnum");
     addEEnumLiteral(lrEnumEEnum, LREnum.LEFT);
     addEEnumLiteral(lrEnumEEnum, LREnum.RIGHT);

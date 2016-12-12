@@ -274,6 +274,31 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+// Entry rule entryRuleMeasurementAction
+entryRuleMeasurementAction
+:
+{ before(grammarAccess.getMeasurementActionRule()); }
+	 ruleMeasurementAction
+{ after(grammarAccess.getMeasurementActionRule()); } 
+	 EOF 
+;
+
+// Rule MeasurementAction
+ruleMeasurementAction 
+	@init {
+		int stackSize = keepStackSize();
+	}
+	:
+	(
+		{ before(grammarAccess.getMeasurementActionAccess().getMeasureAssignment()); }
+		(rule__MeasurementAction__MeasureAssignment)
+		{ after(grammarAccess.getMeasurementActionAccess().getMeasureAssignment()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 // Entry rule entryRuleLeftMovementAction
 entryRuleLeftMovementAction
 :
@@ -674,6 +699,22 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+// Rule MAEnum
+ruleMAEnum
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getMAEnumAccess().getMEASUREEnumLiteralDeclaration()); }
+		('measure')
+		{ after(grammarAccess.getMAEnumAccess().getMEASUREEnumLiteralDeclaration()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 // Rule LREnum
 ruleLREnum
 	@init {
@@ -819,6 +860,12 @@ rule__Actions__Alternatives
 		{ before(grammarAccess.getActionsAccess().getRotateMovementActionParserRuleCall_2()); }
 		ruleRotateMovementAction
 		{ after(grammarAccess.getActionsAccess().getRotateMovementActionParserRuleCall_2()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getActionsAccess().getMeasurementActionParserRuleCall_3()); }
+		ruleMeasurementAction
+		{ after(grammarAccess.getActionsAccess().getMeasurementActionParserRuleCall_3()); }
 	)
 ;
 finally {
@@ -3253,6 +3300,21 @@ rule__Behavior__ActionlistAssignment_5
 		{ before(grammarAccess.getBehaviorAccess().getActionlistActionsParserRuleCall_5_0()); }
 		ruleActions
 		{ after(grammarAccess.getBehaviorAccess().getActionlistActionsParserRuleCall_5_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MeasurementAction__MeasureAssignment
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getMeasurementActionAccess().getMeasureMAEnumEnumRuleCall_0()); }
+		ruleMAEnum
+		{ after(grammarAccess.getMeasurementActionAccess().getMeasureMAEnumEnumRuleCall_0()); }
 	)
 ;
 finally {

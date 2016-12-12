@@ -6,6 +6,9 @@
     copyrightFields="false" runtimeVersion="2.12">
   <genPackages prefix="DSL" basePackage="robot" disposableProviderFactory="true" fileExtensions="rdsl"
       ecorePackage="DSL.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="DSL.ecore#//MAEnum">
+      <genEnumLiterals ecoreEnumLiteral="DSL.ecore#//MAEnum/MEASURE"/>
+    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="DSL.ecore#//LREnum">
       <genEnumLiterals ecoreEnumLiteral="DSL.ecore#//LREnum/LEFT"/>
       <genEnumLiterals ecoreEnumLiteral="DSL.ecore#//LREnum/RIGHT"/>
@@ -67,6 +70,9 @@
     </genClasses>
     <genClasses ecoreClass="DSL.ecore#//Expression"/>
     <genClasses ecoreClass="DSL.ecore#//Actions"/>
+    <genClasses ecoreClass="DSL.ecore#//MeasurementAction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//MeasurementAction/measure"/>
+    </genClasses>
     <genClasses ecoreClass="DSL.ecore#//LeftMovementAction">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//LeftMovementAction/leftmove"/>
     </genClasses>

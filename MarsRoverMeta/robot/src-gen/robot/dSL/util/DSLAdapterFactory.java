@@ -121,6 +121,11 @@ public class DSLAdapterFactory extends AdapterFactoryImpl
         return createActionsAdapter();
       }
       @Override
+      public Adapter caseMeasurementAction(MeasurementAction object)
+      {
+        return createMeasurementActionAdapter();
+      }
+      @Override
       public Adapter caseLeftMovementAction(LeftMovementAction object)
       {
         return createLeftMovementActionAdapter();
@@ -348,6 +353,21 @@ public class DSLAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createActionsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link robot.dSL.MeasurementAction <em>Measurement Action</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see robot.dSL.MeasurementAction
+   * @generated
+   */
+  public Adapter createMeasurementActionAdapter()
   {
     return null;
   }

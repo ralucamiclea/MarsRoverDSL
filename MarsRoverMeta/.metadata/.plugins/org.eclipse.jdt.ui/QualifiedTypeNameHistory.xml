@@ -6,6 +6,7 @@
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="test.slave.GetMessage"/>
-<fullyQualifiedTypeName name="lejos.utility.Delay"/>
 <fullyQualifiedTypeName name="lejos.robotics.subsumption.Behavior"/>
+<fullyQualifiedTypeName name="lejos.utility.Delay"/>
+<fullyQualifiedTypeName name="lejos.hardware.lcd.LCD"/>
 </qualifiedTypeNameHistroy>

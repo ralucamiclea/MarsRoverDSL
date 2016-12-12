@@ -37,6 +37,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
   <eClassifiers xsi:type="ecore:EClass" name="Actions"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MeasurementAction" eSuperTypes="#//Actions">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="measure" eType="#//MAEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MAEnum">
+    <eLiterals name="MEASURE" literal="measure"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LeftMovementAction" eSuperTypes="#//Actions">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftmove" eType="#//MovementAction"
         containment="true"/>

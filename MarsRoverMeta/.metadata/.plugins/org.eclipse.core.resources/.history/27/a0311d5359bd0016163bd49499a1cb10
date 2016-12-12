@@ -1,0 +1,45 @@
+package test.master;
+import lejos.robotics.subsumption.Behavior;
+import lejos.utility.Delay;
+import lejos.hardware.lcd.LCD;
+
+
+public class AvoidEdge implements Behavior{
+			
+			ModelMaster m;
+			private boolean suppressed = false;
+			
+			public AvoidEdge(ModelMaster m){
+				this.m = m;
+			}
+			
+			@Override
+			public boolean takeControl() {
+				m.color.fetchSample(m.colorSamples, 0);
+				LCD.clear();
+				LCD.drawString("R: " + m.colorSamples[0], 1, 1);
+				LCD.drawString("G: " + m.colorSamples[1], 1, 2);
+		        LCD.drawString("B: " + m.colorSamples[2], 1, 3);
+		        LCD.clear();
+				return m.colorSamples[0] > 250 && m.colorSamples[1] > 250 && m.colorSamples[2] >250;
+			}
+			
+			@Override
+			public void action() {
+				suppressed = false;
+//				m.touchFrontLeft=false;
+//				m.touchFrontRight=false;
+//				m.g=false;
+				LCD.drawString("Found Edge! ", 0, 6);
+				m.lm.backward();
+				m.rm.backward();
+				Delay.msDelay(50);
+				m.rm.forward();
+				Delay.msDelay(75);
+				LCD.clear();
+			}
+			@Override
+			public void suppress() {
+				suppressed = true;
+			}
+		}

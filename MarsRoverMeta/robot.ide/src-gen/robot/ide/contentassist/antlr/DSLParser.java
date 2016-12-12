@@ -79,6 +79,7 @@ public class DSLParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBehaviorAccess().getNameAssignment_1(), "rule__Behavior__NameAssignment_1");
 					put(grammarAccess.getBehaviorAccess().getSensorExpressionAssignment_3(), "rule__Behavior__SensorExpressionAssignment_3");
 					put(grammarAccess.getBehaviorAccess().getActionlistAssignment_5(), "rule__Behavior__ActionlistAssignment_5");
+					put(grammarAccess.getMeasurementActionAccess().getMeasureAssignment(), "rule__MeasurementAction__MeasureAssignment");
 					put(grammarAccess.getLeftMovementActionAccess().getLeftmoveAssignment_1(), "rule__LeftMovementAction__LeftmoveAssignment_1");
 					put(grammarAccess.getRightMovementActionAccess().getRightmoveAssignment_1(), "rule__RightMovementAction__RightmoveAssignment_1");
 					put(grammarAccess.getRotateMovementActionAccess().getDegreesAssignment_4(), "rule__RotateMovementAction__DegreesAssignment_4");

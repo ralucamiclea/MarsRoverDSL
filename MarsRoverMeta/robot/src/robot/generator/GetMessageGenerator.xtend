@@ -6,9 +6,10 @@ class GetMessageGenerator {
 	def static toText(MarsRoverExpedition expedition) 
 	'''
 	package test.master;
-	import test.master.ModelMaster;
 	
 	import java.io.IOException;
+	import java.util.concurrent.TimeUnit;
+	
 	import lejos.hardware.lcd.LCD;
 	
 	
@@ -16,39 +17,44 @@ class GetMessageGenerator {
 		ModelMaster m;
 		private byte b;
 		
-		public GetMessageMaster(ModelMaster m, Goals g){
+		public GetMessageMaster(ModelMaster m){
 			this.m=m;
 		}
 	
 		public void run(){
-			boolean bll = false;
-			while(!m.end){
-				try{
-					bll = ((b=m.reader.readByte())!='\n');
-				}catch (IOException ex){
-		 			LCD.drawString("error:", 0, 3);
-		 			LCD.drawString(ex.getMessage(),0,4);
-		 		}
-				if(bll){
-					if(b=='l')
+			String s = "";
+			while(true){
+				try {
+					s = m.reader.readLine();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(s.length() > 0){
+					String[] a = s.split(" ");
+					m.drawReceived(s);
+					if(a[0]=="true")
 						m.touchFrontLeft=true;
-					if(b=='r')
+					else
+						m.touchFrontLeft=false;
+					if(a[1]=="true")
 						m.touchFrontRight=true;
-					if(b=='g')
-						m.g=true;
-					if(b=='d'){
-						try {
-							m.d = (int) m.reader.readFloat();
-						} catch (IOException ex) {
-							LCD.drawString("error:", 0, 3);
-				 			LCD.drawString(ex.getMessage(),0,4);
-						}
+					else
+						m.touchFrontRight=false;
+					m.d = Float.valueOf(a[2]);
+					m.g = Float.valueOf(a[3]);
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-						
 				}
 			}
+				
 		}
 			
 	}
+
 	'''
 	}

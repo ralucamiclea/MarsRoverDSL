@@ -18,12 +18,6 @@ public class MainGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("import java.util.List;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("import java.util.ArrayList;");
-    _builder.newLine();
-    _builder.append("\t");
     _builder.append("import lejos.robotics.subsumption.Arbitrator;");
     _builder.newLine();
     _builder.append("\t");
@@ -45,10 +39,10 @@ public class MainGenerator {
     _builder.append("ModelMaster m = new ModelMaster();");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("Goals g = new Goals();");
+    _builder.append("//Goals g = new Goals();");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("GetMessageMaster t = new GetMessageMaster(m,g);");
+    _builder.append("GetMessageMaster t = new GetMessageMaster(m);");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("t.start();");
@@ -91,21 +85,21 @@ public class MainGenerator {
         _builder.append(_name_3, "\t");
         _builder.append(" = {");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("DriveForward");
+        _builder.newLine();
         {
           List<BehaviorName> _behaviorNames = Auxiliary.getBehaviorNames(m);
           for(final BehaviorName b_1 : _behaviorNames) {
             _builder.append("\t");
             _builder.append("\t");
+            _builder.append(", ");
             String _name_4 = b_1.getName();
             _builder.append(_name_4, "\t\t");
-            _builder.append(", ");
             _builder.newLineIfNotEmpty();
           }
         }
-        _builder.append("\t");
-        _builder.append("\t");
-        _builder.append("DriveForward");
-        _builder.newLine();
         _builder.append("\t");
         _builder.append("};");
         _builder.newLine();
@@ -132,8 +126,6 @@ public class MainGenerator {
     _builder.append("}");
     _builder.newLine();
     _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
     _builder.newLine();
     return _builder;
   }

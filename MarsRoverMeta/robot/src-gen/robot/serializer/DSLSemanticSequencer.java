@@ -28,6 +28,7 @@ import robot.dSL.ExpressionBracket;
 import robot.dSL.LeftMovementAction;
 import robot.dSL.LeftRotatePoint;
 import robot.dSL.MarsRoverExpedition;
+import robot.dSL.MeasurementAction;
 import robot.dSL.MiddleRotatePoint;
 import robot.dSL.Mission;
 import robot.dSL.MovementAction;
@@ -98,6 +99,9 @@ public class DSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				else break;
 			case DSLPackage.MARS_ROVER_EXPEDITION:
 				sequence_MarsRoverExpedition(context, (MarsRoverExpedition) semanticObject); 
+				return; 
+			case DSLPackage.MEASUREMENT_ACTION:
+				sequence_MeasurementAction(context, (MeasurementAction) semanticObject); 
 				return; 
 			case DSLPackage.MIDDLE_ROTATE_POINT:
 				if (rule == grammarAccess.getRotatePointsRule()
@@ -438,6 +442,25 @@ public class DSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 */
 	protected void sequence_MarsRoverExpedition(ISerializationContext context, MarsRoverExpedition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Actions returns MeasurementAction
+	 *     MeasurementAction returns MeasurementAction
+	 *
+	 * Constraint:
+	 *     measure=MAEnum
+	 */
+	protected void sequence_MeasurementAction(ISerializationContext context, MeasurementAction semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DSLPackage.Literals.MEASUREMENT_ACTION__MEASURE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DSLPackage.Literals.MEASUREMENT_ACTION__MEASURE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getMeasurementActionAccess().getMeasureMAEnumEnumRuleCall_0(), semanticObject.getMeasure());
+		feeder.finish();
 	}
 	
 	

@@ -1,0 +1,1 @@
+INDEX VERSION 1.129+C:\Users\raluca.miclea\Documents\MarsRover\runtime-EclipseApplication\.metadata\.plugins\org.eclipse.jdt.core

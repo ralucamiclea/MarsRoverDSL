@@ -105,6 +105,15 @@ public interface DSLFactory extends EFactory
   Actions createActions();
 
   /**
+   * Returns a new object of class '<em>Measurement Action</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Measurement Action</em>'.
+   * @generated
+   */
+  MeasurementAction createMeasurementAction();
+
+  /**
    * Returns a new object of class '<em>Left Movement Action</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
