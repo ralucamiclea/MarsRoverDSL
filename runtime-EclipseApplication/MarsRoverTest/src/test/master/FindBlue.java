@@ -1,40 +1,57 @@
 package test.master;
 import lejos.robotics.subsumption.Behavior;
 import lejos.utility.Delay;
-import lejos.hardware.lcd.LCD;
-import lejos.robotics.Color;
 
 public class FindBlue implements Behavior{
 			
-			Goals goals;
-			ModelMaster m;
-			private boolean suppressed = false;
-			
-			public FindBlue(ModelMaster m, Goals goals){
-				this.m = m;
-				this.goals = goals;
-			}
-			
-			@Override
-			public boolean takeControl() {
-				m.color.fetchSample(m.colorSamples, 0);
-				return m.colorSamples[0] < 10 && m.colorSamples[1] < 10 && m.colorSamples[2] > 200;
-			}
-			
-			@Override
-			public void action() {
-				goals.FindBlue++;
-				suppressed = false;
-				float g = m.g;
-				m.lm.stop();
-				m.rm.stop();
-				
-				Delay.msDelay(120);
-				m.rm.forward();
-				Delay.msDelay(120);
-			}
-			@Override
-			public void suppress() {
-				suppressed = true;
-			}
+	Goals goals;
+	ModelMaster m;
+	private boolean suppressed = false;
+	
+	public FindBlue(ModelMaster m, Goals goals){
+		this.m = m;
+		this.goals = goals;
+	}
+	
+	@Override
+	public boolean takeControl() {
+		m.color.fetchSample(m.colorSamples, 0);
+		return m.closestColor()==1;
+	}
+	
+	@Override
+	public void action() {
+		goals.FindBlue++;
+		suppressed = false;
+		float g;
+		m.lm.backward();
+		m.rm.backward();
+		g=500;
+		while(g>0 && !suppressed){
+		    g--;
+		    Thread.yield();
 		}
+		m.lm.backward();
+		m.rm.backward();
+		g=500;
+		while(g>0 && !suppressed){
+		    g--;
+		    Thread.yield();
+		}
+		g = m.g;
+		m.lm.backward();
+		m.rm.forward();
+		m.lm.setSpeed(200);
+		m.rm.setSpeed(200);
+		while(m.g < (g+255) && !suppressed){
+			Thread.yield();
+		}
+		m.lm.setSpeed(300);
+		m.rm.setSpeed(300);
+	}
+	
+	@Override
+	public void suppress() {
+		suppressed = true;
+	}
+}

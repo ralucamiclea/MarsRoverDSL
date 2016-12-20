@@ -1,0 +1,47 @@
+package test.master;
+
+import lejos.robotics.subsumption.Behavior;
+import lejos.robotics.subsumption.Arbitrator;
+
+public class DriveForwardFollowLine  implements Behavior {
+   private boolean suppressed = false;
+   ModelMaster m;
+   Goals goals;
+   Arbitrator arbyFollowLine;
+   int FollowLineCount = 0;
+   
+   public DriveForwardFollowLine(ModelMaster m, Goals goals){
+	   this.m=m;
+	   this.goals=goals;
+   }
+   
+   public boolean takeControl() {
+      return true;
+   }
+
+   public void suppress() {
+      suppressed = true;
+   }
+   
+   public void setArby(Arbitrator a){
+   	  arbyFollowLine = a;
+   }
+
+   public void action() {
+     suppressed = false;
+     m.lm.forward();
+     m.rm.forward();
+     while( !suppressed )
+     	//wait 1 times for AvoidCollision
+     	if(goals.AvoidCollision >= 1)
+     		FollowLineCount++;
+     	//wait 2 times for FindBlue
+     	if(goals.FindBlue >= 2)
+     		FollowLineCount++;
+     	if(2 >= FollowLineCount)
+     		arbyFollowLine.stop();
+     	FollowLineCount = 0;
+        Thread.yield();
+   }
+}
+

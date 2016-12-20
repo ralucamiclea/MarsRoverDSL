@@ -1,0 +1,44 @@
+package test.master;
+
+import lejos.robotics.subsumption.Behavior;
+import lejos.robotics.subsumption.Arbitrator;
+
+public class DriveForwardAvoidStuff  implements Behavior {
+   private boolean suppressed = false;
+   ModelMaster m;
+   Goals goals;
+   Arbitrator arbyAvoidStuff;
+   int AvoidStuffCount = 0;
+   
+   public DriveForwardAvoidStuff(ModelMaster m, Goals goals){
+	   this.m=m;
+	   this.goals=goals;
+   }
+   
+   public boolean takeControl() {
+      return true;
+   }
+
+   public void suppress() {
+      suppressed = true;
+   }
+   
+   public void setArby(Arbitrator a){
+   	  arbyAvoidStuff = a;
+   }
+
+   public void action() {
+     suppressed = false;
+     m.lm.forward();
+     m.rm.forward();
+     while( !suppressed )
+     	//wait 1 times for AvoidCollision
+     	if(goals.AvoidCollision >= 1)
+     		AvoidStuffCount++;
+     	if(1 >= AvoidStuffCount)
+     		arbyAvoidStuff.stop();
+     	AvoidStuffCount = 0;
+        Thread.yield();
+   }
+}
+

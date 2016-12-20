@@ -5,20 +5,31 @@ import robot.dSL.MarsRoverExpedition
 class GetMessageGenerator {
 	def static toText(MarsRoverExpedition expedition) 
 	'''
+	«var missions = Auxiliary.getMissions(expedition)»
 	package test.master;
 	
 	import java.io.IOException;
 	import java.util.concurrent.TimeUnit;
-	
+	import lejos.robotics.subsumption.Arbitrator;
 	import lejos.hardware.lcd.LCD;
 	
 	
 	public class GetMessageMaster extends Thread {
 		ModelMaster m;
 		private byte b;
-		
-		public GetMessageMaster(ModelMaster m){
+		Arbitrator arby = null;
+		Goals goals;
+		int mission_nr=0;
+		«FOR m : missions»
+		int «m.name»Count=0;
+		«ENDFOR»
+		public GetMessageMaster(ModelMaster m, Goals goals){
 			this.m=m;
+			this.goals=goals;
+		}
+	
+	public void setArby(Arbitrator arby){
+			this.arby=arby;
 		}
 	
 		public void run(){
@@ -32,24 +43,28 @@ class GetMessageGenerator {
 				}
 				if(s.length() > 0){
 					String[] a = s.split(" ");
-					m.drawReceived(s);
-					if(a[0]=="true")
+					if(Boolean.valueOf(a[0]))
 						m.touchFrontLeft=true;
 					else
 						m.touchFrontLeft=false;
-					if(a[1]=="true")
+					if(Boolean.valueOf(a[1]))
 						m.touchFrontRight=true;
 					else
 						m.touchFrontRight=false;
 					m.d = Float.valueOf(a[2]);
 					m.g = Float.valueOf(a[3]);
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 				}
+				if(arby!=null){
+					switch(mission_nr){
+						//«var i = 0»
+						«FOR m : missions»
+						case «i»:
+							{«Auxiliary.getMissionCondition(m)»}
+						//«i++»
+						«ENDFOR»
+					}
+				}	
+				
 			}
 				
 		}

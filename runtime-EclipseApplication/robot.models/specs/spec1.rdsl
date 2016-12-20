@@ -1,35 +1,165 @@
 ExpeditionSTART  
-
-	Mission AvoidStuff
-		Task AvoidCollision
-		Task AvoidEdge
+	/* 
+	//measure lakes
+     Mission Mission1
+     	Task AvoidCollision
+     	Task AvoidEdgeComplicated
+		Task FindBlue
+		Task FindGreen
+		Task FindRed
+		Task MeasureLake
+		Task AvoidWhite
 	ENDMission 
     	If Task AvoidCollision executed 1 times
-	
-	Mission FollowLine
-		Task FindBlue
-		Task AvoidCollision
-		Task AvoidEdge
-	ENDMission
-		If Task AvoidCollision executed 1 times
-		If Task FindBlue executed 2 times
-	
+*/
+/* 
+    //follow line
+    Mission Mission1
+        Task OffLine
+        Task OnLine    
+        Task AboveAbyss
+    ENDMission 
+        If Task AboveAbyss executed 20 times
+   
+    //measure light objects, ignore 2 large objects
+    Mission Mission1
+        Task MeasureLightObjects
+        Task AvoidCollision
+        Task AvoidEdge
+    ENDMission 
+        If Task AvoidCollision executed 2 times
+    */
+    //measure 2 heavy objects, push light objects
+    Mission Mission1
+        Task MeasureHeavyObjects
+        Task AvoidEdge
+    ENDMission 
+        If Task MeasureHeavyObjects executed 2 times
+       /* 
+    //avoid heavy objects, push light objects
+    Mission Mission1
+        Task AvoidCollision
+        Task AvoidEdge
+    ENDMission 
+        If Task AvoidCollision executed 2 times
+        
+    //avoid all objects
+     Mission Mission1
+        Task AvoidObject
+        Task AvoidEdge
+    ENDMission 
+        If Task AvoidObject executed 2 times
+        */
 ExpeditionSTOP
+
+Task OnLine
+    IF edge at frontLeft
+    THEN
+    rotate around right wheel forward for 10 degrees
+ENDtask
+
+Task OffLine
+    IF true
+    THEN 
+    rotate around left wheel forward for 10 degrees
+ENDtask
+
+Task AboveAbyss
+    IF edge at frontRight
+    THEN
+    rotate around middle to the left for 20 degrees
+    move backward a bit
+    rotate around middle to the right for 90 degrees
+ENDtask
+
+Task MeasureLightObjects
+    IF object at 5 cm
+    THEN
+    measure
+ENDtask
+
+Task AvoidWhite
+	IF colorFront sees color WHITE
+	THEN
+	move backward a bit
+    rotate around middle to the left for 90 degrees
+ENDtask
+
+Task AvoidObject 
+    IF object at 5 cm
+    THEN
+    move backward a bit
+    rotate around middle to the left for 90 degrees
+ENDtask
+
+Task MeasureHeavyObjects
+    IF touchFrontLeft hits OR touchFrontRight hits
+    THEN
+    measure
+    move backward a bit
+    rotate around middle to the left for 90 degrees
+ENDtask
 
 Task AvoidEdge
 	IF edge at frontLeft OR edge at frontRight
-	THEN leftMotor backward rightMotor backward 
+	THEN 
+	move backward a bit 
+	rotate around middle to the left for 90 degrees
+ENDtask
+
+Task AvoidEdgeComplicated
+	IF edge at frontLeft OR edge at frontRight
+	THEN  
+	rotate around middle to the left for 45 degrees
+	rotate around middle to the right for 90 degrees
+	rotate around middle to the left for 45 degrees
+	move forward a bit
+	rotate around middle to the left for 45 degrees
+	rotate around middle to the right for 90 degrees
+	rotate around middle to the left for 45 degrees
+	move backward a bit
+	move backward a bit
+	rotate around middle to the left for 90 degrees
 ENDtask
 
 Task AvoidCollision
 	IF touchFrontLeft hits OR touchFrontRight hits 
 	THEN 
-		rotate around left wheel backward for 180 degrees 
-		rotate around right wheel backward for 360 degrees
+		move backward a bit 
+		move backward a bit 
+		rotate around left wheel backward for 90 degrees 
 ENDtask 
+
+Task FindRed
+	 IF colorFront sees color RED 
+	 THEN 
+	 move backward a bit
+	 move backward a bit
+	 rotate around middle to the left for 250 degrees 
+ENDtask
 
 Task FindBlue
 	 IF colorFront sees color BLUE 
-	 THEN leftMotor stop rightMotor stop
+	 THEN 
+	 move backward a bit
+	 move backward a bit
+	 rotate around middle to the left for 250 degrees 
 ENDtask
+
+Task FindGreen
+	 IF colorFront sees color GREEN 
+	 THEN 
+	 move backward a bit
+	 move backward a bit
+	 rotate around middle to the left for 250 degrees 
+ENDtask
+
+Task MeasureLake
+	IF lake at back  
+	THEN
+	rotate around middle to the left for 150 degrees 
+	measure
+	rotate around middle to the left for 90 degrees
+ENDtask
+
 

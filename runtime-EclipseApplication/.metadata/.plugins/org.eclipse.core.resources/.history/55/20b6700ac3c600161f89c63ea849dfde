@@ -1,0 +1,35 @@
+ExpeditionSTART  
+
+	Mission AvoidStuff
+		Task AvoidCollision
+		Task AvoidEdge
+	ENDMission 
+    	If Task AvoidCollision executed 1 times
+	
+	Mission FollowLine
+		Task FindBlue
+		Task AvoidCollision
+		Task AvoidEdge
+	ENDMission
+		If Task AvoidCollision executed 1 times
+		If Task FindBlue executed 2 times
+	
+ExpeditionSTOP
+
+Task AvoidEdge
+	IF edge at frontLeft OR edge at frontRight
+	THEN leftMotor backward rightMotor backward 
+ENDtask
+
+Task AvoidCollision
+	IF touchFrontLeft hits OR touchFrontRight hits 
+	THEN 
+		rotate around left wheel backward for 180 degrees 
+		rotate around right wheel backward for 360 degrees
+ENDtask 
+
+Task FindBlue
+	 IF colorFront sees color BLUE 
+	 THEN leftMotor stop rightMotor stop measure
+ENDtask
+

@@ -19,6 +19,7 @@ import robot.dSL.Behavior;
 import robot.dSL.BehaviorName;
 import robot.dSL.ColorLiteral;
 import robot.dSL.DSLPackage;
+import robot.dSL.DepthLiteral;
 import robot.dSL.DistanceLiteral;
 import robot.dSL.EdgeLiteral;
 import robot.dSL.EndAfter;
@@ -31,11 +32,13 @@ import robot.dSL.MarsRoverExpedition;
 import robot.dSL.MeasurementAction;
 import robot.dSL.MiddleRotatePoint;
 import robot.dSL.Mission;
+import robot.dSL.MoveAction;
 import robot.dSL.MovementAction;
 import robot.dSL.ORexpression;
 import robot.dSL.RightMovementAction;
 import robot.dSL.RightRotatePoint;
 import robot.dSL.TouchLiteral;
+import robot.dSL.TrueLiteral;
 import robot.services.DSLGrammarAccess;
 
 @SuppressWarnings("all")
@@ -63,6 +66,9 @@ public class DSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case DSLPackage.COLOR_LITERAL:
 				sequence_ColorLiteral(context, (ColorLiteral) semanticObject); 
+				return; 
+			case DSLPackage.DEPTH_LITERAL:
+				sequence_DepthLiteral(context, (DepthLiteral) semanticObject); 
 				return; 
 			case DSLPackage.DISTANCE_LITERAL:
 				sequence_DistanceLiteral(context, (DistanceLiteral) semanticObject); 
@@ -118,6 +124,9 @@ public class DSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case DSLPackage.MISSION:
 				sequence_Mission(context, (Mission) semanticObject); 
 				return; 
+			case DSLPackage.MOVE_ACTION:
+				sequence_MoveAction(context, (MoveAction) semanticObject); 
+				return; 
 			case DSLPackage.MOVEMENT_ACTION:
 				sequence_MovementAction(context, (MovementAction) semanticObject); 
 				return; 
@@ -141,6 +150,9 @@ public class DSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				else break;
 			case DSLPackage.TOUCH_LITERAL:
 				sequence_TouchLiteral(context, (TouchLiteral) semanticObject); 
+				return; 
+			case DSLPackage.TRUE_LITERAL:
+				sequence_TrueLiteral(context, (TrueLiteral) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -197,6 +209,30 @@ public class DSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getColorLiteralAccess().getColorColorEnumEnumRuleCall_3_0(), semanticObject.getColor());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Expression returns DepthLiteral
+	 *     Expression1 returns DepthLiteral
+	 *     Expression1.ANDexpression_1_0 returns DepthLiteral
+	 *     Expression2 returns DepthLiteral
+	 *     Expression2.ORexpression_1_0 returns DepthLiteral
+	 *     Expression3 returns DepthLiteral
+	 *     DepthLiteral returns DepthLiteral
+	 *
+	 * Constraint:
+	 *     back=BackEnum
+	 */
+	protected void sequence_DepthLiteral(ISerializationContext context, DepthLiteral semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DSLPackage.Literals.DEPTH_LITERAL__BACK) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DSLPackage.Literals.DEPTH_LITERAL__BACK));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getDepthLiteralAccess().getBackBackEnumEnumRuleCall_2_0(), semanticObject.getBack());
 		feeder.finish();
 	}
 	
@@ -519,6 +555,25 @@ public class DSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     Actions returns MoveAction
+	 *     MoveAction returns MoveAction
+	 *
+	 * Constraint:
+	 *     dir=FBEnum
+	 */
+	protected void sequence_MoveAction(ISerializationContext context, MoveAction semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DSLPackage.Literals.MOVE_ACTION__DIR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DSLPackage.Literals.MOVE_ACTION__DIR));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getMoveActionAccess().getDirFBEnumEnumRuleCall_1_0(), semanticObject.getDir());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     MovementAction returns MovementAction
 	 *
 	 * Constraint:
@@ -615,6 +670,30 @@ public class DSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getTouchLiteralAccess().getTouchTouchEnumEnumRuleCall_0_0(), semanticObject.getTouch());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Expression returns TrueLiteral
+	 *     Expression1 returns TrueLiteral
+	 *     Expression1.ANDexpression_1_0 returns TrueLiteral
+	 *     Expression2 returns TrueLiteral
+	 *     Expression2.ORexpression_1_0 returns TrueLiteral
+	 *     Expression3 returns TrueLiteral
+	 *     TrueLiteral returns TrueLiteral
+	 *
+	 * Constraint:
+	 *     t=Tenum
+	 */
+	protected void sequence_TrueLiteral(ISerializationContext context, TrueLiteral semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DSLPackage.Literals.TRUE_LITERAL__T) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DSLPackage.Literals.TRUE_LITERAL__T));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getTrueLiteralAccess().getTTenumEnumRuleCall_0(), semanticObject.getT());
 		feeder.finish();
 	}
 	

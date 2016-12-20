@@ -121,6 +121,11 @@ public class DSLAdapterFactory extends AdapterFactoryImpl
         return createActionsAdapter();
       }
       @Override
+      public Adapter caseMoveAction(MoveAction object)
+      {
+        return createMoveActionAdapter();
+      }
+      @Override
       public Adapter caseMeasurementAction(MeasurementAction object)
       {
         return createMeasurementActionAdapter();
@@ -166,9 +171,19 @@ public class DSLAdapterFactory extends AdapterFactoryImpl
         return createMovementActionAdapter();
       }
       @Override
+      public Adapter caseTrueLiteral(TrueLiteral object)
+      {
+        return createTrueLiteralAdapter();
+      }
+      @Override
       public Adapter caseExpressionBracket(ExpressionBracket object)
       {
         return createExpressionBracketAdapter();
+      }
+      @Override
+      public Adapter caseDepthLiteral(DepthLiteral object)
+      {
+        return createDepthLiteralAdapter();
       }
       @Override
       public Adapter caseTouchLiteral(TouchLiteral object)
@@ -358,6 +373,21 @@ public class DSLAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link robot.dSL.MoveAction <em>Move Action</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see robot.dSL.MoveAction
+   * @generated
+   */
+  public Adapter createMoveActionAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link robot.dSL.MeasurementAction <em>Measurement Action</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -493,6 +523,21 @@ public class DSLAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link robot.dSL.TrueLiteral <em>True Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see robot.dSL.TrueLiteral
+   * @generated
+   */
+  public Adapter createTrueLiteralAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link robot.dSL.ExpressionBracket <em>Expression Bracket</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -503,6 +548,21 @@ public class DSLAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createExpressionBracketAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link robot.dSL.DepthLiteral <em>Depth Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see robot.dSL.DepthLiteral
+   * @generated
+   */
+  public Adapter createDepthLiteralAdapter()
   {
     return null;
   }

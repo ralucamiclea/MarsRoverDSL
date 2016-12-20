@@ -14,6 +14,7 @@ import robot.dSL.Behavior;
 import robot.dSL.BehaviorName;
 import robot.dSL.ColorEnum;
 import robot.dSL.ColorLiteral;
+import robot.dSL.DepthLiteral;
 import robot.dSL.DistanceLiteral;
 import robot.dSL.EdgeEnum;
 import robot.dSL.EdgeLiteral;
@@ -30,12 +31,14 @@ import robot.dSL.MarsRoverExpedition;
 import robot.dSL.MeasurementAction;
 import robot.dSL.MiddleRotatePoint;
 import robot.dSL.Mission;
+import robot.dSL.MoveAction;
 import robot.dSL.MovementAction;
 import robot.dSL.ORexpression;
 import robot.dSL.RightMovementAction;
 import robot.dSL.RightRotatePoint;
 import robot.dSL.TouchEnum;
 import robot.dSL.TouchLiteral;
+import robot.dSL.TrueLiteral;
 
 @SuppressWarnings("all")
 public class Auxiliary {
@@ -68,14 +71,14 @@ public class Auxiliary {
         _builder.append("if(goals.");
         String _name_1 = e.getName();
         _builder.append(_name_1, "");
-        _builder.append(" == ");
+        _builder.append(" >= ");
         int _times_1 = e.getTimes();
         _builder.append(_times_1, "");
         _builder.append(")");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t");
+        _builder.append("    ");
         String _name_2 = mission.getName();
-        _builder.append(_name_2, "\t");
+        _builder.append(_name_2, "    ");
         _builder.append("Count++;");
         _builder.newLineIfNotEmpty();
       }
@@ -85,16 +88,22 @@ public class Auxiliary {
     List<EndWhen> _missionExecutionList_1 = Auxiliary.getMissionExecutionList(_endcondition_1);
     int _size = _missionExecutionList_1.size();
     _builder.append(_size, "");
-    _builder.append(" == ");
+    _builder.append(" <= ");
     String _name_3 = mission.getName();
     _builder.append(_name_3, "");
-    _builder.append("Count)");
+    _builder.append("Count){");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("arby");
+    _builder.append("    ");
+    _builder.append("arby.stop();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("mission_nr++;");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
     String _name_4 = mission.getName();
-    _builder.append(_name_4, "\t");
-    _builder.append(".stop();");
+    _builder.append(_name_4, "");
+    _builder.append("Count=0;");
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
@@ -171,6 +180,11 @@ public class Auxiliary {
     return sensors;
   }
   
+  protected static HashSet<String> _getSensors(final TrueLiteral b) {
+    HashSet<String> sensors = new HashSet<String>();
+    return sensors;
+  }
+  
   protected static HashSet<String> _getSensors(final ColorLiteral b) {
     HashSet<String> sensors = new HashSet<String>();
     StringConcatenation _builder = new StringConcatenation();
@@ -181,6 +195,14 @@ public class Auxiliary {
   
   protected static HashSet<String> _getSensors(final DistanceLiteral b) {
     HashSet<String> sensors = new HashSet<String>();
+    return sensors;
+  }
+  
+  protected static HashSet<String> _getSensors(final DepthLiteral b) {
+    HashSet<String> sensors = new HashSet<String>();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("distance");
+    sensors.add(_builder.toString());
     return sensors;
   }
   
@@ -250,41 +272,47 @@ public class Auxiliary {
     return _builder;
   }
   
+  protected static CharSequence _getControlReturnString(final TrueLiteral a) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("true");
+    return _builder;
+  }
+  
   protected static CharSequence _getControlReturnString(final ColorLiteral a) {
     ColorEnum _color = a.getColor();
     if (_color != null) {
       switch (_color) {
-        case BLUE:
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("m.colorSamples[0] < 10 && m.colorSamples[1] < 10 && m.colorSamples[2] > 200");
-          return _builder;
         case RED:
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("m.closestColor()==0");
+          return _builder;
+        case BLUE:
           StringConcatenation _builder_1 = new StringConcatenation();
-          _builder_1.append("m.colorSamples[0] > 200 && m.colorSamples[1] < 10 && m.colorSamples[2] < 10");
+          _builder_1.append("m.closestColor()==1");
           return _builder_1;
         case GREEN:
           StringConcatenation _builder_2 = new StringConcatenation();
-          _builder_2.append("m.colorSamples[0] < 10 && m.colorSamples[1] > 200 && m.colorSamples[2] < 10");
+          _builder_2.append("m.closestColor()==2");
           return _builder_2;
         case WHITE:
           StringConcatenation _builder_3 = new StringConcatenation();
-          _builder_3.append("m.colorSamples[0] > 200 && m.colorSamples[1] > 200 && m.colorSamples[2] >200");
+          _builder_3.append("m.closestColor()==3");
           return _builder_3;
         case BLACK:
           StringConcatenation _builder_4 = new StringConcatenation();
-          _builder_4.append("m.colorSamples[0] < 10 && m.colorSamples[1] < 10 && m.colorSamples[2] < 10");
+          _builder_4.append("m.closestColor()==4");
           return _builder_4;
         case BROWN:
           StringConcatenation _builder_5 = new StringConcatenation();
-          _builder_5.append("m.colorSamples[0] < 170 && m.colorSamples[0] > 140 && m.colorSamples[1] > 60 && m.colorSamples[1] < 90 && m.colorSamples[2] > 10 m.colorSamples[2] < 25");
+          _builder_5.append("false");
           return _builder_5;
         case YELLOW:
           StringConcatenation _builder_6 = new StringConcatenation();
-          _builder_6.append("m.colorSamples[0] > 200 && m.colorSamples[1] > 200 && m.colorSamples[2] < 10");
+          _builder_6.append("false");
           return _builder_6;
         case NONE:
           StringConcatenation _builder_7 = new StringConcatenation();
-          _builder_7.append("m.colorSamples[0] = 15 && m.colorSamples[1] = 15 && m.colorSamples[2] = 96");
+          _builder_7.append("false");
           return _builder_7;
         default:
           break;
@@ -307,14 +335,14 @@ public class Auxiliary {
     boolean _equals = Objects.equal(_edge, EdgeEnum.FRONTLEFT);
     if (_equals) {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("m.llSamples[0] > 0.55");
+      _builder.append("m.llSamples[0] > m.borderleft");
       return _builder;
     } else {
       EdgeEnum _edge_1 = a.getEdge();
       boolean _equals_1 = Objects.equal(_edge_1, EdgeEnum.FRONTRIGHT);
       if (_equals_1) {
         StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("m.lrSamples[0] > 0.55");
+        _builder_1.append("m.lrSamples[0] > m.borderright");
         return _builder_1;
       } else {
         StringConcatenation _builder_2 = new StringConcatenation();
@@ -322,6 +350,12 @@ public class Auxiliary {
         return _builder_2;
       }
     }
+  }
+  
+  protected static CharSequence _getControlReturnString(final DepthLiteral a) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("m.distanceSamples[0] > m.lakedepth && m.distanceSamples[0] < m.lakedepth*2");
+    return _builder;
   }
   
   public static String movementAction2Text(final MovementAction m) {
@@ -346,18 +380,63 @@ public class Auxiliary {
   
   protected static String _action2Text(final MeasurementAction a) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("m.ma.rotate(90,false);");
+    _builder.append("m.lm.stop();");
+    _builder.newLine();
+    _builder.append("m.rm.stop();");
     _builder.newLine();
     _builder.append("m.ma.rotate(-90,false);");
+    _builder.newLine();
+    _builder.append("m.ma.rotate(90,false);");
+    _builder.newLine();
+    return _builder.toString();
+  }
+  
+  protected static String _action2Text(final MoveAction a) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("m.lm.");
+    String _xifexpression = null;
+    FBEnum _dir = a.getDir();
+    boolean _equals = Objects.equal(_dir, LREnum.RIGHT);
+    if (_equals) {
+      _xifexpression = "forward";
+    } else {
+      _xifexpression = "backward";
+    }
+    _builder.append(_xifexpression, "");
+    _builder.append("();");
+    _builder.newLineIfNotEmpty();
+    _builder.append("m.rm.");
+    String _xifexpression_1 = null;
+    FBEnum _dir_1 = a.getDir();
+    boolean _equals_1 = Objects.equal(_dir_1, LREnum.RIGHT);
+    if (_equals_1) {
+      _xifexpression_1 = "forward";
+    } else {
+      _xifexpression_1 = "backward";
+    }
+    _builder.append(_xifexpression_1, "");
+    _builder.append("();");
+    _builder.newLineIfNotEmpty();
+    _builder.append("g=500;");
+    _builder.newLine();
+    _builder.append("while(g>0 && !suppressed){");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("g--;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("Thread.yield();");
+    _builder.newLine();
+    _builder.append("}");
     _builder.newLine();
     return _builder.toString();
   }
   
   protected static String _action2Text(final LeftRotatePoint a) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("g = m.g;");
+    _builder.append("m.lm.stop();");
     _builder.newLine();
-    _builder.append("m.lm.");
+    _builder.append("m.rm.");
     String _xifexpression = null;
     FBEnum _leftdir = a.getLeftdir();
     boolean _equals = Objects.equal(_leftdir, FBEnum.FORWARD);
@@ -369,35 +448,41 @@ public class Auxiliary {
     _builder.append(_xifexpression, "");
     _builder.append("();");
     _builder.newLineIfNotEmpty();
-    _builder.append("while(m.g%360 ");
+    _builder.append("g = m.g;");
+    _builder.newLine();
+    _builder.append("m.lm.setSpeed(200);");
+    _builder.newLine();
+    _builder.append("while(m.g ");
     String _xifexpression_1 = null;
-    int _degrees = a.getDegrees();
-    boolean _greaterThan = (_degrees > 0);
-    if (_greaterThan) {
-      int _degrees_1 = a.getDegrees();
-      int _minus = (_degrees_1 - 5);
-      _xifexpression_1 = ("> (g+" + Integer.valueOf(_minus));
-    } else {
-      int _degrees_2 = a.getDegrees();
-      int _plus = (_degrees_2 + 5);
+    FBEnum _leftdir_1 = a.getLeftdir();
+    boolean _equals_1 = Objects.equal(_leftdir_1, FBEnum.FORWARD);
+    if (_equals_1) {
+      int _degrees = a.getDegrees();
+      int _plus = (_degrees + 5);
       _xifexpression_1 = ("< (g+" + Integer.valueOf(_plus));
+    } else {
+      int _degrees_1 = a.getDegrees();
+      int _plus_1 = (_degrees_1 + 5);
+      _xifexpression_1 = ("> (g-" + Integer.valueOf(_plus_1));
     }
     _builder.append(_xifexpression_1, "");
-    _builder.append("%360) && !suppressed){");
+    _builder.append(") && !suppressed){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("Thread.yield();");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
+    _builder.append("m.lm.setSpeed(300);");
+    _builder.newLine();
     return _builder.toString();
   }
   
   protected static String _action2Text(final RightRotatePoint a) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("g = m.g;");
+    _builder.append("m.rm.stop();");
     _builder.newLine();
-    _builder.append("m.rm.");
+    _builder.append("m.lm.");
     String _xifexpression = null;
     FBEnum _rightdir = a.getRightdir();
     boolean _equals = Objects.equal(_rightdir, FBEnum.FORWARD);
@@ -409,26 +494,32 @@ public class Auxiliary {
     _builder.append(_xifexpression, "");
     _builder.append("();");
     _builder.newLineIfNotEmpty();
-    _builder.append("while(m.g%360 ");
+    _builder.append("g = m.g;");
+    _builder.newLine();
+    _builder.append("m.rm.setSpeed(200);");
+    _builder.newLine();
+    _builder.append("while(m.g ");
     String _xifexpression_1 = null;
-    int _degrees = a.getDegrees();
-    boolean _greaterThan = (_degrees > 0);
-    if (_greaterThan) {
-      int _degrees_1 = a.getDegrees();
-      int _minus = (_degrees_1 - 5);
-      _xifexpression_1 = ("> (g+" + Integer.valueOf(_minus));
+    FBEnum _rightdir_1 = a.getRightdir();
+    boolean _equals_1 = Objects.equal(_rightdir_1, FBEnum.FORWARD);
+    if (_equals_1) {
+      int _degrees = a.getDegrees();
+      int _plus = (_degrees + 5);
+      _xifexpression_1 = ("> (g-" + Integer.valueOf(_plus));
     } else {
-      int _degrees_2 = a.getDegrees();
-      int _plus = (_degrees_2 + 5);
-      _xifexpression_1 = ("< (g+" + Integer.valueOf(_plus));
+      int _degrees_1 = a.getDegrees();
+      int _plus_1 = (_degrees_1 + 5);
+      _xifexpression_1 = ("< (g+" + Integer.valueOf(_plus_1));
     }
     _builder.append(_xifexpression_1, "");
-    _builder.append("%360) && !suppressed){");
+    _builder.append(") && !suppressed){");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("Thread.yield();");
     _builder.newLine();
     _builder.append("}");
+    _builder.newLine();
+    _builder.append("m.rm.setSpeed(300);");
     _builder.newLine();
     return _builder.toString();
   }
@@ -437,7 +528,6 @@ public class Auxiliary {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("g = m.g;");
     _builder.newLine();
-    _builder.append("\t\t");
     _builder.append("m.lm.");
     String _xifexpression = null;
     LREnum _middledir = a.getMiddledir();
@@ -447,10 +537,9 @@ public class Auxiliary {
     } else {
       _xifexpression = "backward";
     }
-    _builder.append(_xifexpression, "\t\t");
+    _builder.append(_xifexpression, "");
     _builder.append("();");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
     _builder.append("m.rm.");
     String _xifexpression_1 = null;
     LREnum _middledir_1 = a.getMiddledir();
@@ -460,31 +549,37 @@ public class Auxiliary {
     } else {
       _xifexpression_1 = "backward";
     }
-    _builder.append(_xifexpression_1, "\t\t");
+    _builder.append(_xifexpression_1, "");
     _builder.append("();");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("while(m.g%360 ");
+    _builder.append("m.lm.setSpeed(200);");
+    _builder.newLine();
+    _builder.append("m.rm.setSpeed(200);");
+    _builder.newLine();
+    _builder.append("while(m.g ");
     String _xifexpression_2 = null;
-    int _degrees = a.getDegrees();
-    boolean _greaterThan = (_degrees > 0);
-    if (_greaterThan) {
-      int _degrees_1 = a.getDegrees();
-      int _minus = (_degrees_1 - 5);
-      _xifexpression_2 = ("> (g+" + Integer.valueOf(_minus));
-    } else {
-      int _degrees_2 = a.getDegrees();
-      int _plus = (_degrees_2 + 5);
+    LREnum _middledir_2 = a.getMiddledir();
+    boolean _equals_2 = Objects.equal(_middledir_2, LREnum.LEFT);
+    if (_equals_2) {
+      int _degrees = a.getDegrees();
+      int _plus = (_degrees + 5);
       _xifexpression_2 = ("< (g+" + Integer.valueOf(_plus));
+    } else {
+      int _degrees_1 = a.getDegrees();
+      int _plus_1 = (_degrees_1 + 5);
+      _xifexpression_2 = ("> (g-" + Integer.valueOf(_plus_1));
     }
-    _builder.append(_xifexpression_2, "\t\t");
-    _builder.append("%360) && !suppressed){");
+    _builder.append(_xifexpression_2, "");
+    _builder.append(") && !suppressed){");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t\t\t");
+    _builder.append("\t");
     _builder.append("Thread.yield();");
     _builder.newLine();
-    _builder.append("\t\t");
     _builder.append("}");
+    _builder.newLine();
+    _builder.append("m.lm.setSpeed(300);");
+    _builder.newLine();
+    _builder.append("m.rm.setSpeed(300);");
     _builder.newLine();
     return _builder.toString();
   }
@@ -494,6 +589,8 @@ public class Auxiliary {
       return _getSensors((ANDexpression)b);
     } else if (b instanceof ColorLiteral) {
       return _getSensors((ColorLiteral)b);
+    } else if (b instanceof DepthLiteral) {
+      return _getSensors((DepthLiteral)b);
     } else if (b instanceof DistanceLiteral) {
       return _getSensors((DistanceLiteral)b);
     } else if (b instanceof EdgeLiteral) {
@@ -504,6 +601,8 @@ public class Auxiliary {
       return _getSensors((ORexpression)b);
     } else if (b instanceof TouchLiteral) {
       return _getSensors((TouchLiteral)b);
+    } else if (b instanceof TrueLiteral) {
+      return _getSensors((TrueLiteral)b);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(b).toString());
@@ -515,6 +614,8 @@ public class Auxiliary {
       return _getControlReturnString((ANDexpression)b);
     } else if (b instanceof ColorLiteral) {
       return _getControlReturnString((ColorLiteral)b);
+    } else if (b instanceof DepthLiteral) {
+      return _getControlReturnString((DepthLiteral)b);
     } else if (b instanceof DistanceLiteral) {
       return _getControlReturnString((DistanceLiteral)b);
     } else if (b instanceof EdgeLiteral) {
@@ -525,6 +626,8 @@ public class Auxiliary {
       return _getControlReturnString((ORexpression)b);
     } else if (b instanceof TouchLiteral) {
       return _getControlReturnString((TouchLiteral)b);
+    } else if (b instanceof TrueLiteral) {
+      return _getControlReturnString((TrueLiteral)b);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(b).toString());
@@ -542,6 +645,8 @@ public class Auxiliary {
       return _action2Text((LeftMovementAction)a);
     } else if (a instanceof MeasurementAction) {
       return _action2Text((MeasurementAction)a);
+    } else if (a instanceof MoveAction) {
+      return _action2Text((MoveAction)a);
     } else if (a instanceof RightMovementAction) {
       return _action2Text((RightMovementAction)a);
     } else {

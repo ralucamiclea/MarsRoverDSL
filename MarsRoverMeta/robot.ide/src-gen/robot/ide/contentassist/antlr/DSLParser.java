@@ -51,6 +51,7 @@ public class DSLParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEndWhenAccess().getGroup(), "rule__EndWhen__Group__0");
 					put(grammarAccess.getBehaviorNameAccess().getGroup(), "rule__BehaviorName__Group__0");
 					put(grammarAccess.getBehaviorAccess().getGroup(), "rule__Behavior__Group__0");
+					put(grammarAccess.getMoveActionAccess().getGroup(), "rule__MoveAction__Group__0");
 					put(grammarAccess.getLeftMovementActionAccess().getGroup(), "rule__LeftMovementAction__Group__0");
 					put(grammarAccess.getRightMovementActionAccess().getGroup(), "rule__RightMovementAction__Group__0");
 					put(grammarAccess.getRotateMovementActionAccess().getGroup(), "rule__RotateMovementAction__Group__0");
@@ -62,6 +63,7 @@ public class DSLParser extends AbstractContentAssistParser {
 					put(grammarAccess.getExpression2Access().getGroup(), "rule__Expression2__Group__0");
 					put(grammarAccess.getExpression2Access().getGroup_1(), "rule__Expression2__Group_1__0");
 					put(grammarAccess.getExpressionBracketAccess().getGroup(), "rule__ExpressionBracket__Group__0");
+					put(grammarAccess.getDepthLiteralAccess().getGroup(), "rule__DepthLiteral__Group__0");
 					put(grammarAccess.getTouchLiteralAccess().getGroup(), "rule__TouchLiteral__Group__0");
 					put(grammarAccess.getColorLiteralAccess().getGroup(), "rule__ColorLiteral__Group__0");
 					put(grammarAccess.getDistanceLiteralAccess().getGroup(), "rule__DistanceLiteral__Group__0");
@@ -79,6 +81,7 @@ public class DSLParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBehaviorAccess().getNameAssignment_1(), "rule__Behavior__NameAssignment_1");
 					put(grammarAccess.getBehaviorAccess().getSensorExpressionAssignment_3(), "rule__Behavior__SensorExpressionAssignment_3");
 					put(grammarAccess.getBehaviorAccess().getActionlistAssignment_5(), "rule__Behavior__ActionlistAssignment_5");
+					put(grammarAccess.getMoveActionAccess().getDirAssignment_1(), "rule__MoveAction__DirAssignment_1");
 					put(grammarAccess.getMeasurementActionAccess().getMeasureAssignment(), "rule__MeasurementAction__MeasureAssignment");
 					put(grammarAccess.getLeftMovementActionAccess().getLeftmoveAssignment_1(), "rule__LeftMovementAction__LeftmoveAssignment_1");
 					put(grammarAccess.getRightMovementActionAccess().getRightmoveAssignment_1(), "rule__RightMovementAction__RightmoveAssignment_1");
@@ -89,7 +92,9 @@ public class DSLParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMovementActionAccess().getActionenumAssignment(), "rule__MovementAction__ActionenumAssignment");
 					put(grammarAccess.getExpression1Access().getRightAssignment_1_2(), "rule__Expression1__RightAssignment_1_2");
 					put(grammarAccess.getExpression2Access().getRightAssignment_1_2(), "rule__Expression2__RightAssignment_1_2");
+					put(grammarAccess.getTrueLiteralAccess().getTAssignment(), "rule__TrueLiteral__TAssignment");
 					put(grammarAccess.getExpressionBracketAccess().getExpAssignment_1(), "rule__ExpressionBracket__ExpAssignment_1");
+					put(grammarAccess.getDepthLiteralAccess().getBackAssignment_2(), "rule__DepthLiteral__BackAssignment_2");
 					put(grammarAccess.getTouchLiteralAccess().getTouchAssignment_0(), "rule__TouchLiteral__TouchAssignment_0");
 					put(grammarAccess.getColorLiteralAccess().getColorAssignment_3(), "rule__ColorLiteral__ColorAssignment_3");
 					put(grammarAccess.getDistanceLiteralAccess().getDistanceAssignment_2(), "rule__DistanceLiteral__DistanceAssignment_2");

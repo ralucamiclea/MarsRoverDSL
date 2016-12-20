@@ -2,7 +2,7 @@ package test.master;
 
 import lejos.robotics.subsumption.Behavior;
 
-public class DriveForward  implements Behavior {
+public class DriveForward implements Behavior {
    private boolean suppressed = false;
    ModelMaster m;
    

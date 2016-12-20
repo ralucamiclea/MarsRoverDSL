@@ -75,6 +75,7 @@ public class DSLFactoryImpl extends EFactoryImpl implements DSLFactory
       case DSLPackage.BEHAVIOR: return createBehavior();
       case DSLPackage.EXPRESSION: return createExpression();
       case DSLPackage.ACTIONS: return createActions();
+      case DSLPackage.MOVE_ACTION: return createMoveAction();
       case DSLPackage.MEASUREMENT_ACTION: return createMeasurementAction();
       case DSLPackage.LEFT_MOVEMENT_ACTION: return createLeftMovementAction();
       case DSLPackage.RIGHT_MOVEMENT_ACTION: return createRightMovementAction();
@@ -84,7 +85,9 @@ public class DSLFactoryImpl extends EFactoryImpl implements DSLFactory
       case DSLPackage.RIGHT_ROTATE_POINT: return createRightRotatePoint();
       case DSLPackage.MIDDLE_ROTATE_POINT: return createMiddleRotatePoint();
       case DSLPackage.MOVEMENT_ACTION: return createMovementAction();
+      case DSLPackage.TRUE_LITERAL: return createTrueLiteral();
       case DSLPackage.EXPRESSION_BRACKET: return createExpressionBracket();
+      case DSLPackage.DEPTH_LITERAL: return createDepthLiteral();
       case DSLPackage.TOUCH_LITERAL: return createTouchLiteral();
       case DSLPackage.COLOR_LITERAL: return createColorLiteral();
       case DSLPackage.DISTANCE_LITERAL: return createDistanceLiteral();
@@ -114,6 +117,10 @@ public class DSLFactoryImpl extends EFactoryImpl implements DSLFactory
         return createFBEnumFromString(eDataType, initialValue);
       case DSLPackage.ACTION_ENUM:
         return createActionEnumFromString(eDataType, initialValue);
+      case DSLPackage.TENUM:
+        return createTenumFromString(eDataType, initialValue);
+      case DSLPackage.BACK_ENUM:
+        return createBackEnumFromString(eDataType, initialValue);
       case DSLPackage.EDGE_ENUM:
         return createEdgeEnumFromString(eDataType, initialValue);
       case DSLPackage.TOUCH_ENUM:
@@ -143,6 +150,10 @@ public class DSLFactoryImpl extends EFactoryImpl implements DSLFactory
         return convertFBEnumToString(eDataType, instanceValue);
       case DSLPackage.ACTION_ENUM:
         return convertActionEnumToString(eDataType, instanceValue);
+      case DSLPackage.TENUM:
+        return convertTenumToString(eDataType, instanceValue);
+      case DSLPackage.BACK_ENUM:
+        return convertBackEnumToString(eDataType, instanceValue);
       case DSLPackage.EDGE_ENUM:
         return convertEdgeEnumToString(eDataType, instanceValue);
       case DSLPackage.TOUCH_ENUM:
@@ -258,6 +269,17 @@ public class DSLFactoryImpl extends EFactoryImpl implements DSLFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public MoveAction createMoveAction()
+  {
+    MoveActionImpl moveAction = new MoveActionImpl();
+    return moveAction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public MeasurementAction createMeasurementAction()
   {
     MeasurementActionImpl measurementAction = new MeasurementActionImpl();
@@ -357,10 +379,32 @@ public class DSLFactoryImpl extends EFactoryImpl implements DSLFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public TrueLiteral createTrueLiteral()
+  {
+    TrueLiteralImpl trueLiteral = new TrueLiteralImpl();
+    return trueLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public ExpressionBracket createExpressionBracket()
   {
     ExpressionBracketImpl expressionBracket = new ExpressionBracketImpl();
     return expressionBracket;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DepthLiteral createDepthLiteral()
+  {
+    DepthLiteralImpl depthLiteral = new DepthLiteralImpl();
+    return depthLiteral;
   }
 
   /**
@@ -513,6 +557,50 @@ public class DSLFactoryImpl extends EFactoryImpl implements DSLFactory
    * @generated
    */
   public String convertActionEnumToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Tenum createTenumFromString(EDataType eDataType, String initialValue)
+  {
+    Tenum result = Tenum.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertTenumToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public BackEnum createBackEnumFromString(EDataType eDataType, String initialValue)
+  {
+    BackEnum result = BackEnum.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertBackEnumToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

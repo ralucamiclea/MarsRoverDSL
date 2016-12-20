@@ -1,0 +1,183 @@
+package robot.generator
+
+import robot.dSL.MarsRoverExpedition
+
+class ModelGenerator {
+	
+	def static toText(MarsRoverExpedition expedition) 
+	'''
+	package test.master;
+	
+	import java.io.DataInputStream;
+	import java.io.PrintWriter;
+	
+	import lejos.hardware.Brick;
+	import lejos.hardware.BrickFinder;
+	import lejos.hardware.lcd.LCD;
+	import lejos.hardware.motor.EV3LargeRegulatedMotor;
+	import lejos.hardware.port.MotorPort;
+	import lejos.hardware.port.SensorPort;
+	import lejos.hardware.sensor.EV3ColorSensor;
+	import lejos.hardware.sensor.EV3UltrasonicSensor;
+	import lejos.hardware.sensor.NXTLightSensor;
+	import lejos.remote.nxt.BTConnector;
+	import lejos.remote.nxt.NXTConnection;
+	import lejos.robotics.RegulatedMotor;
+	import lejos.robotics.SampleProvider;
+	
+	public class ModelMaster {
+		public RegulatedMotor lm;
+		public RegulatedMotor rm;
+		protected static EV3ColorSensor colorSensor;
+		public SampleProvider color;
+		public float[] colorSamples;
+		protected static EV3UltrasonicSensor sonar;
+		public SampleProvider distance;
+		public float[] distanceSamples;
+		public Brick brick;
+		public String name;
+		public NXTConnection connection;
+		public BTConnector connector;
+		public PrintWriter writer;
+		public DataInputStream reader;
+		public EV3LargeRegulatedMotor ma;
+		public NXTLightSensor lightL;
+		public NXTLightSensor lightR;
+		public SampleProvider ll, lr;
+		public float[] llSamples, lrSamples;
+		//public int d=100;
+		public boolean touchFrontLeft = false, touchFrontRight = false;
+		public float d = (float) 0.0, g = (float) 0.0;
+	    
+		public ModelMaster(){
+			connector = new BTConnector();
+			brick = BrickFinder.getDefault();
+		 	name = brick.getName();
+			if(name.equals("Rover5")){
+		 		connection = connector.connect("Rover6", NXTConnection.RAW);
+		 	}else if(name.equals("Rover7")){
+		 		connection = connector.connect("Rover8", NXTConnection.RAW);
+		 	}else{ //name==rover6 or rover8
+		 		drawErrorString("unexpected brick name "+name);
+		 	}
+			lm = new EV3LargeRegulatedMotor(MotorPort.A);
+	        rm = new EV3LargeRegulatedMotor(MotorPort.B);
+	        ma = new EV3LargeRegulatedMotor(MotorPort.C);
+	        lm.setSpeed(300);
+	        rm.setSpeed(300);
+	        ma.setSpeed(300);
+	        colorSensor = new EV3ColorSensor(SensorPort.S4);
+	        color = colorSensor.getColorIDMode();
+			colorSamples = new float[color.sampleSize()];
+	        sonar = new EV3UltrasonicSensor(SensorPort.S3);
+			lightL = new NXTLightSensor(SensorPort.S1);
+			lightR = new NXTLightSensor(SensorPort.S2);
+			ll = lightL.getRedMode();
+			lr = lightR.getRedMode();
+			llSamples = new float[ll.sampleSize()];
+			lrSamples = new float[lr.sampleSize()];
+		 	writer = new PrintWriter(connection.openOutputStream());
+	 		reader = connection.openDataInputStream();
+	 		LCD.clearDisplay();
+	
+		}
+	
+		void drawErrorString(String s){
+			LCD.drawString("error: "+s,0,7);
+		}
+		
+		void drawTask(String s){
+			LCD.drawString("task: "+s, 0, 8);
+		}
+		
+		void drawSent(String s){
+			LCD.drawString("sent: "+s, 0, 5);
+		}
+		
+		void drawReceived(String s){
+			LCD.drawString("received: "+s, 0, 6);
+		}
+	}
+	
+	int smallest(float[] a){
+	        float smallest=a[0];
+	        int index=0;
+	        for(int i = 0; i<5; i++){
+	            if(smallest>a[i]){
+	                smallest=a[i];
+	                index=i;
+	            }
+	        }
+	        System.out.println("color seen: "+index);
+	        return index;
+	    }
+	    
+	    int closestColor(){
+	        float dx = colorSamples[0] - red[0];
+	        float dy = colorSamples[1] - red[1];
+	        float dz = colorSamples[2] - red[2];
+	        float reddistance = dx * dx + dy * dy + dz * dz;
+	        dx = colorSamples[0] - blue[0];
+	        dy = colorSamples[1] - blue[1];
+	        dz = colorSamples[2] - blue[2];
+	        float bluedistance = dx * dx + dy * dy + dz * dz;
+	        dx = colorSamples[0] - green[0];
+	        dy = colorSamples[1] - green[1];
+	        dz = colorSamples[2] - green[2];
+	        float greendistance = dx * dx + dy * dy + dz * dz;
+	        dx = colorSamples[0] - white[0];
+	        dy = colorSamples[1] - white[1];
+	        dz = colorSamples[2] - white[2];
+	        float whitedistance = dx * dx + dy * dy + dz * dz;
+	        dx = colorSamples[0] - black[0];
+	        dy = colorSamples[1] - black[1];
+	        dz = colorSamples[2] - black[2];
+	        float blackdistance = dx * dx + dy * dy + dz * dz;
+	        float[] a = {reddistance,bluedistance,greendistance,whitedistance,blackdistance};
+	        return smallest(a);
+	    }
+	    
+	    void calibrate(){
+	        System.out.println("red color?");
+	        Button.ENTER.waitForPress();
+	        color.fetchSample(colorSamples, 0);
+	        red = new float[]{colorSamples[0],colorSamples[1],colorSamples[2]};
+	        System.out.println("blue color?");
+	        Button.ENTER.waitForPress();
+	        color.fetchSample(colorSamples, 0);
+	        blue = new float[]{colorSamples[0],colorSamples[1],colorSamples[2]};
+	        System.out.println("green color?");
+	        Button.ENTER.waitForPress();
+	        color.fetchSample(colorSamples, 0);
+	        green = new float[]{colorSamples[0],colorSamples[1],colorSamples[2]};
+	        System.out.println("black color?");
+	        Button.ENTER.waitForPress();
+	        color.fetchSample(colorSamples, 0);
+	        black = new float[]{colorSamples[0],colorSamples[1],colorSamples[2]};
+	        System.out.println("white color?");
+	        Button.ENTER.waitForPress();
+	        color.fetchSample(colorSamples, 0);
+	        white = new float[]{colorSamples[0],colorSamples[1],colorSamples[2]};
+	        System.out.println("dark?");
+	        Button.ENTER.waitForPress();
+	        ll.fetchSample(llSamples, 0);
+	        lr.fetchSample(lrSamples, 0);
+	        float darkleft = llSamples[0];
+	        float darkright = lrSamples[0];
+	        System.out.println("light?");
+	        Button.ENTER.waitForPress();
+	        ll.fetchSample(llSamples, 0);
+	        lr.fetchSample(lrSamples, 0);
+	        float lightleft = llSamples[0];
+	        float lightright = lrSamples[0];
+	        borderleft = (darkleft + lightleft)/2;
+	        borderright = (darkright + lightright)/2;
+	        System.out.println(borderleft);
+	        System.out.println(borderright);
+	        System.out.println("start?");
+	        Button.ENTER.waitForPress();
+	    }
+
+	'''
+	
+}

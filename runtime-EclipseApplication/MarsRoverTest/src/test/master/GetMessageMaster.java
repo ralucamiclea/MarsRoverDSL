@@ -2,16 +2,24 @@ package test.master;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-
+import lejos.robotics.subsumption.Arbitrator;
 import lejos.hardware.lcd.LCD;
 
 
 public class GetMessageMaster extends Thread {
 	ModelMaster m;
 	private byte b;
-	
-	public GetMessageMaster(ModelMaster m){
+	Arbitrator arby = null;
+	Goals goals;
+	int mission_nr=0;
+	int Mission1Count=0;
+	public GetMessageMaster(ModelMaster m, Goals goals){
 		this.m=m;
+		this.goals=goals;
+	}
+
+public void setArby(Arbitrator arby){
+		this.arby=arby;
 	}
 
 	public void run(){
@@ -25,24 +33,34 @@ public class GetMessageMaster extends Thread {
 			}
 			if(s.length() > 0){
 				String[] a = s.split(" ");
-				m.drawReceived(s);
-				if(a[0]=="true")
+				if(Boolean.valueOf(a[0]))
 					m.touchFrontLeft=true;
 				else
 					m.touchFrontLeft=false;
-				if(a[1]=="true")
+				if(Boolean.valueOf(a[1]))
 					m.touchFrontRight=true;
 				else
 					m.touchFrontRight=false;
 				m.d = Float.valueOf(a[2]);
 				m.g = Float.valueOf(a[3]);
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			}
+			if(arby!=null){
+				switch(mission_nr){
+					//
+					case 0:
+						{//wait 2 times for MeasureHeavyObjects
+						if(goals.MeasureHeavyObjects >= 2)
+						    Mission1Count++;
+						if(1 <= Mission1Count){
+						    arby.stop();
+						    mission_nr++;
+						}
+						Mission1Count=0;
+						}
+					//0
+				}
+			}	
+			
 		}
 			
 	}

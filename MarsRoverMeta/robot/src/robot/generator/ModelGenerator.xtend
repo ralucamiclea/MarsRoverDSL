@@ -13,6 +13,7 @@ class ModelGenerator {
 	
 	import lejos.hardware.Brick;
 	import lejos.hardware.BrickFinder;
+	import lejos.hardware.Button;
 	import lejos.hardware.lcd.LCD;
 	import lejos.hardware.motor.EV3LargeRegulatedMotor;
 	import lejos.hardware.port.MotorPort;
@@ -45,9 +46,16 @@ class ModelGenerator {
 		public NXTLightSensor lightR;
 		public SampleProvider ll, lr;
 		public float[] llSamples, lrSamples;
-		//public int d=100;
 		public boolean touchFrontLeft = false, touchFrontRight = false;
 		public float d = (float) 0.0, g = (float) 0.0;
+		private float[] red = new float[3];
+	    private float[] blue= new float[3];
+	    private float[] green= new float[3];
+	    private float[] white= new float[3];
+	    private float[] black= new float[3];
+	    public float borderleft;
+	    public float borderright;
+	    public float lakedepth;
 	    
 		public ModelMaster(){
 			connector = new BTConnector();
@@ -67,13 +75,15 @@ class ModelGenerator {
 	        rm.setSpeed(300);
 	        ma.setSpeed(300);
 	        colorSensor = new EV3ColorSensor(SensorPort.S4);
-	        color = colorSensor.getColorIDMode();
+	        color = colorSensor.getRGBMode();
 			colorSamples = new float[color.sampleSize()];
 	        sonar = new EV3UltrasonicSensor(SensorPort.S3);
 			lightL = new NXTLightSensor(SensorPort.S1);
 			lightR = new NXTLightSensor(SensorPort.S2);
-			ll = lightL.getRedMode();
-			lr = lightR.getRedMode();
+			ll = lightL.getAmbientMode();
+			lr = lightR.getAmbientMode();
+			distance = sonar.getDistanceMode();
+			distanceSamples=new float[distance.sampleSize()];
 			llSamples = new float[ll.sampleSize()];
 			lrSamples = new float[lr.sampleSize()];
 		 	writer = new PrintWriter(connection.openOutputStream());
@@ -97,6 +107,93 @@ class ModelGenerator {
 		void drawReceived(String s){
 			LCD.drawString("received: "+s, 0, 6);
 		}
+	
+		int smallest(float[] a){
+	        float smallest=a[0];
+	        int index=0;
+	        for(int i = 0; i<5; i++){
+	            if(smallest>a[i]){
+	                smallest=a[i];
+	                index=i;
+	            }
+	        }
+	        System.out.println("color seen: "+index);
+	        return index;
+	    }
+	    
+	    int closestColor(){
+	    	color.fetchSample(colorSamples, 0);
+	        float dx = colorSamples[0] - red[0];
+	        float dy = colorSamples[1] - red[1];
+	        float dz = colorSamples[2] - red[2];
+	        float reddistance = dx * dx + dy * dy + dz * dz;
+	        dx = colorSamples[0] - blue[0];
+	        dy = colorSamples[1] - blue[1];
+	        dz = colorSamples[2] - blue[2];
+	        float bluedistance = dx * dx + dy * dy + dz * dz;
+	        dx = colorSamples[0] - green[0];
+	        dy = colorSamples[1] - green[1];
+	        dz = colorSamples[2] - green[2];
+	        float greendistance = dx * dx + dy * dy + dz * dz;
+	        dx = colorSamples[0] - white[0];
+	        dy = colorSamples[1] - white[1];
+	        dz = colorSamples[2] - white[2];
+	        float whitedistance = dx * dx + dy * dy + dz * dz;
+	        dx = colorSamples[0] - black[0];
+	        dy = colorSamples[1] - black[1];
+	        dz = colorSamples[2] - black[2];
+	        float blackdistance = dx * dx + dy * dy + dz * dz;
+	        float[] a = {reddistance,bluedistance,greendistance,whitedistance,blackdistance};
+	        return smallest(a);
+	    }
+	    
+	    void calibrate(){
+	        System.out.println("red color?");
+	        Button.ENTER.waitForPress();
+	        color.fetchSample(colorSamples, 0);
+	        red = new float[]{colorSamples[0],colorSamples[1],colorSamples[2]};
+	        //measuring the depth of the table
+	        distance.fetchSample(distanceSamples, 0);
+	        float normaldepth = distanceSamples[0];
+	        System.out.println("blue color?");
+	        Button.ENTER.waitForPress();
+	        color.fetchSample(colorSamples, 0);
+	        blue = new float[]{colorSamples[0],colorSamples[1],colorSamples[2]};
+	        System.out.println("green color?");
+	        Button.ENTER.waitForPress();
+	        color.fetchSample(colorSamples, 0);
+	        green = new float[]{colorSamples[0],colorSamples[1],colorSamples[2]};
+	        System.out.println("black color?");
+	        Button.ENTER.waitForPress();
+	        color.fetchSample(colorSamples, 0);
+	        black = new float[]{colorSamples[0],colorSamples[1],colorSamples[2]};
+	        System.out.println("white color?");
+	        Button.ENTER.waitForPress();
+	        color.fetchSample(colorSamples, 0);
+	        white = new float[]{colorSamples[0],colorSamples[1],colorSamples[2]};
+	        System.out.println("dark?");
+	        Button.ENTER.waitForPress();
+	        ll.fetchSample(llSamples, 0);
+	        lr.fetchSample(lrSamples, 0);
+	        float darkleft = llSamples[0];
+	        float darkright = lrSamples[0];
+	        System.out.println("light?");
+	        Button.ENTER.waitForPress();
+	        ll.fetchSample(llSamples, 0);
+	        lr.fetchSample(lrSamples, 0);
+	        float lightleft = llSamples[0];
+	        float lightright = lrSamples[0];
+	        borderleft = (darkleft + lightleft)/2;
+	        borderright = (darkright + lightright)/2;
+	        System.out.println(borderleft);
+	        System.out.println(borderright);
+	        System.out.println("lake depth?");
+	        Button.ENTER.waitForPress();
+	       	distance.fetchSample(distanceSamples, 0);
+	       	lakedepth = (distanceSamples[0] + normaldepth)/2;
+	        System.out.println("start?");
+	        Button.ENTER.waitForPress();
+	    }
 	}
 
 	'''

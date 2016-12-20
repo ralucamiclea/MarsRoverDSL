@@ -580,6 +580,65 @@ ruleActions returns [EObject current=null]
 			$current = $this_MeasurementAction_3.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getActionsAccess().getMoveActionParserRuleCall_4());
+		}
+		this_MoveAction_4=ruleMoveAction
+		{
+			$current = $this_MoveAction_4.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleMoveAction
+entryRuleMoveAction returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getMoveActionRule()); }
+	iv_ruleMoveAction=ruleMoveAction
+	{ $current=$iv_ruleMoveAction.current; }
+	EOF;
+
+// Rule MoveAction
+ruleMoveAction returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='move'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getMoveActionAccess().getMoveKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getMoveActionAccess().getDirFBEnumEnumRuleCall_1_0());
+				}
+				lv_dir_1_0=ruleFBEnum
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getMoveActionRule());
+					}
+					set(
+						$current,
+						"dir",
+						lv_dir_1_0,
+						"robot.DSL.FBEnum");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_2='a'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getMoveActionAccess().getAKeyword_2());
+		}
+		otherlv_3='bit'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getMoveActionAccess().getBitKeyword_3());
+		}
 	)
 ;
 
@@ -1165,6 +1224,60 @@ ruleExpression3 returns [EObject current=null]
 			$current = $this_EdgeLiteral_4.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getExpression3Access().getDepthLiteralParserRuleCall_5());
+		}
+		this_DepthLiteral_5=ruleDepthLiteral
+		{
+			$current = $this_DepthLiteral_5.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getExpression3Access().getTrueLiteralParserRuleCall_6());
+		}
+		this_TrueLiteral_6=ruleTrueLiteral
+		{
+			$current = $this_TrueLiteral_6.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleTrueLiteral
+entryRuleTrueLiteral returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getTrueLiteralRule()); }
+	iv_ruleTrueLiteral=ruleTrueLiteral
+	{ $current=$iv_ruleTrueLiteral.current; }
+	EOF;
+
+// Rule TrueLiteral
+ruleTrueLiteral returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getTrueLiteralAccess().getTTenumEnumRuleCall_0());
+			}
+			lv_t_0_0=ruleTenum
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getTrueLiteralRule());
+				}
+				set(
+					$current,
+					"t",
+					lv_t_0_0,
+					"robot.DSL.Tenum");
+				afterParserOrEnumRuleCall();
+			}
+		)
 	)
 ;
 
@@ -1211,6 +1324,52 @@ ruleExpressionBracket returns [EObject current=null]
 		{
 			newLeafNode(otherlv_2, grammarAccess.getExpressionBracketAccess().getRightParenthesisKeyword_2());
 		}
+	)
+;
+
+// Entry rule entryRuleDepthLiteral
+entryRuleDepthLiteral returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getDepthLiteralRule()); }
+	iv_ruleDepthLiteral=ruleDepthLiteral
+	{ $current=$iv_ruleDepthLiteral.current; }
+	EOF;
+
+// Rule DepthLiteral
+ruleDepthLiteral returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='lake'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getDepthLiteralAccess().getLakeKeyword_0());
+		}
+		otherlv_1='at'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getDepthLiteralAccess().getAtKeyword_1());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getDepthLiteralAccess().getBackBackEnumEnumRuleCall_2_0());
+				}
+				lv_back_2_0=ruleBackEnum
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getDepthLiteralRule());
+					}
+					set(
+						$current,
+						"back",
+						lv_back_2_0,
+						"robot.DSL.BackEnum");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
 	)
 ;
 
@@ -1504,6 +1663,40 @@ ruleActionEnum returns [Enumerator current=null]
 				newLeafNode(enumLiteral_2, grammarAccess.getActionEnumAccess().getSTOPEnumLiteralDeclaration_2());
 			}
 		)
+	)
+;
+
+// Rule Tenum
+ruleTenum returns [Enumerator current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		enumLiteral_0='true'
+		{
+			$current = grammarAccess.getTenumAccess().getTRUEEnumLiteralDeclaration().getEnumLiteral().getInstance();
+			newLeafNode(enumLiteral_0, grammarAccess.getTenumAccess().getTRUEEnumLiteralDeclaration());
+		}
+	)
+;
+
+// Rule BackEnum
+ruleBackEnum returns [Enumerator current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		enumLiteral_0='back'
+		{
+			$current = grammarAccess.getBackEnumAccess().getBACKEnumLiteralDeclaration().getEnumLiteral().getInstance();
+			newLeafNode(enumLiteral_0, grammarAccess.getBackEnumAccess().getBACKEnumLiteralDeclaration());
+		}
 	)
 ;
 

@@ -2,9 +2,20 @@ package test.master;
 	
 public class Goals {
 	
+	public int OnLine	= 0;
+	public int OffLine	= 0;
+	public int AboveAbyss	= 0;
+	public int MeasureLightObjects	= 0;
+	public int AvoidWhite	= 0;
+	public int AvoidObject	= 0;
+	public int MeasureHeavyObjects	= 0;
 	public int AvoidEdge	= 0;
+	public int AvoidEdgeComplicated	= 0;
 	public int AvoidCollision	= 0;
+	public int FindRed	= 0;
 	public int FindBlue	= 0;
+	public int FindGreen	= 0;
+	public int MeasureLake	= 0;
 	 
 	public Goals(){
 		//

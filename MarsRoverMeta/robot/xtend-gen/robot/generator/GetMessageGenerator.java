@@ -1,12 +1,17 @@
 package robot.generator;
 
+import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import robot.dSL.MarsRoverExpedition;
+import robot.dSL.Mission;
+import robot.generator.Auxiliary;
 
 @SuppressWarnings("all")
 public class GetMessageGenerator {
   public static CharSequence toText(final MarsRoverExpedition expedition) {
     StringConcatenation _builder = new StringConcatenation();
+    List<Mission> missions = Auxiliary.getMissions(expedition);
+    _builder.newLineIfNotEmpty();
     _builder.append("package test.master;");
     _builder.newLine();
     _builder.newLine();
@@ -14,6 +19,7 @@ public class GetMessageGenerator {
     _builder.newLine();
     _builder.append("import java.util.concurrent.TimeUnit;");
     _builder.newLine();
+    _builder.append("import lejos.robotics.subsumption.Arbitrator;");
     _builder.newLine();
     _builder.append("import lejos.hardware.lcd.LCD;");
     _builder.newLine();
@@ -28,12 +34,41 @@ public class GetMessageGenerator {
     _builder.append("private byte b;");
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("Arbitrator arby = null;");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public GetMessageMaster(ModelMaster m){");
+    _builder.append("Goals goals;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int mission_nr=0;");
+    _builder.newLine();
+    {
+      for(final Mission m : missions) {
+        _builder.append("\t");
+        _builder.append("int ");
+        String _name = m.getName();
+        _builder.append(_name, "\t");
+        _builder.append("Count=0;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("\t");
+    _builder.append("public GetMessageMaster(ModelMaster m, Goals goals){");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("this.m=m;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.goals=goals;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public void setArby(Arbitrator arby){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.arby=arby;");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -73,10 +108,7 @@ public class GetMessageGenerator {
     _builder.append("String[] a = s.split(\" \");");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("m.drawReceived(s);");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("if(a[0]==\"true\")");
+    _builder.append("if(Boolean.valueOf(a[0]))");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("m.touchFrontLeft=true;");
@@ -88,7 +120,7 @@ public class GetMessageGenerator {
     _builder.append("m.touchFrontLeft=false;");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("if(a[1]==\"true\")");
+    _builder.append("if(Boolean.valueOf(a[1]))");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("m.touchFrontRight=true;");
@@ -105,26 +137,47 @@ public class GetMessageGenerator {
     _builder.append("\t\t\t\t");
     _builder.append("m.g = Float.valueOf(a[3]);");
     _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("if(arby!=null){");
+    _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("try {");
+    _builder.append("switch(mission_nr){");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("Thread.sleep(100);");
-    _builder.newLine();
-    _builder.append("\t\t\t\t");
-    _builder.append("} catch (InterruptedException e) {");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("// TODO Auto-generated catch block");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t");
-    _builder.append("e.printStackTrace();");
-    _builder.newLine();
+    _builder.append("//");
+    int i = 0;
+    _builder.newLineIfNotEmpty();
+    {
+      for(final Mission m_1 : missions) {
+        _builder.append("\t\t\t\t\t");
+        _builder.append("case ");
+        _builder.append(i, "\t\t\t\t\t");
+        _builder.append(":");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("\t");
+        _builder.append("{");
+        String _missionCondition = Auxiliary.getMissionCondition(m_1);
+        _builder.append(_missionCondition, "\t\t\t\t\t\t");
+        _builder.append("}");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("//");
+        int _plusPlus = i++;
+        _builder.append(_plusPlus, "\t\t\t\t\t");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.append("\t\t\t\t");
     _builder.append("}");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("}");
+    _builder.append("}\t");
+    _builder.newLine();
+    _builder.append("\t\t\t");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("}");

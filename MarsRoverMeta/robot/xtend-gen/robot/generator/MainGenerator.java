@@ -12,28 +12,20 @@ import robot.generator.Auxiliary;
 public class MainGenerator {
   public static CharSequence toText(final MarsRoverExpedition root) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\t");
     _builder.append("package test.master;");
     _builder.newLine();
-    _builder.append("\t");
     _builder.newLine();
-    _builder.append("\t");
     _builder.append("import lejos.robotics.subsumption.Arbitrator;");
     _builder.newLine();
-    _builder.append("\t");
     _builder.append("import lejos.robotics.subsumption.Behavior;");
     _builder.newLine();
-    _builder.append("\t");
     _builder.newLine();
-    _builder.append("\t");
     _builder.append("public class MainMaster {");
     _builder.newLine();
-    _builder.append("\t");
     _builder.newLine();
-    _builder.append("\t");
     _builder.append("public static void main(String[] args) {");
     _builder.newLine();
-    _builder.append("\t\t");
+    _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("ModelMaster m = new ModelMaster();");
@@ -42,15 +34,21 @@ public class MainGenerator {
     _builder.append("Goals goals = new Goals();");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("GetMessageMaster t = new GetMessageMaster(m);");
+    _builder.append("GetMessageMaster t = new GetMessageMaster(m,goals);");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("t.start();");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("m.calibrate();");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("//behaviors in this expedition");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Behavior DriveForward = new DriveForward(m);");
     _builder.newLine();
     {
       List<Behavior> _behaviors = Auxiliary.getBehaviors(root);
@@ -68,7 +66,6 @@ public class MainGenerator {
       }
     }
     _builder.append("\t");
-    _builder.append("Behavior DriveForward = new DriveForward(m);");
     _builder.newLine();
     {
       List<Mission> _missions = Auxiliary.getMissions(root);
@@ -80,15 +77,9 @@ public class MainGenerator {
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("int ");
+        _builder.append("Behavior [] bArray");
         String _name_3 = m.getName();
         _builder.append(_name_3, "\t");
-        _builder.append("Count = 0;");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("Behavior [] bArray");
-        String _name_4 = m.getName();
-        _builder.append(_name_4, "\t");
         _builder.append(" = {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -101,8 +92,8 @@ public class MainGenerator {
             _builder.append("\t");
             _builder.append("\t");
             _builder.append(", ");
-            String _name_5 = b_1.getName();
-            _builder.append(_name_5, "\t\t");
+            String _name_4 = b_1.getName();
+            _builder.append(_name_4, "\t\t");
             _builder.newLineIfNotEmpty();
           }
         }
@@ -111,9 +102,15 @@ public class MainGenerator {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("Arbitrator arby");
+        String _name_5 = m.getName();
+        _builder.append(_name_5, "\t");
+        _builder.append(" = new Arbitrator(bArray");
         String _name_6 = m.getName();
         _builder.append(_name_6, "\t");
-        _builder.append(" = new Arbitrator(bArray");
+        _builder.append(");");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("//t.setArby(arby");
         String _name_7 = m.getName();
         _builder.append(_name_7, "\t");
         _builder.append(");");
@@ -126,10 +123,6 @@ public class MainGenerator {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.newLine();
-        _builder.append("\t");
-        String _missionCondition = Auxiliary.getMissionCondition(m);
-        _builder.append(_missionCondition, "\t");
-        _builder.newLineIfNotEmpty();
       }
     }
     _builder.append("\t");

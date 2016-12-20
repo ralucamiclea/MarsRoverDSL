@@ -137,6 +137,14 @@ public class DSLSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case DSLPackage.MOVE_ACTION:
+      {
+        MoveAction moveAction = (MoveAction)theEObject;
+        T result = caseMoveAction(moveAction);
+        if (result == null) result = caseActions(moveAction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case DSLPackage.MEASUREMENT_ACTION:
       {
         MeasurementAction measurementAction = (MeasurementAction)theEObject;
@@ -215,11 +223,27 @@ public class DSLSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case DSLPackage.TRUE_LITERAL:
+      {
+        TrueLiteral trueLiteral = (TrueLiteral)theEObject;
+        T result = caseTrueLiteral(trueLiteral);
+        if (result == null) result = caseExpression(trueLiteral);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case DSLPackage.EXPRESSION_BRACKET:
       {
         ExpressionBracket expressionBracket = (ExpressionBracket)theEObject;
         T result = caseExpressionBracket(expressionBracket);
         if (result == null) result = caseExpression(expressionBracket);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case DSLPackage.DEPTH_LITERAL:
+      {
+        DepthLiteral depthLiteral = (DepthLiteral)theEObject;
+        T result = caseDepthLiteral(depthLiteral);
+        if (result == null) result = caseExpression(depthLiteral);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -420,6 +444,22 @@ public class DSLSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Move Action</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Move Action</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMoveAction(MoveAction object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Measurement Action</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -564,6 +604,22 @@ public class DSLSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>True Literal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>True Literal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTrueLiteral(TrueLiteral object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Expression Bracket</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -575,6 +631,22 @@ public class DSLSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseExpressionBracket(ExpressionBracket object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Depth Literal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Depth Literal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDepthLiteral(DepthLiteral object)
   {
     return null;
   }

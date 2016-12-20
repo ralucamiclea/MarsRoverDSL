@@ -15,31 +15,32 @@ class MainGenerator {
 	
 	public static void main(String[] args) {
 		
-	ModelMaster m = new ModelMaster();
-	Goals goals = new Goals();
-	GetMessageMaster t = new GetMessageMaster(m);
-	t.start();
-		
-	//behaviors in this expedition
-	«FOR b : Auxiliary.getBehaviors(root)»
-	Behavior «b.name» = new «Auxiliary.toClass(b.name)»(m,goals);
-	«ENDFOR»
-	Behavior DriveForward = new DriveForward(m);
-	«FOR m : Auxiliary.getMissions(root)»
-	//mission "«m.name»"
-	int «m.name»Count = 0;
-	Behavior [] bArray«m.name» = {
-		DriveForward
-		«FOR b : Auxiliary.getBehaviorNames(m)»
-			, «b.name»
+		ModelMaster m = new ModelMaster();
+		Goals goals = new Goals();
+		GetMessageMaster t = new GetMessageMaster(m,goals);
+		t.start();
+		m.calibrate();
+			
+		//behaviors in this expedition
+		Behavior DriveForward = new DriveForward(m);
+		«FOR b : Auxiliary.getBehaviors(root)»
+		Behavior «b.name» = new «Auxiliary.toClass(b.name)»(m,goals);
 		«ENDFOR»
-	};
-	Arbitrator arby«m.name» = new Arbitrator(bArray«m.name»);
-	arby«m.name».go();
-	
-	«Auxiliary.getMissionCondition(m)»
-	«ENDFOR»
+		
+		«FOR m : Auxiliary.getMissions(root)»
+		//mission "«m.name»"
+		Behavior [] bArray«m.name» = {
+			DriveForward
+			«FOR b : Auxiliary.getBehaviorNames(m)»
+				, «b.name»
+			«ENDFOR»
+		};
+		Arbitrator arby«m.name» = new Arbitrator(bArray«m.name»);
+		//t.setArby(arby«m.name»);
+		arby«m.name».go();
+		
+		«ENDFOR»
+		}
 	}
-}
-'''
+	'''
 }

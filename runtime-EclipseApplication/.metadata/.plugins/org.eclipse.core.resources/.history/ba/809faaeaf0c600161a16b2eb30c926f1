@@ -1,0 +1,125 @@
+package test.master;
+import lejos.robotics.subsumption.Behavior;
+import lejos.utility.Delay;
+
+public class AvoidEdgeComplicated implements Behavior{
+			
+	Goals goals;
+	ModelMaster m;
+	private boolean suppressed = false;
+	
+	public AvoidEdgeComplicated(ModelMaster m, Goals goals){
+		this.m = m;
+		this.goals = goals;
+	}
+	
+	@Override
+	public boolean takeControl() {
+		m.ll.fetchSample(m.llSamples, 0);
+		m.lr.fetchSample(m.lrSamples, 0);
+		return m.llSamples[0] > m.borderleft || m.lrSamples[0] > m.borderright;
+	}
+	
+	@Override
+	public void action() {
+		goals.AvoidEdgeComplicated++;
+		suppressed = false;
+		float g;
+		g = m.g;
+		m.lm.backward();
+		m.rm.forward();
+		m.lm.setSpeed(200);
+		m.rm.setSpeed(200);
+		while(m.g < (g+50) && !suppressed){
+			Thread.yield();
+		}
+		m.lm.setSpeed(300);
+		m.rm.setSpeed(300);
+		g = m.g;
+		m.lm.forward();
+		m.rm.backward();
+		m.lm.setSpeed(200);
+		m.rm.setSpeed(200);
+		while(m.g > (g-95) && !suppressed){
+			Thread.yield();
+		}
+		m.lm.setSpeed(300);
+		m.rm.setSpeed(300);
+		g = m.g;
+		m.lm.backward();
+		m.rm.forward();
+		m.lm.setSpeed(200);
+		m.rm.setSpeed(200);
+		while(m.g < (g+50) && !suppressed){
+			Thread.yield();
+		}
+		m.lm.setSpeed(300);
+		m.rm.setSpeed(300);
+		m.lm.backward();
+		m.rm.backward();
+		g=500;
+		while(g>0 && !suppressed){
+		    g--;
+		    Thread.yield();
+		}
+		g = m.g;
+		m.lm.backward();
+		m.rm.forward();
+		m.lm.setSpeed(200);
+		m.rm.setSpeed(200);
+		while(m.g < (g+50) && !suppressed){
+			Thread.yield();
+		}
+		m.lm.setSpeed(300);
+		m.rm.setSpeed(300);
+		g = m.g;
+		m.lm.forward();
+		m.rm.backward();
+		m.lm.setSpeed(200);
+		m.rm.setSpeed(200);
+		while(m.g > (g-95) && !suppressed){
+			Thread.yield();
+		}
+		m.lm.setSpeed(300);
+		m.rm.setSpeed(300);
+		g = m.g;
+		m.lm.backward();
+		m.rm.forward();
+		m.lm.setSpeed(200);
+		m.rm.setSpeed(200);
+		while(m.g < (g+50) && !suppressed){
+			Thread.yield();
+		}
+		m.lm.setSpeed(300);
+		m.rm.setSpeed(300);
+		m.lm.backward();
+		m.rm.backward();
+		g=500;
+		while(g>0 && !suppressed){
+		    g--;
+		    Thread.yield();
+		}
+		m.lm.backward();
+		m.rm.backward();
+		g=500;
+		while(g>0 && !suppressed){
+		    g--;
+		    Thread.yield();
+		}
+		g = m.g;
+		m.lm.backward();
+		m.rm.forward();
+		m.lm.setSpeed(200);
+		m.rm.setSpeed(200);
+		while(m.g < (g+95) && !suppressed){
+			Thread.yield();
+		}
+		m.lm.setSpeed(300);
+		m.rm.setSpeed(300);
+	}
+	
+	@Override
+	public void suppress() {
+		suppressed = true;
+	}
+}

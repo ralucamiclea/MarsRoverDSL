@@ -105,6 +105,15 @@ public interface DSLFactory extends EFactory
   Actions createActions();
 
   /**
+   * Returns a new object of class '<em>Move Action</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Move Action</em>'.
+   * @generated
+   */
+  MoveAction createMoveAction();
+
+  /**
    * Returns a new object of class '<em>Measurement Action</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -186,6 +195,15 @@ public interface DSLFactory extends EFactory
   MovementAction createMovementAction();
 
   /**
+   * Returns a new object of class '<em>True Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>True Literal</em>'.
+   * @generated
+   */
+  TrueLiteral createTrueLiteral();
+
+  /**
    * Returns a new object of class '<em>Expression Bracket</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -193,6 +211,15 @@ public interface DSLFactory extends EFactory
    * @generated
    */
   ExpressionBracket createExpressionBracket();
+
+  /**
+   * Returns a new object of class '<em>Depth Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Depth Literal</em>'.
+   * @generated
+   */
+  DepthLiteral createDepthLiteral();
 
   /**
    * Returns a new object of class '<em>Touch Literal</em>'.

@@ -297,12 +297,13 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRightMovementActionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cRotateMovementActionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cMeasurementActionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cMoveActionParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//Actions:
-		//	LeftMovementAction | RightMovementAction | RotateMovementAction | MeasurementAction;
+		//	LeftMovementAction | RightMovementAction | RotateMovementAction | MeasurementAction | MoveAction;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//LeftMovementAction | RightMovementAction | RotateMovementAction | MeasurementAction
+		//LeftMovementAction | RightMovementAction | RotateMovementAction | MeasurementAction | MoveAction
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//LeftMovementAction
@@ -316,6 +317,40 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//MeasurementAction
 		public RuleCall getMeasurementActionParserRuleCall_3() { return cMeasurementActionParserRuleCall_3; }
+		
+		//MoveAction
+		public RuleCall getMoveActionParserRuleCall_4() { return cMoveActionParserRuleCall_4; }
+	}
+	public class MoveActionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.MoveAction");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cMoveKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cDirAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cDirFBEnumEnumRuleCall_1_0 = (RuleCall)cDirAssignment_1.eContents().get(0);
+		private final Keyword cAKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cBitKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//MoveAction:
+		//	"move" dir=FBEnum "a" "bit";
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"move" dir=FBEnum "a" "bit"
+		public Group getGroup() { return cGroup; }
+		
+		//"move"
+		public Keyword getMoveKeyword_0() { return cMoveKeyword_0; }
+		
+		//dir=FBEnum
+		public Assignment getDirAssignment_1() { return cDirAssignment_1; }
+		
+		//FBEnum
+		public RuleCall getDirFBEnumEnumRuleCall_1_0() { return cDirFBEnumEnumRuleCall_1_0; }
+		
+		//"a"
+		public Keyword getAKeyword_2() { return cAKeyword_2; }
+		
+		//"bit"
+		public Keyword getBitKeyword_3() { return cBitKeyword_3; }
 	}
 	public class MeasurementActionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.MeasurementAction");
@@ -618,12 +653,14 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cColorLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cDistanceLiteralParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cEdgeLiteralParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cDepthLiteralParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cTrueLiteralParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		
 		//Expression3 Expression:
-		//	ExpressionBracket | TouchLiteral | ColorLiteral | DistanceLiteral | EdgeLiteral
+		//	ExpressionBracket | TouchLiteral | ColorLiteral | DistanceLiteral | EdgeLiteral | DepthLiteral | TrueLiteral
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ExpressionBracket | TouchLiteral | ColorLiteral | DistanceLiteral | EdgeLiteral
+		//ExpressionBracket | TouchLiteral | ColorLiteral | DistanceLiteral | EdgeLiteral | DepthLiteral | TrueLiteral
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ExpressionBracket
@@ -640,6 +677,27 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//EdgeLiteral
 		public RuleCall getEdgeLiteralParserRuleCall_4() { return cEdgeLiteralParserRuleCall_4; }
+		
+		//DepthLiteral
+		public RuleCall getDepthLiteralParserRuleCall_5() { return cDepthLiteralParserRuleCall_5; }
+		
+		//TrueLiteral
+		public RuleCall getTrueLiteralParserRuleCall_6() { return cTrueLiteralParserRuleCall_6; }
+	}
+	public class TrueLiteralElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.TrueLiteral");
+		private final Assignment cTAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cTTenumEnumRuleCall_0 = (RuleCall)cTAssignment.eContents().get(0);
+		
+		//TrueLiteral:
+		//	t=Tenum;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//t=Tenum
+		public Assignment getTAssignment() { return cTAssignment; }
+		
+		//Tenum
+		public RuleCall getTTenumEnumRuleCall_0() { return cTTenumEnumRuleCall_0; }
 	}
 	public class ExpressionBracketElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.ExpressionBracket");
@@ -667,6 +725,33 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//')'
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
+	}
+	public class DepthLiteralElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.DepthLiteral");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLakeKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cAtKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cBackAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cBackBackEnumEnumRuleCall_2_0 = (RuleCall)cBackAssignment_2.eContents().get(0);
+		
+		//DepthLiteral:
+		//	"lake" "at" back=BackEnum;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"lake" "at" back=BackEnum
+		public Group getGroup() { return cGroup; }
+		
+		//"lake"
+		public Keyword getLakeKeyword_0() { return cLakeKeyword_0; }
+		
+		//"at"
+		public Keyword getAtKeyword_1() { return cAtKeyword_1; }
+		
+		//back=BackEnum
+		public Assignment getBackAssignment_2() { return cBackAssignment_2; }
+		
+		//BackEnum
+		public RuleCall getBackBackEnumEnumRuleCall_2_0() { return cBackBackEnumEnumRuleCall_2_0; }
 	}
 	public class TouchLiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.TouchLiteral");
@@ -889,6 +974,36 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		//'stop'
 		public Keyword getSTOPStopKeyword_2_0() { return cSTOPStopKeyword_2_0; }
 	}
+	public class TenumElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.Tenum");
+		private final EnumLiteralDeclaration cTRUEEnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
+		private final Keyword cTRUETrueKeyword_0 = (Keyword)cTRUEEnumLiteralDeclaration.eContents().get(0);
+		
+		//enum Tenum:
+		//	TRUE="true";
+		public EnumRule getRule() { return rule; }
+		
+		//TRUE="true"
+		public EnumLiteralDeclaration getTRUEEnumLiteralDeclaration() { return cTRUEEnumLiteralDeclaration; }
+		
+		//"true"
+		public Keyword getTRUETrueKeyword_0() { return cTRUETrueKeyword_0; }
+	}
+	public class BackEnumElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.BackEnum");
+		private final EnumLiteralDeclaration cBACKEnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
+		private final Keyword cBACKBackKeyword_0 = (Keyword)cBACKEnumLiteralDeclaration.eContents().get(0);
+		
+		//enum BackEnum:
+		//	BACK="back";
+		public EnumRule getRule() { return rule; }
+		
+		//BACK="back"
+		public EnumLiteralDeclaration getBACKEnumLiteralDeclaration() { return cBACKEnumLiteralDeclaration; }
+		
+		//"back"
+		public Keyword getBACKBackKeyword_0() { return cBACKBackKeyword_0; }
+	}
 	public class EdgeEnumElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "robot.DSL.EdgeEnum");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -1045,6 +1160,7 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 	private final BehaviorElements pBehavior;
 	private final ExpressionElements pExpression;
 	private final ActionsElements pActions;
+	private final MoveActionElements pMoveAction;
 	private final MeasurementActionElements pMeasurementAction;
 	private final MAEnumElements eMAEnum;
 	private final LeftMovementActionElements pLeftMovementAction;
@@ -1061,7 +1177,11 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 	private final Expression1Elements pExpression1;
 	private final Expression2Elements pExpression2;
 	private final Expression3Elements pExpression3;
+	private final TrueLiteralElements pTrueLiteral;
+	private final TenumElements eTenum;
 	private final ExpressionBracketElements pExpressionBracket;
+	private final DepthLiteralElements pDepthLiteral;
+	private final BackEnumElements eBackEnum;
 	private final TouchLiteralElements pTouchLiteral;
 	private final ColorLiteralElements pColorLiteral;
 	private final DistanceLiteralElements pDistanceLiteral;
@@ -1088,6 +1208,7 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pBehavior = new BehaviorElements();
 		this.pExpression = new ExpressionElements();
 		this.pActions = new ActionsElements();
+		this.pMoveAction = new MoveActionElements();
 		this.pMeasurementAction = new MeasurementActionElements();
 		this.eMAEnum = new MAEnumElements();
 		this.pLeftMovementAction = new LeftMovementActionElements();
@@ -1104,7 +1225,11 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pExpression1 = new Expression1Elements();
 		this.pExpression2 = new Expression2Elements();
 		this.pExpression3 = new Expression3Elements();
+		this.pTrueLiteral = new TrueLiteralElements();
+		this.eTenum = new TenumElements();
 		this.pExpressionBracket = new ExpressionBracketElements();
+		this.pDepthLiteral = new DepthLiteralElements();
+		this.eBackEnum = new BackEnumElements();
 		this.pTouchLiteral = new TouchLiteralElements();
 		this.pColorLiteral = new ColorLiteralElements();
 		this.pDistanceLiteral = new DistanceLiteralElements();
@@ -1230,13 +1355,23 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Actions:
-	//	LeftMovementAction | RightMovementAction | RotateMovementAction | MeasurementAction;
+	//	LeftMovementAction | RightMovementAction | RotateMovementAction | MeasurementAction | MoveAction;
 	public ActionsElements getActionsAccess() {
 		return pActions;
 	}
 	
 	public ParserRule getActionsRule() {
 		return getActionsAccess().getRule();
+	}
+	
+	//MoveAction:
+	//	"move" dir=FBEnum "a" "bit";
+	public MoveActionElements getMoveActionAccess() {
+		return pMoveAction;
+	}
+	
+	public ParserRule getMoveActionRule() {
+		return getMoveActionAccess().getRule();
 	}
 	
 	//MeasurementAction:
@@ -1394,13 +1529,33 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Expression3 Expression:
-	//	ExpressionBracket | TouchLiteral | ColorLiteral | DistanceLiteral | EdgeLiteral
+	//	ExpressionBracket | TouchLiteral | ColorLiteral | DistanceLiteral | EdgeLiteral | DepthLiteral | TrueLiteral
 	public Expression3Elements getExpression3Access() {
 		return pExpression3;
 	}
 	
 	public ParserRule getExpression3Rule() {
 		return getExpression3Access().getRule();
+	}
+	
+	//TrueLiteral:
+	//	t=Tenum;
+	public TrueLiteralElements getTrueLiteralAccess() {
+		return pTrueLiteral;
+	}
+	
+	public ParserRule getTrueLiteralRule() {
+		return getTrueLiteralAccess().getRule();
+	}
+	
+	//enum Tenum:
+	//	TRUE="true";
+	public TenumElements getTenumAccess() {
+		return eTenum;
+	}
+	
+	public EnumRule getTenumRule() {
+		return getTenumAccess().getRule();
 	}
 	
 	//ExpressionBracket:
@@ -1411,6 +1566,26 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getExpressionBracketRule() {
 		return getExpressionBracketAccess().getRule();
+	}
+	
+	//DepthLiteral:
+	//	"lake" "at" back=BackEnum;
+	public DepthLiteralElements getDepthLiteralAccess() {
+		return pDepthLiteral;
+	}
+	
+	public ParserRule getDepthLiteralRule() {
+		return getDepthLiteralAccess().getRule();
+	}
+	
+	//enum BackEnum:
+	//	BACK="back";
+	public BackEnumElements getBackEnumAccess() {
+		return eBackEnum;
+	}
+	
+	public EnumRule getBackEnumRule() {
+		return getBackEnumAccess().getRule();
 	}
 	
 	//TouchLiteral:

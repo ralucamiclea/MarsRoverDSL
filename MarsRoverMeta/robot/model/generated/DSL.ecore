@@ -37,6 +37,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
   <eClassifiers xsi:type="ecore:EClass" name="Actions"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MoveAction" eSuperTypes="#//Actions">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dir" eType="#//FBEnum"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MeasurementAction" eSuperTypes="#//Actions">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="measure" eType="#//MAEnum"/>
   </eClassifiers>
@@ -80,9 +83,21 @@
     <eLiterals name="BACKWARD" value="1" literal="backward"/>
     <eLiterals name="STOP" value="2" literal="stop"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrueLiteral" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="t" eType="#//Tenum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Tenum">
+    <eLiterals name="TRUE" literal="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExpressionBracket" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="exp" eType="#//Expression"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DepthLiteral" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="back" eType="#//BackEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="BackEnum">
+    <eLiterals name="BACK" literal="back"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TouchLiteral" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="touch" eType="#//TouchEnum"/>

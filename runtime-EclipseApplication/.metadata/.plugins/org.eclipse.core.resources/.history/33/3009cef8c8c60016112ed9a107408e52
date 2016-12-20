@@ -1,0 +1,46 @@
+ExpeditionSTART  
+
+	Mission AvoidStuff
+		Task FindBlue
+		Task MeasureLake
+		Task AvoidCollision
+		Task AvoidEdge
+	ENDMission 
+    	If Task AvoidCollision executed 1 times
+	
+//	Mission FollowLine
+//		Task FindBlue
+//		Task AvoidCollision
+//		Task AvoidEdge
+//	ENDMission
+//		If Task AvoidCollision executed 1 times
+//		If Task FindBlue executed 2 times
+	
+ExpeditionSTOP
+
+Task AvoidEdge
+	IF edge at frontLeft OR edge at frontRight
+	THEN leftMotor backward rightMotor backward 
+ENDtask
+
+Task AvoidCollision
+	IF touchFrontLeft hits OR touchFrontRight hits 
+	THEN 
+		rotate around left wheel backward for 180 degrees 
+		rotate around right wheel backward for 360 degrees
+ENDtask 
+
+Task FindBlue
+	 IF colorFront sees color BLUE 
+	 THEN 
+	 rotate around middle to the left for 225 degrees 
+ENDtask
+
+Task MeasureLake
+	IF depth
+	THEN
+	rotate around middle to the left for 180 degrees 
+	measure
+ENDtask
+
+

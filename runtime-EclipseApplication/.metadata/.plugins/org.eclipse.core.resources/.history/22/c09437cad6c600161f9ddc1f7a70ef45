@@ -1,0 +1,36 @@
+package test.master;
+
+import lejos.robotics.subsumption.Arbitrator;
+import lejos.robotics.subsumption.Behavior;
+
+public class MainMaster {
+
+public static void main(String[] args) {
+	
+	ModelMaster m = new ModelMaster();
+	Goals goals = new Goals();
+	GetMessageMaster t = new GetMessageMaster(m,goals);
+	t.start();
+	m.calibrate();
+		
+	//behaviors in this expedition
+	Behavior DriveForward = new DriveForward(m);
+	Behavior AvoidEdge = new AvoidEdge(m,goals);
+	Behavior AvoidCollision = new AvoidCollision(m,goals);
+	Behavior FindBlue = new FindBlue(m,goals);
+	Behavior MeasureLake = new MeasureLake(m,goals);
+	
+	//mission "AvoidStuff"
+	Behavior [] bArrayAvoidStuff = {
+		DriveForward
+		, FindBlue
+		, MeasureLake
+		, AvoidCollision
+		, AvoidEdge
+	};
+	Arbitrator arbyAvoidStuff = new Arbitrator(bArrayAvoidStuff);
+	//t.setArby(arbyAvoidStuff);
+	arbyAvoidStuff.go();
+	
+	}
+}

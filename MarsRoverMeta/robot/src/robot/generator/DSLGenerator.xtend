@@ -36,6 +36,13 @@ class DSLGenerator extends AbstractGenerator {
  			for(Behavior i : b){
  				fsa.generateFile("/Master/"+Auxiliary.toClass(i.name) + ".java", BehaviorGenerator.toText(i));
  			}
+ 			
+ 			//special DriveForward for each mission
+// 			var List<Mission> m = new ArrayList<Mission>();
+// 			m = Auxiliary.getMissions(root);
+// 			for(Mission i : m){
+// 				fsa.generateFile("/Master/DriveForward"+i.name + ".java", DriveForwardGenerator.toText(i));
+// 			}
  		}
 	}
 }

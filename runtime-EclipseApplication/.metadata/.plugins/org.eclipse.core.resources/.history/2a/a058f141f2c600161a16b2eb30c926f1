@@ -1,0 +1,49 @@
+package test.master;
+
+import lejos.robotics.subsumption.Arbitrator;
+import lejos.robotics.subsumption.Behavior;
+
+public class MainMaster {
+
+public static void main(String[] args) {
+	
+	ModelMaster m = new ModelMaster();
+	Goals goals = new Goals();
+	GetMessageMaster t = new GetMessageMaster(m,goals);
+	t.start();
+	m.calibrate();
+		
+	//behaviors in this expedition
+	Behavior DriveForward = new DriveForward(m);
+	Behavior OnLine = new OnLine(m,goals);
+	Behavior OffLine = new OffLine(m,goals);
+	Behavior AboveAbyss = new AboveAbyss(m,goals);
+	Behavior MeasureLightObjects = new MeasureLightObjects(m,goals);
+	Behavior AvoidWhite = new AvoidWhite(m,goals);
+	Behavior AvoidObject = new AvoidObject(m,goals);
+	Behavior MeasureHeavyObjects = new MeasureHeavyObjects(m,goals);
+	Behavior AvoidEdge = new AvoidEdge(m,goals);
+	Behavior AvoidEdgeComplicated = new AvoidEdgeComplicated(m,goals);
+	Behavior AvoidCollision = new AvoidCollision(m,goals);
+	Behavior FindRed = new FindRed(m,goals);
+	Behavior FindBlue = new FindBlue(m,goals);
+	Behavior FindGreen = new FindGreen(m,goals);
+	Behavior MeasureLake = new MeasureLake(m,goals);
+	
+	//mission "Mission1"
+	Behavior [] bArrayMission1 = {
+		DriveForward
+		, AvoidCollision
+		, AvoidEdgeComplicated
+		, FindBlue
+		, FindGreen
+		, FindRed
+		, MeasureLake
+		, AvoidWhite
+	};
+	Arbitrator arbyMission1 = new Arbitrator(bArrayMission1);
+	//t.setArby(arbyMission1);
+	arbyMission1.go();
+	
+	}
+}

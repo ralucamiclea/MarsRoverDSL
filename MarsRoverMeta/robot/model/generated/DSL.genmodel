@@ -22,6 +22,12 @@
       <genEnumLiterals ecoreEnumLiteral="DSL.ecore#//ActionEnum/BACKWARD"/>
       <genEnumLiterals ecoreEnumLiteral="DSL.ecore#//ActionEnum/STOP"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="DSL.ecore#//Tenum">
+      <genEnumLiterals ecoreEnumLiteral="DSL.ecore#//Tenum/TRUE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="DSL.ecore#//BackEnum">
+      <genEnumLiterals ecoreEnumLiteral="DSL.ecore#//BackEnum/BACK"/>
+    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="DSL.ecore#//EdgeEnum">
       <genEnumLiterals ecoreEnumLiteral="DSL.ecore#//EdgeEnum/FRONTLEFT"/>
       <genEnumLiterals ecoreEnumLiteral="DSL.ecore#//EdgeEnum/FRONTRIGHT"/>
@@ -70,6 +76,9 @@
     </genClasses>
     <genClasses ecoreClass="DSL.ecore#//Expression"/>
     <genClasses ecoreClass="DSL.ecore#//Actions"/>
+    <genClasses ecoreClass="DSL.ecore#//MoveAction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//MoveAction/dir"/>
+    </genClasses>
     <genClasses ecoreClass="DSL.ecore#//MeasurementAction">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//MeasurementAction/measure"/>
     </genClasses>
@@ -95,8 +104,14 @@
     <genClasses ecoreClass="DSL.ecore#//MovementAction">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//MovementAction/actionenum"/>
     </genClasses>
+    <genClasses ecoreClass="DSL.ecore#//TrueLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//TrueLiteral/t"/>
+    </genClasses>
     <genClasses ecoreClass="DSL.ecore#//ExpressionBracket">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//ExpressionBracket/exp"/>
+    </genClasses>
+    <genClasses ecoreClass="DSL.ecore#//DepthLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//DepthLiteral/back"/>
     </genClasses>
     <genClasses ecoreClass="DSL.ecore#//TouchLiteral">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//TouchLiteral/touch"/>

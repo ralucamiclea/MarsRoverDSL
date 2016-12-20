@@ -5,7 +5,7 @@ import robot.dSL.MarsRoverExpedition;
 
 @SuppressWarnings("all")
 public class DriveForwardGenerator {
-  public static CharSequence toText(final MarsRoverExpedition root) {
+  public static CharSequence toText(final MarsRoverExpedition m) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package test.master;");
     _builder.newLine();
@@ -13,7 +13,7 @@ public class DriveForwardGenerator {
     _builder.append("import lejos.robotics.subsumption.Behavior;");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("public class DriveForward  implements Behavior {");
+    _builder.append("public class DriveForward implements Behavior {");
     _builder.newLine();
     _builder.append("   ");
     _builder.append("private boolean suppressed = false;");

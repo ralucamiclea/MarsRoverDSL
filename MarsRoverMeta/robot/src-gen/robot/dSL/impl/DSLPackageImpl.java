@@ -14,12 +14,14 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import robot.dSL.ANDexpression;
 import robot.dSL.ActionEnum;
 import robot.dSL.Actions;
+import robot.dSL.BackEnum;
 import robot.dSL.Behavior;
 import robot.dSL.BehaviorName;
 import robot.dSL.ColorEnum;
 import robot.dSL.ColorLiteral;
 import robot.dSL.DSLFactory;
 import robot.dSL.DSLPackage;
+import robot.dSL.DepthLiteral;
 import robot.dSL.DistanceLiteral;
 import robot.dSL.EdgeEnum;
 import robot.dSL.EdgeLiteral;
@@ -37,14 +39,17 @@ import robot.dSL.MarsRoverExpedition;
 import robot.dSL.MeasurementAction;
 import robot.dSL.MiddleRotatePoint;
 import robot.dSL.Mission;
+import robot.dSL.MoveAction;
 import robot.dSL.MovementAction;
 import robot.dSL.ORexpression;
 import robot.dSL.RightMovementAction;
 import robot.dSL.RightRotatePoint;
 import robot.dSL.RotateMovementAction;
 import robot.dSL.RotatePoints;
+import robot.dSL.Tenum;
 import robot.dSL.TouchEnum;
 import robot.dSL.TouchLiteral;
+import robot.dSL.TrueLiteral;
 
 /**
  * <!-- begin-user-doc -->
@@ -122,6 +127,13 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass moveActionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass measurementActionEClass = null;
 
   /**
@@ -185,7 +197,21 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass trueLiteralEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass expressionBracketEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass depthLiteralEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -256,6 +282,20 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
    * @generated
    */
   private EEnum actionEnumEEnum = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum tenumEEnum = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum backEnumEEnum = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -566,6 +606,26 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getMoveAction()
+  {
+    return moveActionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMoveAction_Dir()
+  {
+    return (EAttribute)moveActionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getMeasurementAction()
   {
     return measurementActionEClass;
@@ -736,6 +796,26 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getTrueLiteral()
+  {
+    return trueLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTrueLiteral_T()
+  {
+    return (EAttribute)trueLiteralEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getExpressionBracket()
   {
     return expressionBracketEClass;
@@ -749,6 +829,26 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
   public EReference getExpressionBracket_Exp()
   {
     return (EReference)expressionBracketEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDepthLiteral()
+  {
+    return depthLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getDepthLiteral_Back()
+  {
+    return (EAttribute)depthLiteralEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -936,6 +1036,26 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EEnum getTenum()
+  {
+    return tenumEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EEnum getBackEnum()
+  {
+    return backEnumEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getEdgeEnum()
   {
     return edgeEnumEEnum;
@@ -1022,6 +1142,9 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
 
     actionsEClass = createEClass(ACTIONS);
 
+    moveActionEClass = createEClass(MOVE_ACTION);
+    createEAttribute(moveActionEClass, MOVE_ACTION__DIR);
+
     measurementActionEClass = createEClass(MEASUREMENT_ACTION);
     createEAttribute(measurementActionEClass, MEASUREMENT_ACTION__MEASURE);
 
@@ -1048,8 +1171,14 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
     movementActionEClass = createEClass(MOVEMENT_ACTION);
     createEAttribute(movementActionEClass, MOVEMENT_ACTION__ACTIONENUM);
 
+    trueLiteralEClass = createEClass(TRUE_LITERAL);
+    createEAttribute(trueLiteralEClass, TRUE_LITERAL__T);
+
     expressionBracketEClass = createEClass(EXPRESSION_BRACKET);
     createEReference(expressionBracketEClass, EXPRESSION_BRACKET__EXP);
+
+    depthLiteralEClass = createEClass(DEPTH_LITERAL);
+    createEAttribute(depthLiteralEClass, DEPTH_LITERAL__BACK);
 
     touchLiteralEClass = createEClass(TOUCH_LITERAL);
     createEAttribute(touchLiteralEClass, TOUCH_LITERAL__TOUCH);
@@ -1076,6 +1205,8 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
     lrEnumEEnum = createEEnum(LR_ENUM);
     fbEnumEEnum = createEEnum(FB_ENUM);
     actionEnumEEnum = createEEnum(ACTION_ENUM);
+    tenumEEnum = createEEnum(TENUM);
+    backEnumEEnum = createEEnum(BACK_ENUM);
     edgeEnumEEnum = createEEnum(EDGE_ENUM);
     touchEnumEEnum = createEEnum(TOUCH_ENUM);
     colorEnumEEnum = createEEnum(COLOR_ENUM);
@@ -1111,6 +1242,7 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
 
     // Add supertypes to classes
     endAfterEClass.getESuperTypes().add(this.getEndCondition());
+    moveActionEClass.getESuperTypes().add(this.getActions());
     measurementActionEClass.getESuperTypes().add(this.getActions());
     leftMovementActionEClass.getESuperTypes().add(this.getActions());
     rightMovementActionEClass.getESuperTypes().add(this.getActions());
@@ -1119,7 +1251,9 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
     leftRotatePointEClass.getESuperTypes().add(this.getRotatePoints());
     rightRotatePointEClass.getESuperTypes().add(this.getRotatePoints());
     middleRotatePointEClass.getESuperTypes().add(this.getRotatePoints());
+    trueLiteralEClass.getESuperTypes().add(this.getExpression());
     expressionBracketEClass.getESuperTypes().add(this.getExpression());
+    depthLiteralEClass.getESuperTypes().add(this.getExpression());
     touchLiteralEClass.getESuperTypes().add(this.getExpression());
     colorLiteralEClass.getESuperTypes().add(this.getExpression());
     distanceLiteralEClass.getESuperTypes().add(this.getExpression());
@@ -1159,6 +1293,9 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
 
     initEClass(actionsEClass, Actions.class, "Actions", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+    initEClass(moveActionEClass, MoveAction.class, "MoveAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getMoveAction_Dir(), this.getFBEnum(), "dir", null, 0, 1, MoveAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(measurementActionEClass, MeasurementAction.class, "MeasurementAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMeasurementAction_Measure(), this.getMAEnum(), "measure", null, 0, 1, MeasurementAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1185,8 +1322,14 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
     initEClass(movementActionEClass, MovementAction.class, "MovementAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMovementAction_Actionenum(), this.getActionEnum(), "actionenum", null, 0, 1, MovementAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(trueLiteralEClass, TrueLiteral.class, "TrueLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTrueLiteral_T(), this.getTenum(), "t", null, 0, 1, TrueLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(expressionBracketEClass, ExpressionBracket.class, "ExpressionBracket", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getExpressionBracket_Exp(), this.getExpression(), null, "exp", null, 0, 1, ExpressionBracket.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(depthLiteralEClass, DepthLiteral.class, "DepthLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDepthLiteral_Back(), this.getBackEnum(), "back", null, 0, 1, DepthLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(touchLiteralEClass, TouchLiteral.class, "TouchLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getTouchLiteral_Touch(), this.getTouchEnum(), "touch", null, 0, 1, TouchLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1224,6 +1367,12 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
     addEEnumLiteral(actionEnumEEnum, ActionEnum.FORWARD);
     addEEnumLiteral(actionEnumEEnum, ActionEnum.BACKWARD);
     addEEnumLiteral(actionEnumEEnum, ActionEnum.STOP);
+
+    initEEnum(tenumEEnum, Tenum.class, "Tenum");
+    addEEnumLiteral(tenumEEnum, Tenum.TRUE);
+
+    initEEnum(backEnumEEnum, BackEnum.class, "BackEnum");
+    addEEnumLiteral(backEnumEEnum, BackEnum.BACK);
 
     initEEnum(edgeEnumEEnum, EdgeEnum.class, "EdgeEnum");
     addEEnumLiteral(edgeEnumEEnum, EdgeEnum.FRONTLEFT);

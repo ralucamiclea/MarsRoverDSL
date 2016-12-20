@@ -1,47 +1,54 @@
 package test.master;
 import lejos.robotics.subsumption.Behavior;
 import lejos.utility.Delay;
-import lejos.hardware.lcd.LCD;
-import lejos.robotics.Color;
 
 public class AvoidCollision implements Behavior{
 			
-			Goals goals;
-			ModelMaster m;
-			private boolean suppressed = false;
-			
-			public AvoidCollision(ModelMaster m, Goals goals){
-				this.m = m;
-				this.goals = goals;
-			}
-			
-			@Override
-			public boolean takeControl() {
-				return m.touchFrontLeft || m.touchFrontRight;
-			}
-			
-			@Override
-			public void action() {
-				goals.AvoidCollision++;
-				suppressed = false;
-				float g = m.g;
-				g = m.g;
-				m.lm.backward();
-				while(m.g%360 > (g+175%360) && !suppressed){
-					Thread.yield();
-				}
-				g = m.g;
-				m.rm.backward();
-				while(m.g%360 > (g+355%360) && !suppressed){
-					Thread.yield();
-				}
-				
-				Delay.msDelay(120);
-				m.rm.forward();
-				Delay.msDelay(120);
-			}
-			@Override
-			public void suppress() {
-				suppressed = true;
-			}
+	Goals goals;
+	ModelMaster m;
+	private boolean suppressed = false;
+	
+	public AvoidCollision(ModelMaster m, Goals goals){
+		this.m = m;
+		this.goals = goals;
+	}
+	
+	@Override
+	public boolean takeControl() {
+		return m.touchFrontLeft || m.touchFrontRight;
+	}
+	
+	@Override
+	public void action() {
+		goals.AvoidCollision++;
+		suppressed = false;
+		float g;
+		m.lm.backward();
+		m.rm.backward();
+		g=500;
+		while(g>0 && !suppressed){
+		    g--;
+		    Thread.yield();
 		}
+		m.lm.backward();
+		m.rm.backward();
+		g=500;
+		while(g>0 && !suppressed){
+		    g--;
+		    Thread.yield();
+		}
+		m.lm.stop();
+		m.rm.backward();
+		g = m.g;
+		m.lm.setSpeed(200);
+		while(m.g > (g-95) && !suppressed){
+			Thread.yield();
+		}
+		m.lm.setSpeed(300);
+	}
+	
+	@Override
+	public void suppress() {
+		suppressed = true;
+	}
+}

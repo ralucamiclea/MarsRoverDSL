@@ -211,7 +211,7 @@ public class SlaveGenerator {
     _builder.append("try {");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("Thread.sleep(100);");
+    _builder.append("Thread.sleep(10);");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("} catch (InterruptedException e) {");

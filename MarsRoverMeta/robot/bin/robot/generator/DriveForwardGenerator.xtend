@@ -4,14 +4,14 @@ import robot.dSL.MarsRoverExpedition
 
 class DriveForwardGenerator {
 	
-	def static toText(MarsRoverExpedition root) 
+	def static toText(MarsRoverExpedition m) 
 	
 	'''
 	package test.master;
-
+	
 	import lejos.robotics.subsumption.Behavior;
-
-	public class DriveForward  implements Behavior {
+	
+	public class DriveForward implements Behavior {
 	   private boolean suppressed = false;
 	   ModelMaster m;
 	   
@@ -22,11 +22,11 @@ class DriveForwardGenerator {
 	   public boolean takeControl() {
 	      return true;
 	   }
-
+	
 	   public void suppress() {
 	      suppressed = true;
 	   }
-
+	
 	   public void action() {
 	     suppressed = false;
 	     m.lm.forward();

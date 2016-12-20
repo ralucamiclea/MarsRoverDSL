@@ -40,7 +40,11 @@ Behavior:
 Expression: Expression1;
 
 Actions:
-    LeftMovementAction | RightMovementAction | RotateMovementAction | MeasurementAction;
+    LeftMovementAction | RightMovementAction | RotateMovementAction | MeasurementAction | MoveAction;
+    
+MoveAction:
+    "move" dir=FBEnum "a" "bit"
+;
 
 MeasurementAction:
     measure = MAEnum
@@ -106,11 +110,27 @@ Expression2 returns Expression:
 ;
 
 Expression3 returns Expression:
-	ExpressionBracket | TouchLiteral | ColorLiteral | DistanceLiteral | EdgeLiteral
+	ExpressionBracket | TouchLiteral | ColorLiteral | DistanceLiteral | EdgeLiteral | DepthLiteral | TrueLiteral
+;
+
+TrueLiteral:
+	t = Tenum
+;
+
+enum Tenum:
+	TRUE = "true"
 ;
 
 ExpressionBracket:
 	'('exp = Expression')'
+;
+
+DepthLiteral:
+	"lake" "at" back=BackEnum
+;
+
+enum BackEnum:
+	BACK = "back"
 ;
 
 TouchLiteral:

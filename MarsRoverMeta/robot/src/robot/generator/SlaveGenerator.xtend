@@ -86,7 +86,7 @@ class SlaveGenerator {
 					writer.println(tl+" "+tr+" "+d+" "+g);
 					writer.flush();
 					try {
-						Thread.sleep(100);
+						Thread.sleep(10);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

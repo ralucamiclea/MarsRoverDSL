@@ -1,55 +1,44 @@
-	package test.master;
+package test.master;
+
+import lejos.robotics.subsumption.Arbitrator;
+import lejos.robotics.subsumption.Behavior;
+
+public class MainMaster {
+
+public static void main(String[] args) {
 	
-	import lejos.robotics.subsumption.Arbitrator;
-	import lejos.robotics.subsumption.Behavior;
-	
-	public class MainMaster {
-	
-	public static void main(String[] args) {
-		
 	ModelMaster m = new ModelMaster();
 	Goals goals = new Goals();
-	GetMessageMaster t = new GetMessageMaster(m);
+	GetMessageMaster t = new GetMessageMaster(m,goals);
 	t.start();
+	m.calibrate();
 		
 	//behaviors in this expedition
-	Behavior AvoidEdge = new AvoidEdge(m,goals);
-	Behavior AvoidCollision = new AvoidCollision(m,goals);
-	Behavior FindBlue = new FindBlue(m,goals);
 	Behavior DriveForward = new DriveForward(m);
-	//mission "AvoidStuff"
-	int AvoidStuffCount = 0;
-	Behavior [] bArrayAvoidStuff = {
+	Behavior OnLine = new OnLine(m,goals);
+	Behavior OffLine = new OffLine(m,goals);
+	Behavior AboveAbyss = new AboveAbyss(m,goals);
+	Behavior MeasureLightObjects = new MeasureLightObjects(m,goals);
+	Behavior AvoidWhite = new AvoidWhite(m,goals);
+	Behavior AvoidObject = new AvoidObject(m,goals);
+	Behavior MeasureHeavyObjects = new MeasureHeavyObjects(m,goals);
+	Behavior AvoidEdge = new AvoidEdge(m,goals);
+	Behavior AvoidEdgeComplicated = new AvoidEdgeComplicated(m,goals);
+	Behavior AvoidCollision = new AvoidCollision(m,goals);
+	Behavior FindRed = new FindRed(m,goals);
+	Behavior FindBlue = new FindBlue(m,goals);
+	Behavior FindGreen = new FindGreen(m,goals);
+	Behavior MeasureLake = new MeasureLake(m,goals);
+	
+	//mission "Mission1"
+	Behavior [] bArrayMission1 = {
 		DriveForward
-		, AvoidCollision
+		, MeasureHeavyObjects
 		, AvoidEdge
 	};
-	Arbitrator arbyAvoidStuff = new Arbitrator(bArrayAvoidStuff);
-	arbyAvoidStuff.go();
+	Arbitrator arbyMission1 = new Arbitrator(bArrayMission1);
+	//t.setArby(arbyMission1);
+	arbyMission1.go();
 	
-	//wait 1 times for AvoidCollision
-	if(goals.AvoidCollision == 1)
-		AvoidStuffCount++;
-	if(1 == AvoidStuffCount)
-		arbyAvoidStuff.stop();
-	//mission "FollowLine"
-	int FollowLineCount = 0;
-	Behavior [] bArrayFollowLine = {
-		DriveForward
-		, FindBlue
-		, AvoidCollision
-		, AvoidEdge
-	};
-	Arbitrator arbyFollowLine = new Arbitrator(bArrayFollowLine);
-	arbyFollowLine.go();
-	
-	//wait 1 times for AvoidCollision
-	if(goals.AvoidCollision == 1)
-		FollowLineCount++;
-	//wait 2 times for FindBlue
-	if(goals.FindBlue == 2)
-		FollowLineCount++;
-	if(2 == FollowLineCount)
-		arbyFollowLine.stop();
 	}
 }
